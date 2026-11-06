@@ -10,7 +10,8 @@ from aprepro.apj import ApjError, parse
 from aprepro.attest import PREDICATE_TYPE, statement
 from aprepro.compare import compare, regions
 from aprepro.manifest import Manifest
-from aprepro.plan import make, rank
+from aprepro.diagnose import _deflate, unpack
+from aprepro.plan import make, python_for, rank
 from aprepro.run import _git_version_commit
 from aprepro.source import required_toolchain
 
@@ -153,3 +154,18 @@ def test_wilson():
     assert 0.96 < lo < 0.97 and hi == pytest.approx(1.0)
     lo, hi = report.wilson(0, 10)
     assert lo == pytest.approx(0.0, abs=1e-12) and 0.27 < hi < 0.28
+
+
+def test_romfs_unpack_formats():
+    data = bytes(range(256)) * 40 + b"defaults" * 50
+    g = gzip.compress(data, compresslevel=9, mtime=0)            # как embed.py до 4.5
+    fmt, content, payload, mem = unpack(g)
+    assert fmt == "gzip" and content == data and mem == 8 and _deflate(data, 8) == payload
+    raw = _deflate(data, 9)                                      # как embed.py с 4.6
+    assert unpack(raw)[:2] == ("deflate", data)
+    assert unpack(b"plain text, not compressed at all") is None
+
+
+def test_python_for_release():
+    assert python_for("4.4.4") == "3.10" and python_for("4.4.0") == "3.10"
+    assert python_for("4.5.7") == "3.11" and python_for("4.7.2") == "3.11"

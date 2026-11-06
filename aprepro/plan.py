@@ -22,6 +22,11 @@ PANEL = ["CubeOrange", "CubeOrangePlus", "Pixhawk6X", "MatekH743", "Pixhawk4", "
          "MatekF405-Wing"]
 
 
+def python_for(version: str) -> str:
+    """Python для сборки выпуска: waf из ArduPilot 4.4 открывает файлы в режиме 'rU', убранном в Python 3.11."""
+    return "3.10" if tuple(int(x) for x in version.split(".")[:2]) < (4, 5) else "3.11"
+
+
 def rank(seed: str, vehicle: str, version: str, board: str) -> str:
     return hashlib.sha256(f"{seed}:{vehicle}:{version}:{board}".encode()).hexdigest()
 
@@ -69,5 +74,5 @@ def make(manifest: Manifest, groups: list, *, seed: str, sample: int, panel=PANE
         plan["groups"].append({
             "id": tag + ("-tag" if build_from == "tag" else ""), "vehicle": vehicle, "version": version,
             "tag": tag, "tag_commit": tags.get(tag), "build_from": build_from, "boards_in_release": len(boards),
-            "targets": targets})
+            "python": python_for(version), "targets": targets})
     return plan

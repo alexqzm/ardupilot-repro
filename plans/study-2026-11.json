@@ -1,10 +1,11 @@
 {
- "created": "2026-11-06T18:18:50Z",
+ "created": "2026-11-06T19:01:50Z",
  "groups": [
   {
    "boards_in_release": 154,
    "build_from": "release",
    "id": "Copter-4.4.4",
+   "python": "3.10",
    "tag": "Copter-4.4.4",
    "tag_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
    "targets": [
@@ -100,6 +101,7 @@
    "boards_in_release": 187,
    "build_from": "release",
    "id": "Copter-4.5.7",
+   "python": "3.11",
    "tag": "Copter-4.5.7",
    "tag_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
    "targets": [
@@ -195,6 +197,7 @@
    "boards_in_release": 236,
    "build_from": "release",
    "id": "Copter-4.6.3",
+   "python": "3.11",
    "tag": "Copter-4.6.3",
    "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
    "targets": [
@@ -290,6 +293,7 @@
    "boards_in_release": 295,
    "build_from": "release",
    "id": "Copter-4.7.2",
+   "python": "3.11",
    "tag": "Copter-4.7.2",
    "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
    "targets": [
@@ -385,6 +389,7 @@
    "boards_in_release": 143,
    "build_from": "release",
    "id": "Plane-4.4.4",
+   "python": "3.10",
    "tag": "Plane-4.4.4",
    "tag_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
    "targets": [
@@ -480,6 +485,7 @@
    "boards_in_release": 180,
    "build_from": "release",
    "id": "Plane-4.5.7",
+   "python": "3.11",
    "tag": "Plane-4.5.7",
    "tag_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
    "targets": [
@@ -575,6 +581,7 @@
    "boards_in_release": 225,
    "build_from": "release",
    "id": "Plane-4.6.3",
+   "python": "3.11",
    "tag": "Plane-4.6.3",
    "tag_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
    "targets": [
@@ -670,6 +677,7 @@
    "boards_in_release": 285,
    "build_from": "release",
    "id": "Plane-4.7.2",
+   "python": "3.11",
    "tag": "Plane-4.7.2",
    "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
    "targets": [
@@ -765,6 +773,7 @@
    "boards_in_release": 140,
    "build_from": "release",
    "id": "Rover-4.4.0",
+   "python": "3.10",
    "tag": "Rover-4.4.0",
    "tag_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
    "targets": [
@@ -860,6 +869,7 @@
    "boards_in_release": 177,
    "build_from": "release",
    "id": "Rover-4.5.7",
+   "python": "3.11",
    "tag": "Rover-4.5.7",
    "tag_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
    "targets": [
@@ -955,6 +965,7 @@
    "boards_in_release": 224,
    "build_from": "release",
    "id": "Rover-4.6.3",
+   "python": "3.11",
    "tag": "Rover-4.6.3",
    "tag_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
    "targets": [
@@ -1050,6 +1061,7 @@
    "boards_in_release": 282,
    "build_from": "release",
    "id": "Rover-4.7.2",
+   "python": "3.11",
    "tag": "Rover-4.7.2",
    "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
    "targets": [
@@ -1145,6 +1157,7 @@
    "boards_in_release": 236,
    "build_from": "tag",
    "id": "Copter-4.6.3-tag",
+   "python": "3.11",
    "tag": "Copter-4.6.3",
    "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
    "targets": [

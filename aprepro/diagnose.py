@@ -1,10 +1,12 @@
 """Разбор расхождения по файлам ELF: какие символы различаются размером и не в ROMFS ли дело.
 
 ArduPilot встраивает в прошивку файлы ROMFS (загрузчик, параметры по умолчанию, hwdef.dat,
-прошивку сопроцессора ввода-вывода), сжимая их при сборке модулем zlib интерпретатора Python
-(Tools/ardupilotwaf/embed.py: zlib.compressobj(level=9, wbits=-15, memLevel=9)). Разные
-реализации zlib (классический zlib и zlib-ng) дают разный поток deflate для того же содержимого,
-поэтому прошивка зависит от того, с какой библиотекой собран интерпретатор.
+прошивку сопроцессора ввода-вывода), сжимая их при сборке средствами интерпретатора Python
+(Tools/ardupilotwaf/embed.py): до 4.5 включительно — gzip.GzipFile(compresslevel=9, mtime=0), то
+есть deflate с memLevel=8 в оболочке gzip; с 4.6 — zlib.compressobj(level=9, wbits=-15, memLevel=9),
+поток deflate без заголовка. В обоих случаях сжимает библиотека zlib, с которой собран
+интерпретатор. Разные реализации (классический zlib и zlib-ng) дают для одного содержимого разный
+поток deflate, поэтому прошивка зависит от того, с какой библиотекой собран Python.
 
 Разбор сравнивает таблицы символов официального и пересобранного ELF и для блоков ap_romfs_N
 распаковывает оба потока: если содержимое совпадает, а сжатые байты нет, и только эти символы
@@ -12,6 +14,7 @@ ArduPilot встраивает в прошивку файлы ROMFS (загру�
 """
 from __future__ import annotations
 
+import gzip
 import re
 import struct
 import zlib
@@ -61,9 +64,29 @@ def _inflate(b: bytes):
     return out if d.eof and not d.unused_data else None
 
 
-def _deflate(b: bytes) -> bytes:
-    z = zlib.compressobj(level=9, method=zlib.DEFLATED, wbits=-15, memLevel=9)
+def _deflate(b: bytes, mem_level: int) -> bytes:
+    z = zlib.compressobj(level=9, method=zlib.DEFLATED, wbits=-15, memLevel=mem_level)
     return z.compress(b) + z.flush()
+
+
+def unpack(b: bytes):
+    """Блок ROMFS: (формат, содержимое, поток deflate, memLevel сжатия) или None, если блок не сжат."""
+    if b[:3] == b"\x1f\x8b\x08":                       # gzip: ArduPilot до 4.5 включительно
+        try:
+            content = gzip.decompress(b)
+        except (OSError, EOFError, zlib.error):
+            return None
+        flags, pos = b[3], 10
+        if flags & 4:
+            pos += 2 + int.from_bytes(b[pos:pos + 2], "little")
+        for bit in (8, 16):
+            if flags & bit:
+                pos = b.index(b"\0", pos) + 1
+        if flags & 2:
+            pos += 2
+        return "gzip", content, b[pos:-8], zlib.DEF_MEM_LEVEL
+    content = _inflate(b)                                 # deflate без заголовка: с 4.6
+    return None if content is None else ("deflate", content, b, 9)
 
 
 def diagnose(official_elf: bytes, rebuilt_elf: bytes, limit: int = 30) -> dict:
@@ -74,12 +97,15 @@ def diagnose(official_elf: bytes, rebuilt_elf: bytes, limit: int = 30) -> dict:
         oa, ob = a[name][2], b[name][2]
         if oa is None or ob is None:
             continue
-        ca, cb = _inflate(oa), _inflate(ob)
-        romfs.append({"name": _ROMFS.match(name).group(1), "official_size": len(oa), "rebuilt_size": len(ob),
-                      "compressed_equal": oa == ob, "content_equal": ca is not None and ca == cb,
-                      "content_size": len(ca) if ca is not None else None,
-                      "official_is_local_zlib": ca is not None and _deflate(ca) == oa,
-                      "rebuilt_is_local_zlib": cb is not None and _deflate(cb) == ob})
+        ua, ub = unpack(oa), unpack(ob)
+        entry = {"name": _ROMFS.match(name).group(1), "official_size": len(oa), "rebuilt_size": len(ob),
+                 "compressed_equal": oa == ob, "format": ua[0] if ua else "none",
+                 "content_equal": (ua[1] == ub[1]) if ua and ub else oa == ob}
+        if ua and ub:
+            entry.update(content_size=len(ua[1]),
+                         official_is_local_zlib=_deflate(ua[1], ua[3]) == ua[2],
+                         rebuilt_is_local_zlib=_deflate(ub[1], ub[3]) == ub[2])
+        romfs.append(entry)
     only_romfs = bool(sized) and all(_ROMFS.match(n) for n in sized)
     explained = only_romfs and romfs and all(r["content_equal"] for r in romfs) and \
         any(not r["compressed_equal"] for r in romfs)
@@ -95,5 +121,37 @@ def romfs_info(elf: bytes) -> dict:
     """Сколько файлов ROMFS встроено в прошивку и сколько из них сжато (зависит от zlib при сборке)."""
     syms = symbols(elf)
     blobs = [v[2] for n, v in syms.items() if _ROMFS.match(n) and v[2] is not None]
-    compressed = [b for b in blobs if _inflate(b) is not None]
-    return {"files": len(blobs), "compressed": len(compressed), "compressed_bytes": sum(len(b) for b in compressed)}
+    packed = [(b, unpack(b)) for b in blobs]
+    compressed = [(b, u) for b, u in packed if u is not None]
+    return {"files": len(blobs), "compressed": len(compressed), "compressed_bytes": sum(len(b) for b, _ in compressed),
+            "format": sorted({u[0] for _, u in compressed})}
+
+
+def romfs_check(official_elf: bytes) -> dict:
+    """Чувствительность к реализации zlib: пережать содержимое каждого официального блока ROMFS
+    zlib интерпретатора и zlib-ng (привязки zlib-ng, если установлены) и сравнить с официальным потоком."""
+    try:
+        from zlib_ng import zlib_ng as zng
+    except ImportError:
+        zng = None
+    blobs = []
+    for name, (_addr, _size, data) in sorted(symbols(official_elf).items()):
+        m = _ROMFS.match(name)
+        if not m or data is None:
+            continue
+        u = unpack(data)
+        if u is None:
+            blobs.append({"name": m.group(1), "format": "none", "size": len(data)})
+            continue
+        fmt, content, payload, mem = u
+        e = {"name": m.group(1), "format": fmt, "size": len(data), "content_size": len(content),
+             "local_zlib_equal": _deflate(content, mem) == payload}
+        if zng is not None:
+            z = zng.compressobj(level=9, method=zng.DEFLATED, wbits=-15, memLevel=mem)
+            e["zlib_ng_equal"] = (z.compress(content) + z.flush()) == payload
+        blobs.append(e)
+    packed = [b for b in blobs if b["format"] != "none"]
+    return {"zlib": zlib.ZLIB_RUNTIME_VERSION, "zlib_ng": zng.ZLIBNG_VERSION if zng is not None else None,
+            "blobs": blobs, "compressed": len(packed),
+            "local_zlib_all_equal": all(b["local_zlib_equal"] for b in packed),
+            "zlib_ng_differs": (any(not b["zlib_ng_equal"] for b in packed) if zng is not None and packed else None)}

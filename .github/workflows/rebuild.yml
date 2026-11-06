@@ -64,9 +64,21 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Версия Python группы (из плана)
+        id: py
+        env:
+          PLAN: ${{ inputs.plan }}
+          GROUP: ${{ matrix.group }}
+        run: |
+          python3 - >> "$GITHUB_OUTPUT" <<'PY'
+          import json, os
+          plan = json.load(open(os.environ["PLAN"]))
+          group = next(g for g in plan["groups"] if g["id"] == os.environ["GROUP"])
+          print("version=" + group.get("python", "3.11"))
+          PY
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: "3.11"
+          python-version: ${{ steps.py.outputs.version }}
       - name: Зависимости сборки (версии и хеши закреплены)
         run: python -m pip install --require-hashes -r ci/requirements-build.txt
       - name: Интерпретатор собран с классическим zlib

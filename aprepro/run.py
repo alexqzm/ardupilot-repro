@@ -13,7 +13,7 @@ from .apj import ApjError
 from .attest import statement
 from .build import build, clean
 from .compare import compare
-from .diagnose import ElfError, diagnose, romfs_info
+from .diagnose import ElfError, diagnose, romfs_check, romfs_info
 from .manifest import VEHICLES
 from .source import prepare, required_toolchain
 from .util import ToolError, fetch, now_utc, wjson
@@ -38,6 +38,9 @@ def _git_version_commit(text: str):
 def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, boards=None, jobs: int = None,
               keep: bool = False, log=print) -> list:
     g = group_of(plan, gid)
+    want = g.get("python")
+    if want and ".".join(map(str, sys.version_info[:2])) != want:
+        raise ToolError(f"группа {gid} собирается интерпретатором Python {want}, запущен {sys.version.split()[0]}")
     work, out = Path(work), Path(results) / plan_name / gid
     targets = [t for t in g["targets"] if not boards or t["board"] in boards]
     if boards and len(targets) != len(set(boards)):
@@ -79,6 +82,12 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
                 res["firmware_version"] = fetch(base + "/firmware-version.txt").decode("utf-8", "replace").strip()
             except ToolError:
                 res["firmware_version"] = None
+            official_elf = None
+            try:
+                official_elf = fetch(base + f"/{binary}.elf", odir / f"{binary}.elf")
+                res["romfs_official"] = romfs_check(official_elf)
+            except (ToolError, ElfError) as e:
+                res["romfs_official"] = {"error": str(e)[-300:]}
             stage = "build"
             b = build(trees[t["build_commit"]], t["board"], g["vehicle"], tc_bin, work / "logs" / gid, jobs)
             res.update(configure_seconds=b["configure_seconds"], build_seconds=b["build_seconds"])
@@ -92,7 +101,8 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
             if res["verdict"] == "not-reproducible":
                 stage = "diagnose"
                 try:
-                    official_elf = fetch(base + f"/{binary}.elf", odir / f"{binary}.elf")
+                    if official_elf is None:
+                        raise ToolError("официальный ELF не загружен")
                     res["diagnosis"] = diagnose(official_elf, elf.read_bytes())
                 except (ToolError, ElfError, OSError) as e:
                     res["diagnosis"] = {"cause": "unavailable", "error": str(e)[-500:]}

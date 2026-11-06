@@ -52,11 +52,15 @@ def summary(plan: dict, rows: list) -> dict:
     sample = [r for r in release if r["role"] == "sample"]
     k = sum(ok(r) for r in sample)
     lo, hi = wilson(k, len(sample))
-    romfs = [r for r in release if r.get("romfs", {}).get("compressed")]
+    checked = [r["romfs_official"] for r in rows if "compressed" in r.get("romfs_official", {})]
+    packed = [c for c in checked if c["compressed"]]
     return {"groups": by_group,
             "release": {"n": len(release), **{v: sum(r["verdict"] == v for r in release) for v in VERDICTS[:3]}},
             "sample": {"n": len(sample), "ok": k, "wilson95": [round(lo, 4), round(hi, 4)]},
-            "romfs_compressed": {"n": len(romfs), "of": len(release)},
+            "romfs_official": {"checked": len(checked), "with_compressed": len(packed),
+                               "local_zlib_all_equal": sum(c["local_zlib_all_equal"] for c in packed),
+                               "zlib_ng_differs": sum(c.get("zlib_ng_differs") is True for c in packed),
+                               "zlib": sorted({c["zlib"] for c in packed}), "zlib_ng": sorted({str(c.get("zlib_ng")) for c in packed})},
             "causes": dict(Counter(r.get("diagnosis", {}).get("cause", "unknown") for r in rows
                                    if r["verdict"] == "not-reproducible")),
             "errors": sum(r["verdict"] == "error" for r in rows)}
@@ -86,9 +90,13 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None) -> str:
         L += [f"Случайная часть выборки: воспроизводимы {sm['ok']} из {sm['n']}; 95-процентный интервал Уилсона "
               f"для доли воспроизводимых прошивок в выпусках плана — {_pct(sm['wilson95'][0])} … "
               f"{_pct(sm['wilson95'][1])}.", ""]
-    rc = s["romfs_compressed"]
-    L += [f"Сжатые файлы ROMFS есть в {rc['n']} из {rc['of']} пересобранных прошивок: их воспроизводимость "
-          "зависит от реализации zlib в интерпретаторе Python, который выполняет сборку.", ""]
+    ro = s["romfs_official"]
+    if ro["checked"]:
+        L += [f"Сжатые файлы ROMFS есть в {ro['with_compressed']} из {ro['checked']} проверенных официальных "
+              f"прошивок. Официальные блоки ROMFS совпадают с выводом zlib среды прогона "
+              f"({', '.join(ro['zlib'])}) в {ro['local_zlib_all_equal']} из них; zlib-ng "
+              f"({', '.join(ro['zlib_ng'])}) дал бы другой поток хотя бы в одном блоке в {ro['zlib_ng_differs']} — "
+              "собранные с ним прошивки не совпали бы с официальными.", ""]
     L += ["## По группам", "",
           "| Группа | Собрано из | Плат в выпуске | В плане | Побитово | Образ | Не совпало | Ошибка |",
           "|---|---|---|---|---|---|---|---|"]
@@ -123,14 +131,17 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None) -> str:
             run = e.get("github_run") or "—"
             L.append(f"| {gid} | {e.get('python')} | {e.get('python_zlib', '—')} | {e['toolchain'].get('gcc', '—')} | "
                      f"{e.get('cpus')} | {run} |")
-    L += ["", "## Платы", "", "| Группа | Плата | Роль | Итог | SHA-256 образа | ROMFS (сжато/всего) | Сборка, с |",
-          "|---|---|---|---|---|---|---|"]
+    L += ["", "## Платы", "",
+          "| Группа | Плата | Роль | Итог | SHA-256 образа | ROMFS сжато/всего | zlib-ng изменит | Сборка, с |",
+          "|---|---|---|---|---|---|---|---|"]
     for r in sorted(rows, key=lambda r: (r["group"], r["role"] != "panel", r["board"])):
         sha = r.get("official", {}).get("image_sha256", "")[:12]
         rf = r.get("romfs") or {}
         romfs = f"{rf['compressed']}/{rf['files']}" if "files" in rf else "—"
+        ng = (r.get("romfs_official") or {}).get("zlib_ng_differs")
+        ng = "—" if ng is None else ("да" if ng else "нет")
         L.append(f"| {r['group']} | {r['board']} | {'панель' if r['role'] == 'panel' else 'выборка'} | "
-                 f"{VERDICT_RU[r['verdict']]} | `{sha}` | {romfs} | {r.get('build_seconds', '—')} |")
+                 f"{VERDICT_RU[r['verdict']]} | `{sha}` | {romfs} | {ng} | {r.get('build_seconds', '—')} |")
     bad = [r for r in rows if r["verdict"] == "not-reproducible"]
     if bad:
         L += ["", "## Расхождения", ""]

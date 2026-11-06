@@ -10,3 +10,6 @@ ptyprocess
 pymavlink
 pyserial
 dronecan
+# Привязки к zlib-ng: только для анализа чувствительности (сжатие блоков ROMFS реализацией zlib-ng);
+# сборка ArduPilot ими не пользуется.
+zlib-ng

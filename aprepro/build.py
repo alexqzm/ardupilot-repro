@@ -1,7 +1,8 @@
 """Сборка прошивки ArduPilot для платы штатным способом: waf configure --board, затем waf <изделие>.
 
-Сборка всегда чистая: каталог build/<плата> удаляется перед configure, иначе waf не пересоздаст
-шаги, входы которых не изменились (например, сжатие ROMFS другим интерпретатором). Опции сборки —
+Сборка всегда чистая: каталог build/ удаляется целиком перед configure. Иначе waf не пересоздаст
+шаги, входы которых не изменились (например, сжатие ROMFS другим интерпретатором), а после удаления
+каталога одной платы откажется собирать следующую: в общем кэше конфигурации остаются её файлы. Опции сборки —
 по умолчанию, как у официального сервера сборки: без --consistent-builds и без --build-dates.
 Интерпретатор Python — тот же, что запускает инструмент (в нём стоят закреплённые пакеты из
 ci/requirements-build.txt); каталог тулчейна и каталог интерпретатора ставятся первыми в PATH.
@@ -22,7 +23,7 @@ def build(tree: Path, board: str, vehicle: str, toolchain_bin: Path, logdir: Pat
     tree, logdir = Path(tree), Path(logdir)
     env = env_with_path(toolchain_bin, Path(sys.executable).parent)
     target = VEHICLES[vehicle]["target"]
-    clean(tree, board)                      # только чистая сборка: waf не пересоздаёт неизменившиеся шаги
+    clean(tree)                             # только чистая сборка
     t0 = time.monotonic()
     run([sys.executable, "./waf", "configure", "--board", board], cwd=tree, env=env,
         log=logdir / f"{board}-configure.log", timeout=1800)
@@ -34,5 +35,6 @@ def build(tree: Path, board: str, vehicle: str, toolchain_bin: Path, logdir: Pat
     return {"apj": apj, "configure_seconds": round(t1 - t0, 1), "build_seconds": round(t2 - t1, 1)}
 
 
-def clean(tree: Path, board: str) -> None:
-    shutil.rmtree(Path(tree) / "build" / board, ignore_errors=True)
+def clean(tree: Path, board: str = None) -> None:
+    """Удалить каталог сборки целиком (вместе с кэшем конфигурации waf)."""
+    shutil.rmtree(Path(tree) / "build", ignore_errors=True)
