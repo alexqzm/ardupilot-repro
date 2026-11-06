@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ardupilot-repro"
+dynamic = ["version"]
+description = "Воспроизводимость официальных прошивок ArduPilot: пересборка из тегов, побитовая сверка с firmware.ardupilot.org, разбор расхождений, аттестации пересборки"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{name = "Alexander Kuzmin"}]
+keywords = ["reproducible builds", "ArduPilot", "firmware", "software supply chain", "SLSA", "in-toto",
+            "cyber-physical systems", "UAV"]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8", "pyflakes>=3"]
+
+[project.scripts]
+aprepro = "aprepro.cli:main"
+
+[project.urls]
+Repository = "https://github.com/alexqzm/ardupilot-repro"
+
+[tool.hatch.version]
+path = "aprepro/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aprepro"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/.github", "/results", "/data"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

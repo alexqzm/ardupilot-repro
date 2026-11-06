@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "Если вы используете эти данные или инструмент, сошлитесь на них так."
+title: "ardupilot-repro: воспроизводимость официальных прошивок ArduPilot"
+type: software
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/alexqzm/ardupilot-repro"
+authors:
+  - family-names: Kuzmin
+    given-names: Alexander
+    orcid: "https://orcid.org/0000-0002-0393-412X"
+keywords:
+  - reproducible builds
+  - ArduPilot
+  - firmware
+  - software supply chain
+  - UAV
+  - cyber-physical systems
+  - in-toto
+  - evidence graph
+references:
+  - type: software
+    title: "scii-gate: гейт допуска обновлений ПО киберфизических систем по графу доказательств"
+    doi: 10.5281/zenodo.23833592
+    repository-code: "https://github.com/alexqzm/scii-gate"
+    authors:
+      - family-names: Kuzmin
+        given-names: Alexander
+        orcid: "https://orcid.org/0000-0002-0393-412X"
+  - type: software
+    title: "ArduPilot"
+    repository-code: "https://github.com/ArduPilot/ardupilot"
+    authors:
+      - name: "ArduPilot Development Team"

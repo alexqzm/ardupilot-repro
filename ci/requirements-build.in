@@ -1,0 +1,12 @@
+# Пакеты Python для сборки ArduPilot 4.4–4.7 под ChibiOS: подмножество PYTHON_PKGS из
+# Tools/environment_install/install-prereqs-ubuntu.sh тегов (без MAVProxy и geocoder, сборке не нужных)
+# плюс intelhex для файлов *_with_bl.hex.
+empy==3.3.4
+future
+intelhex
+lxml
+pexpect
+ptyprocess
+pymavlink
+pyserial
+dronecan

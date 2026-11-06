@@ -1,0 +1,131 @@
+# Пересборка прошивок по плану и сверка с firmware.ardupilot.org. Запуск вручную:
+# Actions -> rebuild -> Run workflow. Каждая группа плана — отдельная задача матрицы.
+# Результаты (JSON без двоичных файлов) — артефакт results-all; в репозиторий их переносит автор.
+name: rebuild
+
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Файл плана
+        default: plans/study-2026-11.json
+      groups:
+        description: Группы через пробел (пусто — все группы плана)
+        default: ""
+      attest:
+        description: Подписать аттестации пересборки (Sigstore, запись в публичном журнале Rekor)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  COSIGN_SHA256: 8b24b946dd5809c6bd93de08033bcf6bc0ed7d336b7785787c080f574b89249b   # cosign v2.4.1 linux-amd64
+
+jobs:
+  matrix:
+    runs-on: ubuntu-24.04
+    outputs:
+      groups: ${{ steps.m.outputs.groups }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+      - id: m
+        env:
+          PLAN: ${{ inputs.plan }}
+          SELECTED: ${{ inputs.groups }}   # не GROUPS: в bash это встроенная переменная
+        run: |
+          if [ -n "$SELECTED" ]; then
+            # shellcheck disable=SC2086
+            g=$(python -c 'import json, sys; print(json.dumps(sys.argv[1:]))' $SELECTED)
+          else
+            g=$(python -m aprepro matrix "$PLAN")
+          fi
+          echo "groups=$g" >> "$GITHUB_OUTPUT"
+
+  rebuild:
+    needs: matrix
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        group: ${{ fromJSON(needs.matrix.outputs.groups) }}
+    permissions:
+      contents: read
+      id-token: write          # сертификат Sigstore по OIDC-токену (только при attest)
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+      - name: Зависимости сборки (версии и хеши закреплены)
+        run: python -m pip install --require-hashes -r ci/requirements-build.txt
+      - name: Интерпретатор собран с классическим zlib
+        run: |
+          python -c 'import sys, zlib; print(sys.version); print("zlib", zlib.ZLIB_RUNTIME_VERSION)'
+          python -c 'import sys, zlib; sys.exit("zlib-ng" in zlib.ZLIB_RUNTIME_VERSION)'
+      - name: Пересборка и сверка
+        env:
+          PLAN: ${{ inputs.plan }}
+          GROUP: ${{ matrix.group }}
+        run: python -m aprepro run "$PLAN" --group "$GROUP" --work "$RUNNER_TEMP/work" --results results
+      - name: Подпись аттестаций пересборки (cosign, бесключевая)
+        if: ${{ inputs.attest }}
+        env:
+          PLAN: ${{ inputs.plan }}
+          GROUP: ${{ matrix.group }}
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/cosign" https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-amd64
+          echo "$COSIGN_SHA256  $RUNNER_TEMP/cosign" | sha256sum -c -
+          chmod +x "$RUNNER_TEMP/cosign"
+          name=$(basename "$PLAN" .json)
+          for st in results/"$name"/"$GROUP"/*.intoto.json; do
+            board=$(basename "$st" .intoto.json)
+            apj=$(find "$RUNNER_TEMP/work/official/$GROUP/$board" -name '*.apj' | head -1)
+            python -c 'import json, sys; json.dump(json.load(open(sys.argv[1]))["predicate"], open(sys.argv[2], "w"))' \
+              "$st" "$RUNNER_TEMP/predicate.json"
+            "$RUNNER_TEMP/cosign" attest-blob --yes --type urn:scii:predicate:rebuild:v1 \
+              --predicate "$RUNNER_TEMP/predicate.json" --bundle "results/$name/$GROUP/$board.sigstore.json" "$apj"
+          done
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: results-${{ matrix.group }}
+          path: results/
+          if-no-files-found: error
+
+  report:
+    needs: rebuild
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: results-*
+          merge-multiple: true
+          path: results/
+      - name: Сводка
+        env:
+          PLAN: ${{ inputs.plan }}
+        run: |
+          python -m aprepro report "$PLAN" --md "$RUNNER_TEMP/results.md" --json "results/$(basename "$PLAN" .json)/summary.json"
+          cat "$RUNNER_TEMP/results.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: results-all
+          path: results/

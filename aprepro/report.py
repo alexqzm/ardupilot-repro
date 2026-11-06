@@ -1,0 +1,185 @@
+"""Сводка результатов: доли воспроизводимых прошивок по группам и по выборке, среда сборки, разбор расхождений."""
+from __future__ import annotations
+
+import math
+from collections import Counter
+from pathlib import Path
+
+from .util import rjson
+
+VERDICTS = ("reproducible", "image-identical", "not-reproducible", "error")
+VERDICT_RU = {"reproducible": "совпадает побитово", "image-identical": "совпадает образ",
+              "not-reproducible": "не совпадает", "error": "ошибка"}
+CAUSE_RU = {"romfs-compression": "сжатие ROMFS другой реализацией zlib", "unknown": "не установлена",
+            "unavailable": "разбор недоступен"}
+
+
+def load(results: Path, plan_name: str) -> list:
+    root = Path(results) / plan_name
+    return [rjson(p) for p in sorted(root.glob("*/*.json"))
+            if not p.name.startswith("_") and not p.name.endswith((".intoto.json", ".sigstore.json"))]
+
+
+def environments(results: Path, plan_name: str) -> dict:
+    root = Path(results) / plan_name
+    return {p.parent.name: rjson(p) for p in sorted(root.glob("*/_group.json"))}
+
+
+def wilson(k: int, n: int, z: float = 1.959964) -> tuple:
+    """95-процентный доверительный интервал Уилсона для доли k/n."""
+    if n == 0:
+        return (0.0, 1.0)
+    p = k / n
+    d = 1 + z * z / n
+    c = p + z * z / (2 * n)
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))
+    return (max(0.0, (c - h) / d), min(1.0, (c + h) / d))
+
+
+def ok(r: dict) -> bool:
+    return r["verdict"] in ("reproducible", "image-identical")
+
+
+def summary(plan: dict, rows: list) -> dict:
+    by_group = {}
+    for g in plan["groups"]:
+        rs = [r for r in rows if r["group"] == g["id"]]
+        c = Counter(r["verdict"] for r in rs)
+        by_group[g["id"]] = {"planned": len(g["targets"]), "done": len(rs), **{v: c.get(v, 0) for v in VERDICTS},
+                             "build_from": g["build_from"], "tag_commit": g["tag_commit"],
+                             "build_commits": sorted({t["build_commit"] for t in g["targets"]})}
+    release = [r for r in rows if r["build_from"] == "release" and r["verdict"] != "error"]
+    sample = [r for r in release if r["role"] == "sample"]
+    k = sum(ok(r) for r in sample)
+    lo, hi = wilson(k, len(sample))
+    romfs = [r for r in release if r.get("romfs", {}).get("compressed")]
+    return {"groups": by_group,
+            "release": {"n": len(release), **{v: sum(r["verdict"] == v for r in release) for v in VERDICTS[:3]}},
+            "sample": {"n": len(sample), "ok": k, "wilson95": [round(lo, 4), round(hi, 4)]},
+            "romfs_compressed": {"n": len(romfs), "of": len(release)},
+            "causes": dict(Counter(r.get("diagnosis", {}).get("cause", "unknown") for r in rows
+                                   if r["verdict"] == "not-reproducible")),
+            "errors": sum(r["verdict"] == "error" for r in rows)}
+
+
+def _pct(x: float) -> str:
+    return f"{100 * x:.1f}".replace(".", ",") + " %"
+
+
+def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None) -> str:
+    s = summary(plan, rows)
+    L = [f"# Результаты: {plan_name}", "",
+         f"План [`plans/{plan_name}.json`](../plans/{plan_name}.json): групп — {len(plan['groups'])}, "
+         f"сборок — {sum(len(g['targets']) for g in plan['groups'])}; снимок манифеста firmware.ardupilot.org "
+         f"SHA-256 `{plan['manifest']['sha256'][:16]}…`; тулчейн {plan['toolchain']}. Файл создаётся командой "
+         f"`aprepro report plans/{plan_name}.json --md docs/results.md --readme README.md`, методика — "
+         f"[`docs/methodology.md`](methodology.md).", ""]
+    if not rows:
+        return "\n".join(L + ["Результатов пока нет: запустите workflow rebuild."]) + "\n"
+    rel = s["release"]
+    L += ["## Итог", "",
+          f"Сборки из коммита, указанного в официальных файлах: {rel['n']}. Побитово совпали файлы .apj — "
+          f"{rel['reproducible']}, совпали только образы — {rel['image-identical']}, не совпали — "
+          f"{rel['not-reproducible']}. Ошибки сборки или загрузки — {s['errors']}.", ""]
+    sm = s["sample"]
+    if sm["n"]:
+        L += [f"Случайная часть выборки: воспроизводимы {sm['ok']} из {sm['n']}; 95-процентный интервал Уилсона "
+              f"для доли воспроизводимых прошивок в выпусках плана — {_pct(sm['wilson95'][0])} … "
+              f"{_pct(sm['wilson95'][1])}.", ""]
+    rc = s["romfs_compressed"]
+    L += [f"Сжатые файлы ROMFS есть в {rc['n']} из {rc['of']} пересобранных прошивок: их воспроизводимость "
+          "зависит от реализации zlib в интерпретаторе Python, который выполняет сборку.", ""]
+    L += ["## По группам", "",
+          "| Группа | Собрано из | Плат в выпуске | В плане | Побитово | Образ | Не совпало | Ошибка |",
+          "|---|---|---|---|---|---|---|---|"]
+    for g in plan["groups"]:
+        x = s["groups"][g["id"]]
+        src = "тега" if g["build_from"] == "tag" else "коммита выпуска"
+        commits = ", ".join(f"`{c[:8]}`" for c in x["build_commits"])
+        L.append(f"| {g['id']} | {src} {commits} | {g['boards_in_release']} | {x['planned']} | {x['reproducible']} | "
+                 f"{x['image-identical']} | {x['not-reproducible']} | {x['error']} |")
+    L += ["", "## Выпуск, тег и метаданные", "",
+          "Коммит тега выпуска сравнивается с коммитом, из которого собраны официальные файлы (манифест и "
+          "git-version.txt), а тип выпуска в firmware-version.txt — с типом, зашитым в образ (AP_FWVersion).", "",
+          "| Группа | Коммит тега | Коммит сборки | firmware-version.txt | В образе |", "|---|---|---|---|---|"]
+    for g in plan["groups"]:
+        if g["build_from"] != "release":
+            continue
+        r = next((r for r in rows if r["group"] == g["id"] and r.get("official")), None)
+        if r is None:
+            continue
+        fw = (r["official"].get("fwversion") or {})
+        built = {r["manifest_commit"], r.get("git_version_commit")} - {None}
+        commit = ", ".join(f"`{c[:8]}`" for c in sorted(built))
+        mark = "" if built == {g["tag_commit"]} else " ≠ тегу"
+        txt = r.get("firmware_version") or "—"
+        typ = f"{fw.get('version', '—')} {fw.get('fw_type', '')}".strip()
+        mark2 = "" if not fw or txt.endswith("_" + fw.get("fw_type", "")) else " ≠ файлу"
+        L.append(f"| {g['id']} | `{(g['tag_commit'] or '—')[:8]}` | {commit}{mark} | {txt} | {typ}{mark2} |")
+    if envs:
+        L += ["", "## Среда сборки", "", "| Группа | Python | zlib | Компилятор | Ядер | Запуск CI |",
+              "|---|---|---|---|---|---|"]
+        for gid, e in envs.items():
+            run = e.get("github_run") or "—"
+            L.append(f"| {gid} | {e.get('python')} | {e.get('python_zlib', '—')} | {e['toolchain'].get('gcc', '—')} | "
+                     f"{e.get('cpus')} | {run} |")
+    L += ["", "## Платы", "", "| Группа | Плата | Роль | Итог | SHA-256 образа | ROMFS (сжато/всего) | Сборка, с |",
+          "|---|---|---|---|---|---|---|"]
+    for r in sorted(rows, key=lambda r: (r["group"], r["role"] != "panel", r["board"])):
+        sha = r.get("official", {}).get("image_sha256", "")[:12]
+        rf = r.get("romfs") or {}
+        romfs = f"{rf['compressed']}/{rf['files']}" if "files" in rf else "—"
+        L.append(f"| {r['group']} | {r['board']} | {'панель' if r['role'] == 'panel' else 'выборка'} | "
+                 f"{VERDICT_RU[r['verdict']]} | `{sha}` | {romfs} | {r.get('build_seconds', '—')} |")
+    bad = [r for r in rows if r["verdict"] == "not-reproducible"]
+    if bad:
+        L += ["", "## Расхождения", ""]
+        for r in bad:
+            d = r.get("image_diff", {})
+            dg = r.get("diagnosis", {})
+            extra = []
+            if r["official"].get("git_identity") != r["rebuilt"].get("git_identity"):
+                extra.append(f"git_identity {r['official']['git_identity']} → {r['rebuilt']['git_identity']}")
+            if dg:
+                extra.append(f"причина: {CAUSE_RU.get(dg.get('cause'), dg.get('cause'))}; символов разного размера "
+                             f"{dg.get('size_diff_count', '—')}; zlib сборки {dg.get('zlib', r.get('python_zlib', '—'))}")
+            L.append(f"- **{r['group']} / {r['board']}**: областей различий {d.get('regions', '—')}, байт "
+                     f"{d.get('differing_bytes', '—')}; поля .apj: {', '.join(r['meta_diff']) or 'нет'}"
+                     + "".join(f"; {x}" for x in extra))
+    errs = [r for r in rows if r["verdict"] == "error"]
+    if errs:
+        L += ["", "## Ошибки", ""]
+        L += [f"- {r['group']} / {r['board']} (этап {r.get('stage')}): {r['error'].splitlines()[0][:200]}" for r in errs]
+    return "\n".join(L) + "\n"
+
+
+README_BEGIN, README_END = "<!-- results:begin -->", "<!-- results:end -->"
+
+
+def readme_block(plan: dict, rows: list) -> str:
+    """Краткая сводка для README: итог и таблица по группам."""
+    s = summary(plan, rows)
+    if not rows:
+        return "Результатов пока нет."
+    rel, sm = s["release"], s["sample"]
+    L = [f"Официальные прошивки, пересобранные из коммитов выпусков: {rel['n']}; побитово совпали — "
+         f"{rel['reproducible']}, совпали только образы — {rel['image-identical']}, не совпали — "
+         f"{rel['not-reproducible']}" + (f"; ошибки — {s['errors']}" if s["errors"] else "") + "."]
+    if sm["n"]:
+        L.append(f"Случайная часть выборки: воспроизводимы {sm['ok']} из {sm['n']}, 95-процентный интервал Уилсона "
+                 f"{_pct(sm['wilson95'][0])} … {_pct(sm['wilson95'][1])}.")
+    L += ["", "| Группа | Собрано из | Побитово | Образ | Не совпало | Ошибка |", "|---|---|---|---|---|---|"]
+    for g in plan["groups"]:
+        x = s["groups"][g["id"]]
+        src = "тега" if g["build_from"] == "tag" else "коммита выпуска"
+        L.append(f"| {g['id']} | {src} | {x['reproducible']} | {x['image-identical']} | {x['not-reproducible']} | "
+                 f"{x['error']} |")
+    return "\n".join(L)
+
+
+def readme_with_block(readme: str, block: str) -> str:
+    head, sep, rest = readme.partition(README_BEGIN)
+    _old, sep2, tail = rest.partition(README_END)
+    if not sep or not sep2:
+        raise ValueError(f"в README нет меток {README_BEGIN} … {README_END}")
+    return head + README_BEGIN + "\n" + block + "\n" + README_END + tail

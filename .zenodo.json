@@ -1,0 +1,38 @@
+{
+  "title": "ardupilot-repro: воспроизводимость официальных прошивок ArduPilot",
+  "upload_type": "software",
+  "version": "0.1.0",
+  "language": "rus",
+  "license": "apache-2.0",
+  "creators": [
+    {
+      "name": "Kuzmin, Alexander",
+      "orcid": "0000-0002-0393-412X"
+    }
+  ],
+  "description": "<p>Инструмент и данные исследования воспроизводимости официальных прошивок ArduPilot, опубликованных на firmware.ardupilot.org: пересборка из коммита выпуска с закреплённым тулчейном, побитовая сверка файлов .apj, разбор расхождений по таблицам символов ELF и блокам ROMFS, аттестации пересборки in-toto с предикатом SCII (свидетельство s24 «независимая контрольная пересборка»).</p><p>План зафиксирован до прогона по снимку манифеста firmware.ardupilot.org: Copter, Plane и Rover, последние выпуски линеек 4.4–4.7, постоянная панель плат и детерминированная случайная выборка — 152 сборки в GitHub Actions. Предварительные находки: прошивка зависит от реализации zlib в интерпретаторе Python, выполняющем сборку (сжатие ROMFS), а тег Copter-4.6.3 указывает не на коммит официальной сборки.</p>",
+  "keywords": [
+    "reproducible builds",
+    "ArduPilot",
+    "firmware",
+    "software supply chain",
+    "UAV",
+    "cyber-physical systems",
+    "in-toto",
+    "evidence graph"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/alexqzm/ardupilot-repro",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23833592",
+      "relation": "references",
+      "resource_type": "software",
+      "scheme": "doi"
+    }
+  ]
+}

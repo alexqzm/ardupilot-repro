@@ -1,0 +1,1236 @@
+{
+ "created": "2026-11-06T18:18:50Z",
+ "groups": [
+  {
+   "boards_in_release": 154,
+   "build_from": "release",
+   "id": "Copter-4.4.4",
+   "tag": "Copter-4.4.4",
+   "tag_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CubeOrange/arducopter.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CubeOrangePlus/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/Pixhawk6X/arducopter.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/MatekH743/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/Pixhawk4/arducopter.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CubeYellow/arducopter.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CubeBlack/arducopter.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/MatekF405-Wing/arducopter.apj"
+    },
+    {
+     "board": "CUAV-Nora",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CUAV-Nora/arducopter.apj"
+    },
+    {
+     "board": "fmuv3",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/fmuv3/arducopter.apj"
+    },
+    {
+     "board": "SPRacingH7",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/SPRacingH7/arducopter.apj"
+    },
+    {
+     "board": "DrotekP3Pro",
+     "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/DrotekP3Pro/arducopter.apj"
+    }
+   ],
+   "vehicle": "Copter",
+   "version": "4.4.4"
+  },
+  {
+   "boards_in_release": 187,
+   "build_from": "release",
+   "id": "Copter-4.5.7",
+   "tag": "Copter-4.5.7",
+   "tag_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/CubeOrange/arducopter.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/CubeOrangePlus/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/Pixhawk6X/arducopter.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/MatekH743/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/Pixhawk4/arducopter.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/CubeYellow/arducopter.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/CubeBlack/arducopter.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/MatekF405-Wing/arducopter.apj"
+    },
+    {
+     "board": "SpeedyBeeF405Mini",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/SpeedyBeeF405Mini/arducopter.apj"
+    },
+    {
+     "board": "CubePurple",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/CubePurple/arducopter.apj"
+    },
+    {
+     "board": "VRBrain-v52",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/VRBrain-v52/arducopter.apj"
+    },
+    {
+     "board": "speedybeef4",
+     "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/speedybeef4/arducopter.apj"
+    }
+   ],
+   "vehicle": "Copter",
+   "version": "4.5.7"
+  },
+  {
+   "boards_in_release": 236,
+   "build_from": "release",
+   "id": "Copter-4.6.3",
+   "tag": "Copter-4.6.3",
+   "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeOrange/arducopter.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeOrangePlus/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk6X/arducopter.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MatekH743/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk4/arducopter.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeYellow/arducopter.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeBlack/arducopter.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MatekF405-Wing/arducopter.apj"
+    },
+    {
+     "board": "CUAV-Pixhack-v3",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CUAV-Pixhack-v3/arducopter.apj"
+    },
+    {
+     "board": "3DRControlZeroG",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/3DRControlZeroG/arducopter.apj"
+    },
+    {
+     "board": "MambaH743v4",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MambaH743v4/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6C",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk6C/arducopter.apj"
+    }
+   ],
+   "vehicle": "Copter",
+   "version": "4.6.3"
+  },
+  {
+   "boards_in_release": 295,
+   "build_from": "release",
+   "id": "Copter-4.7.2",
+   "tag": "Copter-4.7.2",
+   "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/CubeOrange/arducopter.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/CubeOrangePlus/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/Pixhawk6X/arducopter.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/MatekH743/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/Pixhawk4/arducopter.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/CubeYellow/arducopter.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/CubeBlack/arducopter.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/MatekF405-Wing/arducopter.apj"
+    },
+    {
+     "board": "ARKV6S",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/ARKV6S/arducopter.apj"
+    },
+    {
+     "board": "MicoAir743",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/MicoAir743/arducopter.apj"
+    },
+    {
+     "board": "OmnibusNanoV6-bdshot",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/OmnibusNanoV6-bdshot/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk1",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.7.2/Pixhawk1/arducopter.apj"
+    }
+   ],
+   "vehicle": "Copter",
+   "version": "4.7.2"
+  },
+  {
+   "boards_in_release": 143,
+   "build_from": "release",
+   "id": "Plane-4.4.4",
+   "tag": "Plane-4.4.4",
+   "tag_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/CubeOrange/arduplane.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/CubeOrangePlus/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/Pixhawk6X/arduplane.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/MatekH743/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/Pixhawk4/arduplane.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/CubeYellow/arduplane.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/CubeBlack/arduplane.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/MatekF405-Wing/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk1-bdshot",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/Pixhawk1-bdshot/arduplane.apj"
+    },
+    {
+     "board": "SPRacingH7",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/SPRacingH7/arduplane.apj"
+    },
+    {
+     "board": "Pixracer",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/Pixracer/arduplane.apj"
+    },
+    {
+     "board": "fmuv5",
+     "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/fmuv5/arduplane.apj"
+    }
+   ],
+   "vehicle": "Plane",
+   "version": "4.4.4"
+  },
+  {
+   "boards_in_release": 180,
+   "build_from": "release",
+   "id": "Plane-4.5.7",
+   "tag": "Plane-4.5.7",
+   "tag_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/CubeOrange/arduplane.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/CubeOrangePlus/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/Pixhawk6X/arduplane.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/MatekH743/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/Pixhawk4/arduplane.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/CubeYellow/arduplane.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/CubeBlack/arduplane.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/MatekF405-Wing/arduplane.apj"
+    },
+    {
+     "board": "KakuteF7Mini",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/KakuteF7Mini/arduplane.apj"
+    },
+    {
+     "board": "AIRLink",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/AIRLink/arduplane.apj"
+    },
+    {
+     "board": "PixSurveyA1-IND",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/PixSurveyA1-IND/arduplane.apj"
+    },
+    {
+     "board": "VRBrain-v52",
+     "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/VRBrain-v52/arduplane.apj"
+    }
+   ],
+   "vehicle": "Plane",
+   "version": "4.5.7"
+  },
+  {
+   "boards_in_release": 225,
+   "build_from": "release",
+   "id": "Plane-4.6.3",
+   "tag": "Plane-4.6.3",
+   "tag_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/CubeOrange/arduplane.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/CubeOrangePlus/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/Pixhawk6X/arduplane.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/MatekH743/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/Pixhawk4/arduplane.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/CubeYellow/arduplane.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/CubeBlack/arduplane.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/MatekF405-Wing/arduplane.apj"
+    },
+    {
+     "board": "FlywooF405Pro",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/FlywooF405Pro/arduplane.apj"
+    },
+    {
+     "board": "PixFlamingo-F767",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/PixFlamingo-F767/arduplane.apj"
+    },
+    {
+     "board": "modalai_fc-v1",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/modalai_fc-v1/arduplane.apj"
+    },
+    {
+     "board": "R9Pilot",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/R9Pilot/arduplane.apj"
+    }
+   ],
+   "vehicle": "Plane",
+   "version": "4.6.3"
+  },
+  {
+   "boards_in_release": 285,
+   "build_from": "release",
+   "id": "Plane-4.7.2",
+   "tag": "Plane-4.7.2",
+   "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/CubeOrange/arduplane.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/CubeOrangePlus/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/Pixhawk6X/arduplane.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/MatekH743/arduplane.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/Pixhawk4/arduplane.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/CubeYellow/arduplane.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/CubeBlack/arduplane.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/MatekF405-Wing/arduplane.apj"
+    },
+    {
+     "board": "CubePurple",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/CubePurple/arduplane.apj"
+    },
+    {
+     "board": "OMNIBUSF7V2",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/OMNIBUSF7V2/arduplane.apj"
+    },
+    {
+     "board": "NarinFC-H7",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/NarinFC-H7/arduplane.apj"
+    },
+    {
+     "board": "JHEMCUF405PRO",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/JHEMCUF405PRO/arduplane.apj"
+    }
+   ],
+   "vehicle": "Plane",
+   "version": "4.7.2"
+  },
+  {
+   "boards_in_release": 140,
+   "build_from": "release",
+   "id": "Rover-4.4.0",
+   "tag": "Rover-4.4.0",
+   "tag_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/CubeOrange/ardurover.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/CubeOrangePlus/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/Pixhawk6X/ardurover.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/MatekH743/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/Pixhawk4/ardurover.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/CubeYellow/ardurover.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/CubeBlack/ardurover.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/MatekF405-Wing/ardurover.apj"
+    },
+    {
+     "board": "mini-pix",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/mini-pix/ardurover.apj"
+    },
+    {
+     "board": "MatekF765-SE",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/MatekF765-SE/ardurover.apj"
+    },
+    {
+     "board": "fmuv3",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/fmuv3/ardurover.apj"
+    },
+    {
+     "board": "mRoControlZeroF7",
+     "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/mRoControlZeroF7/ardurover.apj"
+    }
+   ],
+   "vehicle": "Rover",
+   "version": "4.4.0"
+  },
+  {
+   "boards_in_release": 177,
+   "build_from": "release",
+   "id": "Rover-4.5.7",
+   "tag": "Rover-4.5.7",
+   "tag_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/CubeOrange/ardurover.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/CubeOrangePlus/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/Pixhawk6X/ardurover.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/MatekH743/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/Pixhawk4/ardurover.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/CubeYellow/ardurover.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/CubeBlack/ardurover.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/MatekF405-Wing/ardurover.apj"
+    },
+    {
+     "board": "MFT-SEMA100",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/MFT-SEMA100/ardurover.apj"
+    },
+    {
+     "board": "TMotorH743",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/TMotorH743/ardurover.apj"
+    },
+    {
+     "board": "VRUBrain-v51",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/VRUBrain-v51/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk5X",
+     "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/Pixhawk5X/ardurover.apj"
+    }
+   ],
+   "vehicle": "Rover",
+   "version": "4.5.7"
+  },
+  {
+   "boards_in_release": 224,
+   "build_from": "release",
+   "id": "Rover-4.6.3",
+   "tag": "Rover-4.6.3",
+   "tag_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/CubeOrange/ardurover.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/CubeOrangePlus/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/Pixhawk6X/ardurover.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/MatekH743/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/Pixhawk4/ardurover.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/CubeYellow/ardurover.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/CubeBlack/ardurover.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/MatekF405-Wing/ardurover.apj"
+    },
+    {
+     "board": "MicoAir743-AIO",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/MicoAir743-AIO/ardurover.apj"
+    },
+    {
+     "board": "Pixracer",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/Pixracer/ardurover.apj"
+    },
+    {
+     "board": "JHEMCU-H743HD",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/JHEMCU-H743HD/ardurover.apj"
+    },
+    {
+     "board": "PixPilot-V6PRO",
+     "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/PixPilot-V6PRO/ardurover.apj"
+    }
+   ],
+   "vehicle": "Rover",
+   "version": "4.6.3"
+  },
+  {
+   "boards_in_release": 282,
+   "build_from": "release",
+   "id": "Rover-4.7.2",
+   "tag": "Rover-4.7.2",
+   "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/CubeOrange/ardurover.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/CubeOrangePlus/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/Pixhawk6X/ardurover.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/MatekH743/ardurover.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/Pixhawk4/ardurover.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/CubeYellow/ardurover.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/CubeBlack/ardurover.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/MatekF405-Wing/ardurover.apj"
+    },
+    {
+     "board": "KakuteF4",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/KakuteF4/ardurover.apj"
+    },
+    {
+     "board": "PixFlamingo",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/PixFlamingo/ardurover.apj"
+    },
+    {
+     "board": "MFT-SEMA100",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/MFT-SEMA100/ardurover.apj"
+    },
+    {
+     "board": "BCubeF745v2",
+     "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+     "role": "sample",
+     "url": "https://firmware.ardupilot.org/Rover/stable-4.7.2/BCubeF745v2/ardurover.apj"
+    }
+   ],
+   "vehicle": "Rover",
+   "version": "4.7.2"
+  },
+  {
+   "boards_in_release": 236,
+   "build_from": "tag",
+   "id": "Copter-4.6.3-tag",
+   "tag": "Copter-4.6.3",
+   "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+   "targets": [
+    {
+     "board": "CubeOrange",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeOrange/arducopter.apj"
+    },
+    {
+     "board": "CubeOrangePlus",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeOrangePlus/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk6X",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk6X/arducopter.apj"
+    },
+    {
+     "board": "MatekH743",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MatekH743/arducopter.apj"
+    },
+    {
+     "board": "Pixhawk4",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk4/arducopter.apj"
+    },
+    {
+     "board": "CubeYellow",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeYellow/arducopter.apj"
+    },
+    {
+     "board": "CubeBlack",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/CubeBlack/arducopter.apj"
+    },
+    {
+     "board": "MatekF405-Wing",
+     "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+     "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+     "role": "panel",
+     "url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MatekF405-Wing/arducopter.apj"
+    }
+   ],
+   "vehicle": "Copter",
+   "version": "4.6.3"
+  }
+ ],
+ "manifest": {
+  "file": "data/manifest-2026-11-06.json.gz",
+  "format_version": "1.0.0",
+  "last_modified": "Fri, 06 Nov 2026 17:14:26 GMT",
+  "retrieved": "2026-11-06T18:00:57Z",
+  "sha256": "ca5c3a1cc65baa5d8412babfb3a1be4a933bdb32d152e4565285a8d6b8b94b6a",
+  "size": 2021383,
+  "url": "https://firmware.ardupilot.org/manifest.json.gz"
+ },
+ "panel": [
+  "CubeOrange",
+  "CubeOrangePlus",
+  "Pixhawk6X",
+  "MatekH743",
+  "Pixhawk4",
+  "CubeYellow",
+  "CubeBlack",
+  "MatekF405-Wing"
+ ],
+ "sample_per_group": 4,
+ "schema": "ardupilot-repro/plan/v1",
+ "seed": "ca5c3a1cc65baa5d8412babfb3a1be4a933bdb32d152e4565285a8d6b8b94b6a",
+ "tool": "ardupilot-repro 0.1.0",
+ "toolchain": "gcc-arm-none-eabi-10-2020-q4-major"
+}
