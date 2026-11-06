@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "SPRacingH7",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42290481338"
+  },
+  "candidate": {
+   "apj_sha256": "a5832bd0092e43099c74924846d9ea8e37b81a17faf73cbbd46b0cac413c1ce8",
+   "sha256": "66374bc53a53bd40666a87106ec98aad5b6fb926152d08f8d8a931b5c746218b",
+   "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/SPRacingH7/arducopter.apj"
+  },
+  "environment": {
+   "outDir": "/home/autotest/build/tmp/binaries.build",
+   "pythonZlib": "1.3",
+   "srcPath": "/mnt/volume_nyc3_01/autotest/APM/APM",
+   "toolchainDir": "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T20:46:40Z",
+  "rebuilt": {
+   "apj_sha256": "a5832bd0092e43099c74924846d9ea8e37b81a17faf73cbbd46b0cac413c1ce8",
+   "sha256": "66374bc53a53bd40666a87106ec98aad5b6fb926152d08f8d8a931b5c746218b"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+   "tag": "Copter-4.4.4",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@db53a28f321dc8233ee49d3cc6b395b5835c768b"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Copter",
+  "verdict": "reproducible",
+  "version": "4.4.4"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "a5832bd0092e43099c74924846d9ea8e37b81a17faf73cbbd46b0cac413c1ce8"
+   },
+   "name": "SPRacingH7/arducopter.apj"
+  },
+  {
+   "digest": {
+    "sha256": "66374bc53a53bd40666a87106ec98aad5b6fb926152d08f8d8a931b5c746218b"
+   },
+   "name": "SPRacingH7/arducopter.bin"
+  }
+ ]
+}

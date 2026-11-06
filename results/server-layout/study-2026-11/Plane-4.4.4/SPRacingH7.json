@@ -1,0 +1,159 @@
+{
+ "apj_equal": true,
+ "board": "SPRacingH7",
+ "build_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+ "build_from": "release",
+ "build_seconds": 212.1,
+ "configure_seconds": 1.5,
+ "extf_equal": true,
+ "finished": "2026-11-06T20:46:27Z",
+ "firmware_version": "4.4.4-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+ "group": "Plane-4.4.4",
+ "image_equal": true,
+ "manifest_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "6186355834e99689fe23aadc68c37d85de04833e28578c030c8b4a748670c1da",
+  "board_id": 1060,
+  "extf_sha256": "fff3c40222be273bac96c13a960d20acbf3e85b7be17bb99098c2602eac17d82",
+  "extf_size": 1196956,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.4.4"
+  },
+  "git_identity": "16b78382",
+  "image_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "image_size": 0
+ },
+ "official_url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/SPRacingH7/arduplane.apj",
+ "out_dir": "/home/autotest/build/tmp/binaries.build",
+ "paths": {
+  "dirs": [
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include",
+   "/home/autotest/build/tmp/binaries.build/SPRacingH7"
+  ],
+  "other": 4,
+  "prefixes": {
+   "../../../../../../mnt/volume_nyc3_01/autotest/APM/APM": 14
+  },
+  "tree": 14
+ },
+ "paths_official": {
+  "dirs": [
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include",
+   "/home/autotest/build/tmp/binaries.build/SPRacingH7"
+  ],
+  "other": 4,
+  "prefixes": {
+   "../../../../../../mnt/volume_nyc3_01/autotest/APM/APM": 14
+  },
+  "tree": 14
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "6186355834e99689fe23aadc68c37d85de04833e28578c030c8b4a748670c1da",
+  "board_id": 1060,
+  "extf_sha256": "fff3c40222be273bac96c13a960d20acbf3e85b7be17bb99098c2602eac17d82",
+  "extf_size": 1196956,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.4.4"
+  },
+  "git_identity": "16b78382",
+  "image_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "image_size": 0
+ },
+ "role": "sample",
+ "romfs": {
+  "compressed": 7,
+  "compressed_bytes": 35533,
+  "files": 7,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 26624,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 18557,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 3239,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 3165,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 3049,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 3183,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_5",
+    "size": 3068,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 3122,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_6",
+    "size": 1272,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 7,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/mnt/volume_nyc3_01/autotest/APM/APM",
+ "started": "2026-11-06T20:42:52Z",
+ "tag": "Plane-4.4.4",
+ "tag_commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+ "toolchain_dir": "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Plane",
+ "verdict": "reproducible",
+ "version": "4.4.4"
+}
