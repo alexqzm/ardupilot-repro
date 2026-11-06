@@ -5,7 +5,7 @@ import math
 from collections import Counter
 from pathlib import Path
 
-from .diagnose import located
+from .diagnose import host_dirs, located
 from .util import rjson
 
 VERDICTS = ("reproducible", "image-identical", "not-reproducible", "error")
@@ -75,7 +75,7 @@ def summary(plan: dict, rows: list) -> dict:
     with_paths = [r for r in official if "tree" in r.get("paths_official", {})]
     pathful = [r for r in with_paths if located(r["paths_official"])]
     by_file = [r for r in pathful if any(p.startswith("/") for p in r["paths_official"]["prefixes"])]
-    by_debug = [r for r in pathful if r["paths_official"].get("dirs")]
+    by_debug = [r for r in pathful if host_dirs(r["paths_official"])]
     return {"groups": by_group,
             "release": {"n": len(release), **{v: sum(r["verdict"] == v for r in release) for v in VERDICTS[:3]}},
             "sample": {"n": len(sample), "ok": k, "wilson95": [round(lo, 4), round(hi, 4)]},
@@ -90,9 +90,9 @@ def summary(plan: dict, rows: list) -> dict:
                                                                if p.startswith("/")})},
                                "debug_info": {"n": len(by_debug), "boards": sorted({r["board"] for r in by_debug}),
                                               "groups": sorted({r["group"] for r in by_debug}),
-                                              "dirs": sorted({d for r in by_debug for d in r["paths_official"]["dirs"]})},
+                                              "dirs": sorted({d for r in by_debug for d in host_dirs(r["paths_official"])})},
                                "reproducible": sum(ok(r) for r in pathful)},
-            "causes": dict(Counter(r.get("diagnosis", {}).get("cause", "unknown") for r in rows
+            "causes": dict(Counter(r.get("diagnosis", {}).get("cause", "unknown") for r in official
                                    if r["verdict"] == "not-reproducible")),
             "errors": sum(r["verdict"] == "error" for r in rows)}
 
@@ -213,16 +213,19 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: 
             extra = []
             if r["official"].get("git_identity") != r["rebuilt"].get("git_identity"):
                 extra.append(f"git_identity {r['official']['git_identity']} → {r['rebuilt']['git_identity']}")
+            if r["build_from"] == "tag" and r["build_commit"] != r["manifest_commit"]:
+                extra.append(f"собрано из тега: коммит `{r['build_commit'][:8]}` вместо `{r['manifest_commit'][:8]}` "
+                             "официальной сборки")
             if dg:
-                extra.append(f"причина: {CAUSE_RU.get(dg.get('cause'), dg.get('cause'))}; символов разного размера "
+                extra.append(f"разбор: {CAUSE_RU.get(dg.get('cause'), dg.get('cause'))}; символов разного размера "
                              f"{dg.get('size_diff_count', '—')}; zlib сборки {dg.get('zlib', r.get('python_zlib', '—'))}")
                 bp = dg.get("build_paths") or {}
                 if located(bp.get("official") or {}) or located(bp.get("rebuilt") or {}):
                     fmt = lambda x: ", ".join(f"`{p}`" for p in x["prefixes"]) or "нет"
                     extra.append(f"корень дерева в путях образа: {fmt(bp['official'])} → {fmt(bp['rebuilt'])}")
-                    if bp["official"].get("dirs") or bp["rebuilt"].get("dirs"):
-                        extra.append(f"каталогов сборки и тулчейна в образе: {len(bp['official'].get('dirs', []))} → "
-                                     f"{len(bp['rebuilt'].get('dirs', []))}")
+                    if host_dirs(bp["official"]) or host_dirs(bp["rebuilt"]):
+                        extra.append(f"каталогов сборки и тулчейна в образе: {len(host_dirs(bp['official']))} → "
+                                     f"{len(host_dirs(bp['rebuilt']))}")
             L.append(f"- **{r['group']} / {r['board']}**: областей различий {d.get('regions', '—')}, байт "
                      f"{d.get('differing_bytes', '—')}; поля .apj: {', '.join(r['meta_diff']) or 'нет'}"
                      + "".join(f"; {x}" for x in extra))

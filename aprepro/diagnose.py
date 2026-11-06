@@ -112,16 +112,26 @@ def build_paths(elf: bytes) -> dict:
                 prefixes[s[:d.start()]] = prefixes.get(s[:d.start()], 0) + 1
             elif _SOURCE.search(s):
                 other += 1
-            elif s.startswith("/"):
+            elif s.startswith("/") and _host_dir(s):
                 dirs.add(s)
     return {"tree": sum(prefixes.values()), "prefixes": dict(sorted(prefixes.items())), "other": other,
             "dirs": sorted(dirs)[:40]}
 
 
+def _host_dir(s: str) -> bool:
+    """Каталог сборки или тулчейна: не меньше трёх компонентов. Короче бывают случайные байты
+    образа, похожие на путь («/HBF/K9F»)."""
+    return s.strip("/").count("/") >= 2
+
+
+def host_dirs(bp: dict) -> list:
+    return [d for d in bp.get("dirs", []) if _host_dir(d)]
+
+
 def located(bp: dict) -> bool:
     """Зависят ли пути образа от расположения каталогов сборки: абсолютный или именованный корень
     дерева (не «../..» внутри дерева) либо абсолютные каталоги сборки и тулчейна."""
-    return bool(bp.get("dirs")) or any(p.startswith("/") or p.strip("./") for p in bp.get("prefixes", {}))
+    return bool(host_dirs(bp)) or any(p.startswith("/") or p.strip("./") for p in bp.get("prefixes", {}))
 
 
 def _inflate(b: bytes):
@@ -182,7 +192,7 @@ def diagnose(official_elf: bytes, rebuilt_elf: bytes, limit: int = 30) -> dict:
     paths = {"official": build_paths(official_elf), "rebuilt": build_paths(rebuilt_elf)}
     po, pr = paths["official"], paths["rebuilt"]
     by_path = only_romfs and (located(po) or located(pr)) and \
-        (set(po["prefixes"]) != set(pr["prefixes"]) or po["dirs"] != pr["dirs"])
+        (set(po["prefixes"]) != set(pr["prefixes"]) or host_dirs(po) != host_dirs(pr))
     causes = [c for c, ok in (("romfs-compression", by_romfs), ("build-path", by_path)) if ok]
     return {"zlib": zlib.ZLIB_RUNTIME_VERSION,
             "size_diff_count": len(sized),

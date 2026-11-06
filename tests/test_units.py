@@ -213,7 +213,8 @@ def test_debug_info_paths():
     # отладочная информация в .text у плат с прошивкой во внешней флеш-памяти (SPRacingH7)
     official = elf32(b"\0../../../../../../mnt/srv/APM/APM/modules/ChibiOS/os/rt/include\0"
                      b"/home/autotest/build/tmp/binaries.build/SPRacingH7\0"
-                     b"/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys\0/APM/LOGS\0")
+                     b"/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys\0/APM/LOGS\0"
+                     b"\x01/HBF/K9F\0")                                     # случайные байты, похожие на путь
     rebuilt = elf32(b"\0../../modules/ChibiOS/os/rt/include\0/home/runner/src/build/SPRacingH7\0"
                     b"/home/runner/tc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys\0/APM/LOGS\0")
     bp = build_paths(official)
