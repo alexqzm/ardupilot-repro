@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "CubeBlack",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "d938d96a8b509e00593a962434a28147b3cda424ea3953823c4fd4bbc3230801",
+   "sha256": "4d302631e235fe9ab972f715c1e20293fea5b4e7983e12594e58b6a7163acc13",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.4.4/CubeBlack/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/16b783822905",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:05:50Z",
+  "rebuilt": {
+   "apj_sha256": "d938d96a8b509e00593a962434a28147b3cda424ea3953823c4fd4bbc3230801",
+   "sha256": "4d302631e235fe9ab972f715c1e20293fea5b4e7983e12594e58b6a7163acc13"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "16b783822905668b160b0eb1ef5599ce0d3a0231",
+   "tag": "Plane-4.4.4",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@16b783822905668b160b0eb1ef5599ce0d3a0231"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "reproducible",
+  "version": "4.4.4"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "d938d96a8b509e00593a962434a28147b3cda424ea3953823c4fd4bbc3230801"
+   },
+   "name": "CubeBlack/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "4d302631e235fe9ab972f715c1e20293fea5b4e7983e12594e58b6a7163acc13"
+   },
+   "name": "CubeBlack/arduplane.bin"
+  }
+ ]
+}

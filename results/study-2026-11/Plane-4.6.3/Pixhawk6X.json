@@ -1,0 +1,401 @@
+{
+ "apj_equal": false,
+ "board": "Pixhawk6X",
+ "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "build_from": "release",
+ "build_seconds": 209.1,
+ "configure_seconds": 1.0,
+ "diagnosis": {
+  "build_paths": {
+   "official": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {
+     "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+    },
+    "tree": 24
+   },
+   "rebuilt": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {
+     "../..": 24
+    },
+    "tree": 24
+   }
+  },
+  "cause": "build-path",
+  "romfs": [
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 38848,
+    "format": "deflate",
+    "name": "ap_romfs_0",
+    "official_is_local_zlib": true,
+    "official_size": 28803,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 28803
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 7018,
+    "format": "deflate",
+    "name": "ap_romfs_1",
+    "official_is_local_zlib": true,
+    "official_size": 2259,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 2259
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 40728,
+    "format": "deflate",
+    "name": "ap_romfs_2",
+    "official_is_local_zlib": true,
+    "official_size": 29101,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 29101
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 53476,
+    "format": "deflate",
+    "name": "ap_romfs_3",
+    "official_is_local_zlib": true,
+    "official_size": 38190,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 38190
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 47,
+    "format": "deflate",
+    "name": "ap_romfs_4",
+    "official_is_local_zlib": true,
+    "official_size": 36,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 36
+   }
+  ],
+  "size_diff": [],
+  "size_diff_count": 0,
+  "zlib": "1.3"
+ },
+ "extf_equal": true,
+ "finished": "2026-11-06T21:53:49Z",
+ "firmware_version": "4.6.3-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "group": "Plane-4.6.3",
+ "image_diff": {
+  "differing_bytes": 247869,
+  "first_regions": [
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 3800,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 13,
+    "official_strings": [],
+    "offset": 5733,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 1,
+    "official_strings": [],
+    "offset": 6241,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 1,
+    "official_strings": [
+     "%/O0L;x"
+    ],
+    "offset": 6925,
+    "rebuilt_strings": [
+     "%/O0L;x"
+    ]
+   },
+   {
+    "length": 1,
+    "official_strings": [
+     "a \"2p"
+    ],
+    "offset": 7185,
+    "rebuilt_strings": [
+     "a \"2p"
+    ]
+   },
+   {
+    "length": 1,
+    "official_strings": [],
+    "offset": 7737,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 30056,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 30928,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 31756,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "(F%`",
+     "E#`O"
+    ],
+    "offset": 32224,
+    "rebuilt_strings": [
+     "(F%`",
+     "E#`O"
+    ]
+   },
+   {
+    "length": 14,
+    "official_strings": [
+     ">'K D"
+    ],
+    "offset": 33180,
+    "rebuilt_strings": [
+     ">'K D"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 33300,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 34164,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 34204,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 36188,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 54236,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 30,
+    "official_strings": [],
+    "offset": 83924,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 26,
+    "official_strings": [],
+    "offset": 84620,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 10,
+    "official_strings": [],
+    "offset": 111612,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 138560,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 144632,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 149184,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "h9F.F",
+     " pGpG"
+    ],
+    "offset": 167488,
+    "rebuilt_strings": [
+     "h9F.F",
+     " pGpG"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 167592,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 167976,
+    "rebuilt_strings": []
+   }
+  ],
+  "official_size": 1919368,
+  "rebuilt_size": 1918616,
+  "regions": 1698
+ },
+ "image_equal": false,
+ "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "meta_diff": {
+  "flash_free": {
+   "official": 46712,
+   "rebuilt": 47464
+  },
+  "image_size": {
+   "official": 1919368,
+   "rebuilt": 1918616
+  }
+ },
+ "official": {
+  "apj_sha256": "dbd894f094b1f6ce9d46bedfbf69c34cf9dbbb5bce46c2d4f2280bedbb7db183",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "591ad3555d0f3076e18528be46c6a692661fcc72e06f23a17fa261a530c9d645",
+  "image_size": 1919368
+ },
+ "official_url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/Pixhawk6X/arduplane.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {
+   "../..": 24
+  },
+  "tree": 24
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "cc22f262e68c1fecde0c9029cfd1b61b0d37d6bfe2bdb97a874004935bc844ff",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "983ebd5c2d3d60ce6d9b412583fc887044cd0cf868581fb61b6dac14cbe5419f",
+  "image_size": 1918616
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 98389,
+  "files": 5,
+  "format": [
+   "deflate"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 38848,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 28803,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 7018,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 2259,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40728,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 29101,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 53476,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 38190,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 36,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+ "started": "2026-11-06T21:50:17Z",
+ "tag": "Plane-4.6.3",
+ "tag_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Plane",
+ "verdict": "not-reproducible",
+ "version": "4.6.3"
+}

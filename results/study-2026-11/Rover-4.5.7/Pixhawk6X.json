@@ -1,0 +1,427 @@
+{
+ "apj_equal": false,
+ "board": "Pixhawk6X",
+ "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "build_from": "release",
+ "build_seconds": 205.2,
+ "configure_seconds": 1.0,
+ "diagnosis": {
+  "build_paths": {
+   "official": {
+    "dirs": [],
+    "other": 5,
+    "prefixes": {
+     "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+    },
+    "tree": 24
+   },
+   "rebuilt": {
+    "dirs": [],
+    "other": 5,
+    "prefixes": {
+     "../..": 24
+    },
+    "tree": 24
+   }
+  },
+  "cause": "build-path",
+  "romfs": [
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 38848,
+    "format": "gzip",
+    "name": "ap_romfs_0",
+    "official_is_local_zlib": true,
+    "official_size": 28834,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 28834
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 6993,
+    "format": "gzip",
+    "name": "ap_romfs_1",
+    "official_is_local_zlib": true,
+    "official_size": 2278,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 2278
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 40648,
+    "format": "gzip",
+    "name": "ap_romfs_2",
+    "official_is_local_zlib": true,
+    "official_size": 29028,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 29028
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 52828,
+    "format": "gzip",
+    "name": "ap_romfs_3",
+    "official_is_local_zlib": true,
+    "official_size": 37794,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 37794
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 47,
+    "format": "gzip",
+    "name": "ap_romfs_4",
+    "official_is_local_zlib": true,
+    "official_size": 54,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 54
+   }
+  ],
+  "size_diff": [],
+  "size_diff_count": 0,
+  "zlib": "1.3"
+ },
+ "extf_equal": true,
+ "finished": "2026-11-06T21:53:30Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "group": "Rover-4.5.7",
+ "image_diff": {
+  "differing_bytes": 229511,
+  "first_regions": [
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 3784,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 14,
+    "official_strings": [],
+    "offset": 5716,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 6204,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "%/O0L;x"
+    ],
+    "offset": 6888,
+    "rebuilt_strings": [
+     "%/O0L;x"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "a \"2p"
+    ],
+    "offset": 7148,
+    "rebuilt_strings": [
+     "a \"2p"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 7700,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "J1F(F"
+    ],
+    "offset": 7892,
+    "rebuilt_strings": [
+     "J1F(F"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "9F0F",
+     "pP(D",
+     "D(F\\"
+    ],
+    "offset": 16648,
+    "rebuilt_strings": [
+     "9F0F",
+     "pP(D",
+     "D(F\\"
+    ]
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 17168,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "(F%`",
+     "`%D\"`"
+    ],
+    "offset": 21052,
+    "rebuilt_strings": [
+     "(F%`",
+     "`%D\"`"
+    ]
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 50888,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 56880,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     " pGpG"
+    ],
+    "offset": 77736,
+    "rebuilt_strings": [
+     " pGpG"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 77828,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 78208,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "; F,4"
+    ],
+    "offset": 78236,
+    "rebuilt_strings": [
+     "; F,4"
+    ]
+   },
+   {
+    "length": 26,
+    "official_strings": [
+     ";FZFAF",
+     ";FZFAF"
+    ],
+    "offset": 79424,
+    "rebuilt_strings": [
+     ";FZFAF",
+     ";FZFAF"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 89744,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 6,
+    "official_strings": [
+     "I FH",
+     "BDIS"
+    ],
+    "offset": 96680,
+    "rebuilt_strings": [
+     "I FH",
+     "BDIS"
+    ]
+   },
+   {
+    "length": 10,
+    "official_strings": [],
+    "offset": 97748,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 101872,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "F@hH"
+    ],
+    "offset": 180252,
+    "rebuilt_strings": [
+     "F@hH"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 193748,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 10,
+    "official_strings": [],
+    "offset": 197456,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 197864,
+    "rebuilt_strings": []
+   }
+  ],
+  "official_size": 1730784,
+  "rebuilt_size": 1730032,
+  "regions": 1817
+ },
+ "image_equal": false,
+ "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "meta_diff": {
+  "flash_free": {
+   "official": 235296,
+   "rebuilt": 236048
+  },
+  "image_size": {
+   "official": 1730784,
+   "rebuilt": 1730032
+  }
+ },
+ "official": {
+  "apj_sha256": "c3900878d1ccc09431a4ae58f92d89aabd699bbbaa39ddb8eb4885284e68bf40",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "e158d31a95ea9087c9714f11f11fd79efc4023b043f0f06fda31c7203e949890",
+  "image_size": 1730784
+ },
+ "official_url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/Pixhawk6X/ardurover.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {
+   "../..": 24
+  },
+  "tree": 24
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "d690a8321e3f999a7c4d5b3ea1be5ac513d3d36dc418c298646986d1801d3d30",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "47e3e066d9f0b25f27b7dabe2ae7b35e254f1d65f404e1c7b15c61343d9d2698",
+  "image_size": 1730032
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 97988,
+  "files": 5,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 38848,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 28834,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 6993,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 2278,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40648,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 29028,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 52828,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 37794,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 54,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/52bed8d54200",
+ "started": "2026-11-06T21:50:01Z",
+ "tag": "Rover-4.5.7",
+ "tag_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Rover",
+ "verdict": "not-reproducible",
+ "version": "4.5.7"
+}

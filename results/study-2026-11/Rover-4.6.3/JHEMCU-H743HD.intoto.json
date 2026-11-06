@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "JHEMCU-H743HD",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "34ee6d1de5bd1c0ca50435015d7e9bb26491cc2260c5a414123fb640bee3042b",
+   "sha256": "623dbc0dfbae4dff54bc9adbcc2b4ce40cd7f3d5e6713982ba5eaed1e2e58c34",
+   "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/JHEMCU-H743HD/ardurover.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:07:37Z",
+  "rebuilt": {
+   "apj_sha256": "34ee6d1de5bd1c0ca50435015d7e9bb26491cc2260c5a414123fb640bee3042b",
+   "sha256": "623dbc0dfbae4dff54bc9adbcc2b4ce40cd7f3d5e6713982ba5eaed1e2e58c34"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Rover-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Rover",
+  "verdict": "reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "34ee6d1de5bd1c0ca50435015d7e9bb26491cc2260c5a414123fb640bee3042b"
+   },
+   "name": "JHEMCU-H743HD/ardurover.apj"
+  },
+  {
+   "digest": {
+    "sha256": "623dbc0dfbae4dff54bc9adbcc2b4ce40cd7f3d5e6713982ba5eaed1e2e58c34"
+   },
+   "name": "JHEMCU-H743HD/ardurover.bin"
+  }
+ ]
+}

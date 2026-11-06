@@ -1,0 +1,101 @@
+{
+ "apj_equal": true,
+ "board": "VRBrain-v52",
+ "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "build_from": "release",
+ "build_seconds": 110.8,
+ "configure_seconds": 0.8,
+ "extf_equal": true,
+ "finished": "2026-11-06T22:11:09Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "group": "Plane-4.5.7",
+ "image_equal": true,
+ "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "335507b9883e7e269acf059385e2855b8cc6e5eb2efacb9921914bb07bafd098",
+  "board_id": 1152,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.5.7"
+  },
+  "git_identity": "0358a9c2",
+  "image_sha256": "6dc18647440c309cd9fa8d16956ca42200af8e08d6300b225669e80241f9f748",
+  "image_size": 913288
+ },
+ "official_url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/VRBrain-v52/arduplane.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "335507b9883e7e269acf059385e2855b8cc6e5eb2efacb9921914bb07bafd098",
+  "board_id": 1152,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.5.7"
+  },
+  "git_identity": "0358a9c2",
+  "image_sha256": "6dc18647440c309cd9fa8d16956ca42200af8e08d6300b225669e80241f9f748",
+  "image_size": 913288
+ },
+ "role": "sample",
+ "romfs": {
+  "compressed": 2,
+  "compressed_bytes": 11918,
+  "files": 2,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 14208,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 10091,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 5640,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 1827,
+    "zlib_ng_equal": false
+   }
+  ],
+  "compressed": 2,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/0358a9c210bc",
+ "started": "2026-11-06T22:09:16Z",
+ "tag": "Plane-4.5.7",
+ "tag_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Plane",
+ "verdict": "reproducible",
+ "version": "4.5.7"
+}

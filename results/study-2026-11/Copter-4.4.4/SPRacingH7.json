@@ -1,0 +1,479 @@
+{
+ "apj_equal": false,
+ "board": "SPRacingH7",
+ "build_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+ "build_from": "release",
+ "build_seconds": 205.6,
+ "configure_seconds": 1.2,
+ "diagnosis": {
+  "build_paths": {
+   "official": {
+    "dirs": [
+     "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+     "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+     "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include",
+     "/home/autotest/build/tmp/binaries.build/SPRacingH7"
+    ],
+    "other": 4,
+    "prefixes": {
+     "../../../../../../mnt/volume_nyc3_01/autotest/APM/APM": 14
+    },
+    "tree": 14
+   },
+   "rebuilt": {
+    "dirs": [
+     "/home/runner/work/_temp/work/src/db53a28f321d/build/SPRacingH7",
+     "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+     "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+     "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include"
+    ],
+    "other": 4,
+    "prefixes": {
+     "../..": 14
+    },
+    "tree": 14
+   }
+  },
+  "cause": "build-path",
+  "romfs": [
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 26624,
+    "format": "gzip",
+    "name": "ap_romfs_0",
+    "official_is_local_zlib": true,
+    "official_size": 18557,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 18557
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "gzip",
+    "name": "ap_romfs_1",
+    "official_is_local_zlib": true,
+    "official_size": 3239,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3239
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "gzip",
+    "name": "ap_romfs_2",
+    "official_is_local_zlib": true,
+    "official_size": 3165,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3165
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "gzip",
+    "name": "ap_romfs_3",
+    "official_is_local_zlib": true,
+    "official_size": 3049,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3049
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "gzip",
+    "name": "ap_romfs_4",
+    "official_is_local_zlib": true,
+    "official_size": 3183,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3183
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "gzip",
+    "name": "ap_romfs_5",
+    "official_is_local_zlib": true,
+    "official_size": 3068,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3068
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 3122,
+    "format": "gzip",
+    "name": "ap_romfs_6",
+    "official_is_local_zlib": true,
+    "official_size": 1272,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 1272
+   }
+  ],
+  "size_diff": [],
+  "size_diff_count": 0,
+  "zlib": "1.3"
+ },
+ "extf_diff": {
+  "differing_bytes": 858948,
+  "first_regions": [
+   {
+    "length": 18,
+    "official_strings": [],
+    "offset": 8,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 94,
+    "official_strings": [],
+    "offset": 672,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 74,
+    "official_strings": [],
+    "offset": 49232,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 57040,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 57104,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 10,
+    "official_strings": [],
+    "offset": 58792,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 10,
+    "official_strings": [],
+    "offset": 58820,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 58852,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     " pGpG",
+     " pGpG"
+    ],
+    "offset": 58980,
+    "rebuilt_strings": [
+     " pGpG",
+     " pGpG"
+    ]
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 59164,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 14,
+    "official_strings": [],
+    "offset": 59192,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 58,
+    "official_strings": [
+     "h[y3"
+    ],
+    "offset": 59232,
+    "rebuilt_strings": [
+     "h[y3"
+    ]
+   },
+   {
+    "length": 6,
+    "official_strings": [
+     "h[y3",
+     "H0pG",
+     "@kpG"
+    ],
+    "offset": 59312,
+    "rebuilt_strings": [
+     "h[y3",
+     "H0pG",
+     "@kpG"
+    ]
+   },
+   {
+    "length": 10,
+    "official_strings": [
+     "I F="
+    ],
+    "offset": 61176,
+    "rebuilt_strings": [
+     "I F="
+    ]
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 66712,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 67364,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 67392,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "zqHF"
+    ],
+    "offset": 74464,
+    "rebuilt_strings": [
+     "zqHF"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [
+     "$Failed to register gyro id %u"
+    ],
+    "offset": 222836,
+    "rebuilt_strings": [
+     "$Failed to register gyro id %u"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 231292,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 235748,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 6,
+    "official_strings": [],
+    "offset": 237008,
+    "rebuilt_strings": []
+   },
+   {
+    "length": 26,
+    "official_strings": [
+     "> +`"
+    ],
+    "offset": 238252,
+    "rebuilt_strings": [
+     "> +`"
+    ]
+   },
+   {
+    "length": 14,
+    "official_strings": [
+     " F)h",
+     "p@`Giy F"
+    ],
+    "offset": 238808,
+    "rebuilt_strings": [
+     " F)h",
+     "p@`Giy F"
+    ]
+   },
+   {
+    "length": 2,
+    "official_strings": [],
+    "offset": 239308,
+    "rebuilt_strings": []
+   }
+  ],
+  "official_size": 1179644,
+  "rebuilt_size": 1179060,
+  "regions": 177
+ },
+ "extf_equal": false,
+ "finished": "2026-11-06T22:26:44Z",
+ "firmware_version": "4.4.4-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+ "group": "Copter-4.4.4",
+ "image_equal": true,
+ "manifest_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+ "meta_diff": {
+  "extf_image_size": {
+   "official": 1179644,
+   "rebuilt": 1179060
+  },
+  "extflash_free": {
+   "official": 15597572,
+   "rebuilt": 15598156
+  }
+ },
+ "official": {
+  "apj_sha256": "a5832bd0092e43099c74924846d9ea8e37b81a17faf73cbbd46b0cac413c1ce8",
+  "board_id": 1060,
+  "extf_sha256": "66374bc53a53bd40666a87106ec98aad5b6fb926152d08f8d8a931b5c746218b",
+  "extf_size": 1179644,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.4.4"
+  },
+  "git_identity": "db53a28f",
+  "image_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "image_size": 0
+ },
+ "official_url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/SPRacingH7/arducopter.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [
+   "/home/runner/work/_temp/work/src/db53a28f321d/build/SPRacingH7",
+   "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+   "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+   "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include"
+  ],
+  "other": 4,
+  "prefixes": {
+   "../..": 14
+  },
+  "tree": 14
+ },
+ "paths_official": {
+  "dirs": [
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machine",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys",
+   "/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/lib/gcc/arm-none-eabi/10.2.1/include",
+   "/home/autotest/build/tmp/binaries.build/SPRacingH7"
+  ],
+  "other": 4,
+  "prefixes": {
+   "../../../../../../mnt/volume_nyc3_01/autotest/APM/APM": 14
+  },
+  "tree": 14
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "28dd693c33c5f76309614bd8d1c7e56a2f239b600f9de16ebc4df1f0e6c06d7f",
+  "board_id": 1060,
+  "extf_sha256": "d101b241376eaeabbfbc3b7cf72eb2041180c8129b8ec36c6c8a114c3a8af36b",
+  "extf_size": 1179060,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.4.4"
+  },
+  "git_identity": "db53a28f",
+  "image_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "image_size": 0
+ },
+ "role": "sample",
+ "romfs": {
+  "compressed": 7,
+  "compressed_bytes": 35533,
+  "files": 7,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 26624,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 18557,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 3239,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 3165,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 3049,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 3183,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_5",
+    "size": 3068,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 3122,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_6",
+    "size": 1272,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 7,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/db53a28f321d",
+ "started": "2026-11-06T22:23:17Z",
+ "tag": "Copter-4.4.4",
+ "tag_commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Copter",
+ "verdict": "not-reproducible",
+ "version": "4.4.4"
+}

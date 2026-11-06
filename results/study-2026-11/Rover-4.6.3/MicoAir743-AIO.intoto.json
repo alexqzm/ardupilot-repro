@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "MicoAir743-AIO",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "9e16c95228436b731ce364d9a4d49318de4f05acaabeaab1e49f69caa86405b5",
+   "sha256": "03ba2ab715225e4b19d01ca7c6b9db6a67bc9dd664f5d60212a41b4670561de0",
+   "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/MicoAir743-AIO/ardurover.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:03:18Z",
+  "rebuilt": {
+   "apj_sha256": "9e16c95228436b731ce364d9a4d49318de4f05acaabeaab1e49f69caa86405b5",
+   "sha256": "03ba2ab715225e4b19d01ca7c6b9db6a67bc9dd664f5d60212a41b4670561de0"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Rover-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Rover",
+  "verdict": "reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "9e16c95228436b731ce364d9a4d49318de4f05acaabeaab1e49f69caa86405b5"
+   },
+   "name": "MicoAir743-AIO/ardurover.apj"
+  },
+  {
+   "digest": {
+    "sha256": "03ba2ab715225e4b19d01ca7c6b9db6a67bc9dd664f5d60212a41b4670561de0"
+   },
+   "name": "MicoAir743-AIO/ardurover.bin"
+  }
+ ]
+}

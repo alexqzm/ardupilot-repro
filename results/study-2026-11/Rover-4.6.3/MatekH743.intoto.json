@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "MatekH743",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "e3a2cb389a43ae831bde0d30abc2c6d8426d52b489ffb19d5b3be14fcd3ec97e",
+   "sha256": "df6dd5d3e3f08cafacc780de6cc0ff9cdfdfb31856e8390bd61c5816653cacdd",
+   "url": "https://firmware.ardupilot.org/Rover/stable-4.6.3/MatekH743/ardurover.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:52:23Z",
+  "rebuilt": {
+   "apj_sha256": "e3a2cb389a43ae831bde0d30abc2c6d8426d52b489ffb19d5b3be14fcd3ec97e",
+   "sha256": "df6dd5d3e3f08cafacc780de6cc0ff9cdfdfb31856e8390bd61c5816653cacdd"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Rover-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Rover",
+  "verdict": "reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "e3a2cb389a43ae831bde0d30abc2c6d8426d52b489ffb19d5b3be14fcd3ec97e"
+   },
+   "name": "MatekH743/ardurover.apj"
+  },
+  {
+   "digest": {
+    "sha256": "df6dd5d3e3f08cafacc780de6cc0ff9cdfdfb31856e8390bd61c5816653cacdd"
+   },
+   "name": "MatekH743/ardurover.bin"
+  }
+ ]
+}

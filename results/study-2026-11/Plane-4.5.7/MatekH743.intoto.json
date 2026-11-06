@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "MatekH743",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "f2fcff9141460d02131383da24fdea571dafb442b3dc9ebfcd9e87d16d7d2258",
+   "sha256": "f53c630bf57d21729f944f2c8715c848e884ab19e3c7f7feb566ea8bb9d1fe0f",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/MatekH743/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/0358a9c210bc",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:52:59Z",
+  "rebuilt": {
+   "apj_sha256": "f2fcff9141460d02131383da24fdea571dafb442b3dc9ebfcd9e87d16d7d2258",
+   "sha256": "f53c630bf57d21729f944f2c8715c848e884ab19e3c7f7feb566ea8bb9d1fe0f"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+   "tag": "Plane-4.5.7",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@0358a9c210bc6c965006f5d6029239b7033616df"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "reproducible",
+  "version": "4.5.7"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "f2fcff9141460d02131383da24fdea571dafb442b3dc9ebfcd9e87d16d7d2258"
+   },
+   "name": "MatekH743/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "f53c630bf57d21729f944f2c8715c848e884ab19e3c7f7feb566ea8bb9d1fe0f"
+   },
+   "name": "MatekH743/arduplane.bin"
+  }
+ ]
+}

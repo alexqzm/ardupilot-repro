@@ -1,0 +1,125 @@
+{
+ "apj_equal": true,
+ "board": "Pixhawk4",
+ "build_commit": "fb773567896014da007bca58358704d4a0d8516f",
+ "build_from": "release",
+ "build_seconds": 196.8,
+ "configure_seconds": 1.0,
+ "extf_equal": true,
+ "finished": "2026-11-06T21:59:51Z",
+ "firmware_version": "4.7.2-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "fb773567896014da007bca58358704d4a0d8516f",
+ "group": "Plane-4.7.2",
+ "image_equal": true,
+ "manifest_commit": "fb773567896014da007bca58358704d4a0d8516f",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "951cd5067844f6e5b76dc35fc9a5fb54880c759df7a1467b4b746ec1d1970db0",
+  "board_id": 50,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.7.2"
+  },
+  "git_identity": "fb773567",
+  "image_sha256": "7d6ce10cc3f88dfb75c9d6de031d0401cf5d0306c4e64ba5620d577865f4a206",
+  "image_size": 1560496
+ },
+ "official_url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/Pixhawk4/arduplane.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "951cd5067844f6e5b76dc35fc9a5fb54880c759df7a1467b4b746ec1d1970db0",
+  "board_id": 50,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.7.2"
+  },
+  "git_identity": "fb773567",
+  "image_sha256": "7d6ce10cc3f88dfb75c9d6de031d0401cf5d0306c4e64ba5620d577865f4a206",
+  "image_size": 1560496
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 76941,
+  "files": 5,
+  "format": [
+   "deflate"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 16448,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 11621,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 88,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 75,
+    "zlib_ng_equal": true
+   },
+   {
+    "content_size": 5218,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 1784,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40664,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 29024,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47668,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 34437,
+    "zlib_ng_equal": false
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/fb7735678960",
+ "started": "2026-11-06T21:56:31Z",
+ "tag": "Plane-4.7.2",
+ "tag_commit": "fb773567896014da007bca58358704d4a0d8516f",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Plane",
+ "verdict": "reproducible",
+ "version": "4.7.2"
+}

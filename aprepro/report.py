@@ -12,8 +12,8 @@ VERDICTS = ("reproducible", "image-identical", "not-reproducible", "error")
 VERDICT_RU = {"reproducible": "совпадает побитово", "image-identical": "совпадает образ",
               "not-reproducible": "не совпадает", "error": "ошибка"}
 CAUSE_RU = {"romfs-compression": "сжатие ROMFS другой реализацией zlib",
-            "build-path": "пути исходников в образе (__FILE__): другие каталоги дерева или сборки",
-            "romfs-compression+build-path": "сжатие ROMFS и пути исходников в образе",
+            "build-path": "пути каталогов сборки в образе: другие каталоги дерева, сборки или тулчейна",
+            "romfs-compression+build-path": "сжатие ROMFS и пути каталогов сборки в образе",
             "unknown": "не установлена", "unavailable": "разбор недоступен"}
 # варианты прогона: results/<вариант>/<план>/… — та же сборка с одним изменённым условием
 VARIANT_RU = {"zlib-ng": "Python с zlib-ng вместо классического zlib",
@@ -156,6 +156,12 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: 
                   f"{po['reproducible']}.", ""]
         else:
             L += [f"Путей каталогов сборки нет ни в одной из {po['checked']} проверенных официальных прошивок.", ""]
+    if varied:
+        bad_rel = {(r["group"], r["board"]) for r in rows if r["build_from"] == "release" and r["verdict"] == "not-reproducible"}
+        fixed = {(r["group"], r["board"]) for vr in varied.values() for r in vr if ok(r)} & bad_rel
+        if bad_rel:
+            L += [f"Пересборка с изменённым условием (раздел «Проверка причин повторной сборкой») воспроизвела "
+                  f"{len(fixed)} из {len(bad_rel)} несовпавших прошивок выпусков.", ""]
     L += ["## По группам", "",
           "| Группа | Собрано из | Плат в выпуске | В плане | Побитово | Образ | Не совпало | Ошибка |",
           "|---|---|---|---|---|---|---|---|"]
@@ -213,11 +219,14 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: 
             extra = []
             if r["official"].get("git_identity") != r["rebuilt"].get("git_identity"):
                 extra.append(f"git_identity {r['official']['git_identity']} → {r['rebuilt']['git_identity']}")
-            if r["build_from"] == "tag" and r["build_commit"] != r["manifest_commit"]:
+            other_commit = r["build_from"] == "tag" and r["build_commit"] != r["manifest_commit"]
+            if other_commit:
                 extra.append(f"собрано из тега: коммит `{r['build_commit'][:8]}` вместо `{r['manifest_commit'][:8]}` "
                              "официальной сборки")
             if dg:
-                extra.append(f"разбор: {CAUSE_RU.get(dg.get('cause'), dg.get('cause'))}; символов разного размера "
+                cause = "других причин не найдено" if other_commit and dg.get("cause") == "unknown" \
+                    else CAUSE_RU.get(dg.get("cause"), dg.get("cause"))
+                extra.append(f"разбор: {cause}; символов разного размера "
                              f"{dg.get('size_diff_count', '—')}; zlib сборки {dg.get('zlib', r.get('python_zlib', '—'))}")
                 bp = dg.get("build_paths") or {}
                 if located(bp.get("official") or {}) or located(bp.get("rebuilt") or {}):

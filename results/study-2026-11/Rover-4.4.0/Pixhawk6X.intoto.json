@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "Pixhawk6X",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "3c1a4bd7da6cca965f8b1b8ce2694c552d8f42b3e05563df2ca9f02c0888ac3b",
+   "sha256": "ebb36a766bab97970e11abfce6b1e5105fa66616f6e62c1f42346ecc9edde30f",
+   "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/Pixhawk6X/ardurover.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/9279df6191a7",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:49:04Z",
+  "rebuilt": {
+   "apj_sha256": "3c1a4bd7da6cca965f8b1b8ce2694c552d8f42b3e05563df2ca9f02c0888ac3b",
+   "sha256": "ebb36a766bab97970e11abfce6b1e5105fa66616f6e62c1f42346ecc9edde30f"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+   "tag": "Rover-4.4.0",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@9279df6191a772c098b2e4797c95ac954f258d88"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Rover",
+  "verdict": "reproducible",
+  "version": "4.4.0"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "3c1a4bd7da6cca965f8b1b8ce2694c552d8f42b3e05563df2ca9f02c0888ac3b"
+   },
+   "name": "Pixhawk6X/ardurover.apj"
+  },
+  {
+   "digest": {
+    "sha256": "ebb36a766bab97970e11abfce6b1e5105fa66616f6e62c1f42346ecc9edde30f"
+   },
+   "name": "Pixhawk6X/ardurover.bin"
+  }
+ ]
+}

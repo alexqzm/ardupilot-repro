@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "MatekF405-Wing",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "d102fea3df065ee2f3ed6ddedfd01a653684ef39628cd500320db277c062debe",
+   "sha256": "1e396bed0406bdbc1da179bc8b32fbee990b9ac881db878fd09a7a83f733301d",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/MatekF405-Wing/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:10:18Z",
+  "rebuilt": {
+   "apj_sha256": "d102fea3df065ee2f3ed6ddedfd01a653684ef39628cd500320db277c062debe",
+   "sha256": "1e396bed0406bdbc1da179bc8b32fbee990b9ac881db878fd09a7a83f733301d"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Plane-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "d102fea3df065ee2f3ed6ddedfd01a653684ef39628cd500320db277c062debe"
+   },
+   "name": "MatekF405-Wing/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "1e396bed0406bdbc1da179bc8b32fbee990b9ac881db878fd09a7a83f733301d"
+   },
+   "name": "MatekF405-Wing/arduplane.bin"
+  }
+ ]
+}

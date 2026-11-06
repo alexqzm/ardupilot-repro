@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "CubeOrangePlus",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "f66fc66bfd3532a85e018e1c6fe862ff3389bc8ae3038c0774b82a86ad01c021",
+   "sha256": "bc3a16365473fa1b6d8086a81401404f3ebf3d2fe1baae4c75445ff1d2fac05f",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/CubeOrangePlus/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:50:16Z",
+  "rebuilt": {
+   "apj_sha256": "b422b142bc3f0cda097361c000fe36fa848f08b7773b2213a61afc0b8cded439",
+   "sha256": "bcda61ad040ac9a3b1801e6812b83325baca69c2305a8b630ac06b1b4506e8ff"
+  },
+  "result": "MISMATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Plane-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "not-reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "f66fc66bfd3532a85e018e1c6fe862ff3389bc8ae3038c0774b82a86ad01c021"
+   },
+   "name": "CubeOrangePlus/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "bc3a16365473fa1b6d8086a81401404f3ebf3d2fe1baae4c75445ff1d2fac05f"
+   },
+   "name": "CubeOrangePlus/arduplane.bin"
+  }
+ ]
+}

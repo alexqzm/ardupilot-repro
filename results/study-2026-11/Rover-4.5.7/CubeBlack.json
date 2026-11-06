@@ -1,0 +1,125 @@
+{
+ "apj_equal": true,
+ "board": "CubeBlack",
+ "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "build_from": "release",
+ "build_seconds": 196.3,
+ "configure_seconds": 1.0,
+ "extf_equal": true,
+ "finished": "2026-11-06T22:06:47Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "group": "Rover-4.5.7",
+ "image_equal": true,
+ "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "2c27f60d23bed769d2368673c70f143214de006176185968ec5382488205f7dc",
+  "board_id": 9,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "7030f56c2681d78c6a852e0f90903b6350dd2dba6fd26f31a7280fa0af4cc5d5",
+  "image_size": 1594336
+ },
+ "official_url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/CubeBlack/ardurover.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "2c27f60d23bed769d2368673c70f143214de006176185968ec5382488205f7dc",
+  "board_id": 9,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "7030f56c2681d78c6a852e0f90903b6350dd2dba6fd26f31a7280fa0af4cc5d5",
+  "image_size": 1594336
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 77237,
+  "files": 5,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 16384,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 11578,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 195,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 150,
+    "zlib_ng_equal": true
+   },
+   {
+    "content_size": 6790,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 2239,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40656,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 29020,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47324,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 34250,
+    "zlib_ng_equal": false
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/52bed8d54200",
+ "started": "2026-11-06T22:03:28Z",
+ "tag": "Rover-4.5.7",
+ "tag_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Rover",
+ "verdict": "reproducible",
+ "version": "4.5.7"
+}

@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "fmuv3",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "ef4f68c9376c61240d8f70b7227c6c214135a51f89fe18cf007f4022bfd63fde",
+   "sha256": "b14ac5e847301b719744a235d0ab2b7bf80c55da1d0f0cf1802fa1d7a1bc4599",
+   "url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/fmuv3/ardurover.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/9279df6191a7",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:03:55Z",
+  "rebuilt": {
+   "apj_sha256": "ef4f68c9376c61240d8f70b7227c6c214135a51f89fe18cf007f4022bfd63fde",
+   "sha256": "b14ac5e847301b719744a235d0ab2b7bf80c55da1d0f0cf1802fa1d7a1bc4599"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+   "tag": "Rover-4.4.0",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@9279df6191a772c098b2e4797c95ac954f258d88"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Rover",
+  "verdict": "reproducible",
+  "version": "4.4.0"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "ef4f68c9376c61240d8f70b7227c6c214135a51f89fe18cf007f4022bfd63fde"
+   },
+   "name": "fmuv3/ardurover.apj"
+  },
+  {
+   "digest": {
+    "sha256": "b14ac5e847301b719744a235d0ab2b7bf80c55da1d0f0cf1802fa1d7a1bc4599"
+   },
+   "name": "fmuv3/ardurover.bin"
+  }
+ ]
+}

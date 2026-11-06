@@ -1,0 +1,295 @@
+{
+ "apj_equal": false,
+ "board": "MatekH743",
+ "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+ "build_from": "tag",
+ "build_seconds": 291.7,
+ "configure_seconds": 1.2,
+ "diagnosis": {
+  "build_paths": {
+   "official": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {},
+    "tree": 0
+   },
+   "rebuilt": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {},
+    "tree": 0
+   }
+  },
+  "cause": "unknown",
+  "romfs": [
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 19776,
+    "format": "deflate",
+    "name": "ap_romfs_0",
+    "official_is_local_zlib": true,
+    "official_size": 13370,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 13370
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "deflate",
+    "name": "ap_romfs_1",
+    "official_is_local_zlib": true,
+    "official_size": 3372,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3372
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "deflate",
+    "name": "ap_romfs_2",
+    "official_is_local_zlib": true,
+    "official_size": 3296,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3296
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "deflate",
+    "name": "ap_romfs_3",
+    "official_is_local_zlib": true,
+    "official_size": 3158,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3158
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "deflate",
+    "name": "ap_romfs_4",
+    "official_is_local_zlib": true,
+    "official_size": 3311,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3311
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 13824,
+    "format": "deflate",
+    "name": "ap_romfs_5",
+    "official_is_local_zlib": true,
+    "official_size": 3171,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 3171
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 3628,
+    "format": "deflate",
+    "name": "ap_romfs_6",
+    "official_is_local_zlib": true,
+    "official_size": 1381,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 1381
+   }
+  ],
+  "size_diff": [],
+  "size_diff_count": 0,
+  "zlib": "1.3"
+ },
+ "extf_equal": true,
+ "finished": "2026-11-06T22:27:35Z",
+ "firmware_version": "4.6.3-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "group": "Copter-4.6.3-tag",
+ "image_diff": {
+  "differing_bytes": 35,
+  "first_regions": [
+   {
+    "length": 18,
+    "official_strings": [
+     "ch::update",
+     "AP_Button::update",
+     "ArduCopter V4.6.3 (3fc7011a)",
+     "3fc7011a",
+     "ArduCopter V4.6.3",
+     "ChibiOS"
+    ],
+    "offset": 1333521,
+    "rebuilt_strings": [
+     "ch::update",
+     "AP_Button::update",
+     "ArduCopter V4.6.3 (92b0cd78)",
+     "92b0cd78",
+     "ArduCopter V4.6.3",
+     "ChibiOS"
+    ]
+   },
+   {
+    "length": 17,
+    "official_strings": [
+     "ter V4.6.3",
+     "ChibiOS",
+     "88b84600",
+     "revwfpa"
+    ],
+    "offset": 1333595,
+    "rebuilt_strings": [
+     "ter V4.6.3",
+     "ChibiOS",
+     "88b84600",
+     "revwfpa"
+    ]
+   }
+  ],
+  "hints": {
+   "git_identity": {
+    "official": 2,
+    "rebuilt": 2
+   }
+  },
+  "official_size": 1584428,
+  "rebuilt_size": 1584428,
+  "regions": 2
+ },
+ "image_equal": false,
+ "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "meta_diff": {
+  "git_identity": {
+   "official": "3fc7011a",
+   "rebuilt": "92b0cd78"
+  }
+ },
+ "official": {
+  "apj_sha256": "877797699e0a1651747a447abf8ccb168bd1e1caf4212c3a7863c6adc3e874bd",
+  "board_id": 1013,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "BETA",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "80b1167fdcc38c8151f253b7f0b95232164e0c43ced82107e82a4b1388e8a15a",
+  "image_size": 1584428
+ },
+ "official_url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/MatekH743/arducopter.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "9b13483519c283f4e83da216074cc5b8b0030cb087be4f023485009e58f9775c",
+  "board_id": 1013,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "92b0cd78",
+  "image_sha256": "729379effd8c55b1d756946b76dbe36653a333b128b7efb5b9c69ba691c630cc",
+  "image_size": 1584428
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 7,
+  "compressed_bytes": 31059,
+  "files": 7,
+  "format": [
+   "deflate"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 19776,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 13370,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 3372,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 3296,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 3158,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 3311,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_5",
+    "size": 3171,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 3628,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_6",
+    "size": 1381,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 7,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/92b0cd788ec2",
+ "started": "2026-11-06T22:22:40Z",
+ "tag": "Copter-4.6.3",
+ "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Copter",
+ "verdict": "not-reproducible",
+ "version": "4.6.3"
+}

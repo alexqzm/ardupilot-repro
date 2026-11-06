@@ -21,20 +21,46 @@
 группа сборки из тега — 152 сборки. Полная таблица — [`docs/results.md`](docs/results.md).
 
 <!-- results:begin -->
-Результатов пока нет.
+Официальные прошивки, пересобранные из коммитов выпусков: 144; побитово совпали — 133, совпали только образы — 0, не совпали — 11.
+Случайная часть выборки: воспроизводимы 46 из 48, 95-процентный интервал Уилсона 86,0 % … 98,9 %.
+
+| Группа | Собрано из | Побитово | Образ | Не совпало | Ошибка |
+|---|---|---|---|---|---|
+| Copter-4.4.4 | коммита выпуска | 11 | 0 | 1 | 0 |
+| Copter-4.5.7 | коммита выпуска | 11 | 0 | 1 | 0 |
+| Copter-4.6.3 | коммита выпуска | 10 | 0 | 2 | 0 |
+| Copter-4.7.2 | коммита выпуска | 12 | 0 | 0 | 0 |
+| Plane-4.4.4 | коммита выпуска | 11 | 0 | 1 | 0 |
+| Plane-4.5.7 | коммита выпуска | 11 | 0 | 1 | 0 |
+| Plane-4.6.3 | коммита выпуска | 10 | 0 | 2 | 0 |
+| Plane-4.7.2 | коммита выпуска | 12 | 0 | 0 | 0 |
+| Rover-4.4.0 | коммита выпуска | 12 | 0 | 0 | 0 |
+| Rover-4.5.7 | коммита выпуска | 11 | 0 | 1 | 0 |
+| Rover-4.6.3 | коммита выпуска | 10 | 0 | 2 | 0 |
+| Rover-4.7.2 | коммита выпуска | 12 | 0 | 0 | 0 |
+| Copter-4.6.3-tag | тега | 0 | 0 | 8 | 0 |
 <!-- results:end -->
 
-**Находки до прогона** (подробно — [`docs/methodology.md`](docs/methodology.md#находки-до-прогона)):
+**Находки** (подробно — [`docs/methodology.md`](docs/methodology.md#находки-прогона)):
 
 - **Прошивка зависит от реализации zlib в интерпретаторе Python.** ArduPilot сжимает встроенные
-  файлы ROMFS модулем `zlib` интерпретатора, который выполняет сборку. Copter 4.7.2 для CubeOrange,
-  собранный интерпретатором с zlib-ng, на 112 байт длиннее официального; с классическим zlib —
-  совпадает побитово. Распакованное содержимое ROMFS в обоих случаях одинаково. Эта зависимость
-  не упомянута в документированной среде сборки ArduPilot.
+  файлы ROMFS модулем `zlib` интерпретатора, который выполняет сборку. Сжатые блоки есть во всех
+  144 официальных прошивках выборки; все совпадают с выводом классического zlib, и ни одна не
+  совпала бы при сборке интерпретатором с zlib-ng (Copter 4.7.2 для CubeOrange с zlib-ng — на 112
+  байт длиннее официального). В документированной среде сборки ArduPilot этого условия нет.
+- **В 11 официальных прошивках зашиты пути каталогов сборочного сервера.** У Pixhawk6X (4.5.7 и
+  4.6.3) и CubeOrangePlus (4.6.3) утверждения lwIP передают `__FILE__`, а сервер собирает с
+  `waf --out` вне дерева, и в образе оказываются абсолютные пути
+  `/mnt/volume_nyc3_01/autotest/APM/APM/modules/lwip/…`. У SPRacingH7 (4.4.4, прошивка во внешней
+  флеш-памяти) в образе лежат отладочные данные с каталогом сборки
+  `/home/autotest/build/tmp/binaries.build` и тулчейном в `/home/autotest/arm-gcc`. Штатная сборка
+  эти прошивки не воспроизводит; с деревом, каталогом сборки и тулчейном в тех же каталогах — все
+  11 совпали побитово. В 4.7 ArduPilot добавил `-ffile-prefix-map` и убрал `__FILE__` из
+  утверждений lwIP.
 - **Тег Copter-4.6.3 не указывает на коммит официальной сборки.** Официальные прошивки Copter
   stable-4.6.3 собраны из `3fc7011a`, тег указывает на следующий коммит `92b0cd78`, который меняет
   тип выпуска с BETA на OFFICIAL. В образах официальных прошивок зашит тип BETA, рядом лежит
-  `firmware-version.txt` с OFFICIAL.
+  `firmware-version.txt` с OFFICIAL; ни одна из 8 плат, собранных из тега, не совпала.
 
 ## Как это работает
 
@@ -46,7 +72,7 @@
                    тулчейн gcc-arm-none-eabi-10-2020-q4-major (SHA-256 закреплён), Python 3.11 с классическим zlib
                                      │
                    сверка .apj ─► reproducible | image-identical | not-reproducible
-                   при расхождении: области различий, символы ELF, разбор ROMFS
+                   при расхождении: области различий, символы ELF, разбор ROMFS, пути сборки в образе
                    аттестация in-toto, предикат urn:scii:predicate:rebuild:v1
 ```
 
@@ -116,8 +142,9 @@ cosign verify-blob-attestation --type urn:scii:predicate:rebuild:v1 \
 
 Три изделия, четыре линейки и 12 плат на группу; Sub, вертолётные варианты, Tracker, AP_Periph и
 форматы кроме `.apj` не проверялись. Среда официального сервера сборки не опубликована —
-реализация zlib на нём выведена из того, какой вывод совпадает. SHA-256 тулчейна закреплён по
-первой загрузке. Совпадение подтверждает происхождение прошивки из коммита, а не безопасность кода.
+реализация zlib на нём выведена из того, какой вывод совпадает, каталоги — из путей в официальных
+образах. SHA-256 тулчейна закреплён по первой загрузке. Совпадение подтверждает происхождение
+прошивки из коммита, а не безопасность кода.
 
 ## Связанные репозитории
 
@@ -130,13 +157,17 @@ cosign verify-blob-attestation --type urn:scii:predicate:rebuild:v1 \
 
 Are official ArduPilot firmware files on firmware.ardupilot.org bit-for-bit reproducible from the
 public source? `aprepro` rebuilds them from the release commit with the pinned toolchain,
-compares the `.apj` files, explains mismatches (byte regions, ELF symbols, ROMFS blobs) and emits an
-in-toto rebuild attestation usable as SCII evidence s24. A pre-registered plan covers 152 builds
-(Copter, Plane and Rover; the latest release of the 4.4–4.7 lines; a fixed panel of boards plus
-a seeded random sample). Findings so far: the firmware depends on the zlib implementation linked
-into the Python interpreter that runs the build (ROMFS compression; zlib-ng output differs from
-classic zlib), and the Copter-4.6.3 tag points to a commit later than the one the official binaries
-were built from.
+compares the `.apj` files, explains mismatches (byte regions, ELF symbols, ROMFS blobs, build paths
+embedded in the image) and emits an in-toto rebuild attestation usable as SCII evidence s24. A
+pre-registered plan covers 152 builds (Copter, Plane and Rover; the latest release of the 4.4–4.7
+lines; a fixed panel of boards plus a seeded random sample). Result: 133 of 144 official firmware
+files rebuilt bit-for-bit with a standard in-tree build; the other 11 embed the build server's
+paths (lwIP `__FILE__` assertions with an out-of-tree `waf --out` build in 4.5–4.6, debug data in
+the external-flash image of SPRacingH7 in 4.4.4) and match once the source tree, build directory
+and toolchain sit at the server's paths, which can be read from the official image itself. Every
+image also depends on the zlib implementation linked into Python (ROMFS compression; zlib-ng output
+differs from classic zlib), and the Copter-4.6.3 tag points to a commit later than the one the
+official binaries were built from.
 
 ## Лицензия
 

@@ -1,0 +1,109 @@
+{
+ "apj_equal": true,
+ "board": "3DRControlZeroG",
+ "build_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "build_from": "release",
+ "build_seconds": 294.8,
+ "configure_seconds": 1.2,
+ "extf_equal": true,
+ "finished": "2026-11-06T22:31:13Z",
+ "firmware_version": "4.6.3-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "group": "Copter-4.6.3",
+ "image_equal": true,
+ "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "3ab5e72656d5fe3e04aa4dfd65603cf21e99056afb1704786b171599e2169f1c",
+  "board_id": 1124,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "BETA",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "841e2590e6e3023d2cdd298f4d4880be6ea85635bbc0c0c054a031889533c2b8",
+  "image_size": 1749592
+ },
+ "official_url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/3DRControlZeroG/arducopter.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "3ab5e72656d5fe3e04aa4dfd65603cf21e99056afb1704786b171599e2169f1c",
+  "board_id": 1124,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "BETA",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "841e2590e6e3023d2cdd298f4d4880be6ea85635bbc0c0c054a031889533c2b8",
+  "image_size": 1749592
+ },
+ "role": "sample",
+ "romfs": {
+  "compressed": 3,
+  "compressed_bytes": 14564,
+  "files": 3,
+  "format": [
+   "deflate"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 19360,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 13033,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 85,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 76,
+    "zlib_ng_equal": true
+   },
+   {
+    "content_size": 3734,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 1455,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 3,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+ "started": "2026-11-06T22:26:15Z",
+ "tag": "Copter-4.6.3",
+ "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Copter",
+ "verdict": "reproducible",
+ "version": "4.6.3"
+}

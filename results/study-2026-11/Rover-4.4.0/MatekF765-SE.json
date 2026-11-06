@@ -1,0 +1,141 @@
+{
+ "apj_equal": true,
+ "board": "MatekF765-SE",
+ "build_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+ "build_from": "release",
+ "build_seconds": 113.5,
+ "configure_seconds": 0.8,
+ "extf_equal": true,
+ "finished": "2026-11-06T22:01:52Z",
+ "firmware_version": "4.4.0-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+ "group": "Rover-4.4.0",
+ "image_equal": true,
+ "manifest_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "a8b5a04f0140e66d3d8a89eefaf5a7081a7193e792470a1de756e45a24bf9b5c",
+  "board_id": 143,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.4.0"
+  },
+  "git_identity": "9279df61",
+  "image_sha256": "7fb5f441fd506aad2d67374ad9d9fb3647cc70bb0ac448f55b103b942f1dc035",
+  "image_size": 1440612
+ },
+ "official_url": "https://firmware.ardupilot.org/Rover/stable-4.4.0/MatekF765-SE/ardurover.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 5,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "a8b5a04f0140e66d3d8a89eefaf5a7081a7193e792470a1de756e45a24bf9b5c",
+  "board_id": 143,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.4.0"
+  },
+  "git_identity": "9279df61",
+  "image_sha256": "7fb5f441fd506aad2d67374ad9d9fb3647cc70bb0ac448f55b103b942f1dc035",
+  "image_size": 1440612
+ },
+ "role": "sample",
+ "romfs": {
+  "compressed": 7,
+  "compressed_bytes": 28650,
+  "files": 7,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 16352,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 11477,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 3239,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 3165,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 3049,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 3183,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 13824,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_5",
+    "size": 3068,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 3978,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_6",
+    "size": 1469,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 7,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/9279df6191a7",
+ "started": "2026-11-06T21:59:56Z",
+ "tag": "Rover-4.4.0",
+ "tag_commit": "9279df6191a772c098b2e4797c95ac954f258d88",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Rover",
+ "verdict": "reproducible",
+ "version": "4.4.0"
+}

@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "CubeOrangePlus",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "8b8ffc44d00f4264565ee2c35260b36811b91a9eee79bfe6576c5b05184db4f1",
+   "sha256": "59392e0eb3091d114ad8e8318669e7aeb52f0cba551cd333fbdd94e56d47fad6",
+   "url": "https://firmware.ardupilot.org/Copter/stable-4.4.4/CubeOrangePlus/arducopter.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/db53a28f321d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:51:08Z",
+  "rebuilt": {
+   "apj_sha256": "8b8ffc44d00f4264565ee2c35260b36811b91a9eee79bfe6576c5b05184db4f1",
+   "sha256": "59392e0eb3091d114ad8e8318669e7aeb52f0cba551cd333fbdd94e56d47fad6"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "db53a28f321dc8233ee49d3cc6b395b5835c768b",
+   "tag": "Copter-4.4.4",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@db53a28f321dc8233ee49d3cc6b395b5835c768b"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Copter",
+  "verdict": "reproducible",
+  "version": "4.4.4"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "8b8ffc44d00f4264565ee2c35260b36811b91a9eee79bfe6576c5b05184db4f1"
+   },
+   "name": "CubeOrangePlus/arducopter.apj"
+  },
+  {
+   "digest": {
+    "sha256": "59392e0eb3091d114ad8e8318669e7aeb52f0cba551cd333fbdd94e56d47fad6"
+   },
+   "name": "CubeOrangePlus/arducopter.bin"
+  }
+ ]
+}

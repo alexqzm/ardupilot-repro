@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "Pixhawk6X",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "dbd894f094b1f6ce9d46bedfbf69c34cf9dbbb5bce46c2d4f2280bedbb7db183",
+   "sha256": "591ad3555d0f3076e18528be46c6a692661fcc72e06f23a17fa261a530c9d645",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.6.3/Pixhawk6X/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/3fc7011a7d3d",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:53:49Z",
+  "rebuilt": {
+   "apj_sha256": "cc22f262e68c1fecde0c9029cfd1b61b0d37d6bfe2bdb97a874004935bc844ff",
+   "sha256": "983ebd5c2d3d60ce6d9b412583fc887044cd0cf868581fb61b6dac14cbe5419f"
+  },
+  "result": "MISMATCH",
+  "source": {
+   "commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+   "tag": "Plane-4.6.3",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@3fc7011a7d3dc047cbb17d8bd98ee94577d144c6"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "not-reproducible",
+  "version": "4.6.3"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "dbd894f094b1f6ce9d46bedfbf69c34cf9dbbb5bce46c2d4f2280bedbb7db183"
+   },
+   "name": "Pixhawk6X/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "591ad3555d0f3076e18528be46c6a692661fcc72e06f23a17fa261a530c9d645"
+   },
+   "name": "Pixhawk6X/arduplane.bin"
+  }
+ ]
+}

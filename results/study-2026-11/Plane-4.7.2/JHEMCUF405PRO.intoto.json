@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "JHEMCUF405PRO",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "524541a66fc259f459ed51db1bec67c17dd63cf1910e9aae52d78704757f39d9",
+   "sha256": "8be2bf588253ea89138804d4c0588dc2066ac358ea73e0c8b759e32dd58b4919",
+   "url": "https://firmware.ardupilot.org/Plane/stable-4.7.2/JHEMCUF405PRO/arduplane.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/fb7735678960",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T22:20:23Z",
+  "rebuilt": {
+   "apj_sha256": "524541a66fc259f459ed51db1bec67c17dd63cf1910e9aae52d78704757f39d9",
+   "sha256": "8be2bf588253ea89138804d4c0588dc2066ac358ea73e0c8b759e32dd58b4919"
+  },
+  "result": "MATCH",
+  "source": {
+   "commit": "fb773567896014da007bca58358704d4a0d8516f",
+   "tag": "Plane-4.7.2",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@fb773567896014da007bca58358704d4a0d8516f"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Plane",
+  "verdict": "reproducible",
+  "version": "4.7.2"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "524541a66fc259f459ed51db1bec67c17dd63cf1910e9aae52d78704757f39d9"
+   },
+   "name": "JHEMCUF405PRO/arduplane.apj"
+  },
+  {
+   "digest": {
+    "sha256": "8be2bf588253ea89138804d4c0588dc2066ac358ea73e0c8b759e32dd58b4919"
+   },
+   "name": "JHEMCUF405PRO/arduplane.bin"
+  }
+ ]
+}

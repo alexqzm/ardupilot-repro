@@ -1,0 +1,257 @@
+{
+ "apj_equal": false,
+ "board": "Pixhawk4",
+ "build_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+ "build_from": "tag",
+ "build_seconds": 296.8,
+ "configure_seconds": 1.2,
+ "diagnosis": {
+  "build_paths": {
+   "official": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {},
+    "tree": 0
+   },
+   "rebuilt": {
+    "dirs": [],
+    "other": 4,
+    "prefixes": {},
+    "tree": 0
+   }
+  },
+  "cause": "unknown",
+  "romfs": [
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 16448,
+    "format": "deflate",
+    "name": "ap_romfs_0",
+    "official_is_local_zlib": true,
+    "official_size": 11621,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 11621
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 88,
+    "format": "deflate",
+    "name": "ap_romfs_1",
+    "official_is_local_zlib": true,
+    "official_size": 75,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 75
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 5203,
+    "format": "deflate",
+    "name": "ap_romfs_2",
+    "official_is_local_zlib": true,
+    "official_size": 1808,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 1808
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 40736,
+    "format": "deflate",
+    "name": "ap_romfs_3",
+    "official_is_local_zlib": true,
+    "official_size": 29088,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 29088
+   },
+   {
+    "compressed_equal": true,
+    "content_equal": true,
+    "content_size": 47652,
+    "format": "deflate",
+    "name": "ap_romfs_4",
+    "official_is_local_zlib": true,
+    "official_size": 34448,
+    "rebuilt_is_local_zlib": true,
+    "rebuilt_size": 34448
+   }
+  ],
+  "size_diff": [],
+  "size_diff_count": 0,
+  "zlib": "1.3"
+ },
+ "extf_equal": true,
+ "finished": "2026-11-06T22:32:36Z",
+ "firmware_version": "4.6.3-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "group": "Copter-4.6.3-tag",
+ "image_diff": {
+  "differing_bytes": 38,
+  "first_regions": [
+   {
+    "length": 21,
+    "official_strings": [
+     "pdate",
+     "AP_Button::update",
+     "ArduCopter V4.6.3 (3fc7011a)",
+     "3fc7011a",
+     "ArduCopter V4.6.3",
+     "ChibiOS"
+    ],
+    "offset": 1500167,
+    "rebuilt_strings": [
+     "pdate",
+     "AP_Button::update",
+     "ArduCopter V4.6.3 (92b0cd78)",
+     "92b0cd78",
+     "ArduCopter V4.6.3",
+     "ChibiOS"
+    ]
+   },
+   {
+    "length": 17,
+    "official_strings": [
+     "V4.6.3",
+     "ChibiOS",
+     "88b84600",
+     "revwfpa"
+    ],
+    "offset": 1500251,
+    "rebuilt_strings": [
+     "V4.6.3",
+     "ChibiOS",
+     "88b84600",
+     "revwfpa"
+    ]
+   }
+  ],
+  "hints": {
+   "git_identity": {
+    "official": 2,
+    "rebuilt": 2
+   }
+  },
+  "official_size": 1791976,
+  "rebuilt_size": 1791976,
+  "regions": 2
+ },
+ "image_equal": false,
+ "manifest_commit": "3fc7011a7d3dc047cbb17d8bd98ee94577d144c6",
+ "meta_diff": {
+  "git_identity": {
+   "official": "3fc7011a",
+   "rebuilt": "92b0cd78"
+  }
+ },
+ "official": {
+  "apj_sha256": "8482ac826b04c4a3dd7d732e380133a28902047b8541438acb0467067d6c3428",
+  "board_id": 50,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "BETA",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "3fc7011a",
+  "image_sha256": "3e9847a7b755d9b828244b5fd7db171e768229693ca9903ff6d408125737ea2b",
+  "image_size": 1791976
+ },
+ "official_url": "https://firmware.ardupilot.org/Copter/stable-4.6.3/Pixhawk4/arducopter.apj",
+ "out_dir": null,
+ "paths": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "paths_official": {
+  "dirs": [],
+  "other": 4,
+  "prefixes": {},
+  "tree": 0
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "aa7df955c7d61dfc443f4a5f2bd9b5d4335aada1aa96ef71ccf3c5e83145f7ed",
+  "board_id": 50,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.6.3"
+  },
+  "git_identity": "92b0cd78",
+  "image_sha256": "ff0e219033908147b6dba25a706c4c0da8406dba283cc19658e5469b975f35a9",
+  "image_size": 1791976
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 77040,
+  "files": 5,
+  "format": [
+   "deflate"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 16448,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 11621,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 88,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 75,
+    "zlib_ng_equal": true
+   },
+   {
+    "content_size": 5203,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 1808,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40736,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 29088,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47652,
+    "format": "deflate",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 34448,
+    "zlib_ng_equal": false
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/home/runner/work/_temp/work/src/92b0cd788ec2",
+ "started": "2026-11-06T22:27:36Z",
+ "tag": "Copter-4.6.3",
+ "tag_commit": "92b0cd788ec29406f26c6f9c31d5ceedbd1cc538",
+ "toolchain_dir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+ "vehicle": "Copter",
+ "verdict": "not-reproducible",
+ "version": "4.6.3"
+}

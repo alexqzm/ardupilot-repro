@@ -1,0 +1,54 @@
+{
+ "_type": "https://in-toto.io/Statement/v1",
+ "predicate": {
+  "board": "Pixhawk6X",
+  "builder": {
+   "id": "https://github.com/alexqzm/ardupilot-repro/actions/runs/42298809011"
+  },
+  "candidate": {
+   "apj_sha256": "4a4415f9c075872ce29ba72a35261efca18065eb289beeff911ff369dea7d48d",
+   "sha256": "777058bebb0c62e6cd3c23f7787fa7c2655cd7bdbc02b5e4f5ebb416d2a48461",
+   "url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/Pixhawk6X/arducopter.apj"
+  },
+  "environment": {
+   "outDir": null,
+   "pythonZlib": "1.3",
+   "srcPath": "/home/runner/work/_temp/work/src/2a3dc4b7bf25",
+   "toolchainDir": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major"
+  },
+  "finishedOn": "2026-11-06T21:54:18Z",
+  "rebuilt": {
+   "apj_sha256": "a0d177de9c69a2c7932aaa6e037e926484cb6cfa36db1060d83ebc48d153cb3f",
+   "sha256": "81e12525675c76c0b586692ba05bc08f8d73692ca6fea6bacb04ede9ac91a94f"
+  },
+  "result": "MISMATCH",
+  "source": {
+   "commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+   "tag": "Copter-4.5.7",
+   "uri": "git+https://github.com/ArduPilot/ardupilot@2a3dc4b7bf2507120f7378a7b2fde73185e0c325"
+  },
+  "toolchain": {
+   "name": "gcc-arm-none-eabi-10-2020-q4-major",
+   "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+   "uri": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+  },
+  "vehicle": "Copter",
+  "verdict": "not-reproducible",
+  "version": "4.5.7"
+ },
+ "predicateType": "urn:scii:predicate:rebuild:v1",
+ "subject": [
+  {
+   "digest": {
+    "sha256": "4a4415f9c075872ce29ba72a35261efca18065eb289beeff911ff369dea7d48d"
+   },
+   "name": "Pixhawk6X/arducopter.apj"
+  },
+  {
+   "digest": {
+    "sha256": "777058bebb0c62e6cd3c23f7787fa7c2655cd7bdbc02b5e4f5ebb416d2a48461"
+   },
+   "name": "Pixhawk6X/arducopter.bin"
+  }
+ ]
+}

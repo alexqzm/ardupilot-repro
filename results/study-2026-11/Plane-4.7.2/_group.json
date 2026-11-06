@@ -1,0 +1,47 @@
+{
+ "cpus": 4,
+ "finished": "2026-11-06T22:20:24Z",
+ "github_run": "42298809011",
+ "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+ "python": "3.11.18",
+ "python_zlib": "1.3",
+ "sources": {
+  "fb773567896014da007bca58358704d4a0d8516f": {
+   "commit": "fb773567896014da007bca58358704d4a0d8516f",
+   "path": "/home/runner/work/_temp/work/src/fb7735678960",
+   "required_toolchain": "gcc-arm-none-eabi-10-2020-q4-major",
+   "submodules": [
+    "d103983f4362e5506bcf7062ccacf345fc0c0859 modules/ChibiOS (d103983)",
+    " 599965086437137ec0fe66e185611f43f335f889 modules/CrashDebug (heads/master)",
+    " 4cf6e11df3a081b0f573a7834ed8e1e4000af73e modules/CrashDebug/CrashCatcher (4cf6e11)",
+    " 011f371fdb5d7e441fb023be67295783e053df4a modules/CrashDebug/CrashCatcher/CppUTest (heads/master)",
+    " b35c89451b41a45b7f5b580acaff555315ac88e2 modules/CrashDebug/mri (heads/master)",
+    " 011f371fdb5d7e441fb023be67295783e053df4a modules/CrashDebug/mri/CppUTest (heads/master)",
+    " 04e0e818b06c180eb1720fcdf16484d0f12895ee modules/DroneCAN/DSDL (04e0e81)",
+    " de47a8972b7d8c59e50c3acfab5754db29798caa modules/DroneCAN/dronecan_dsdlc (de47a89)",
+    " 601ed35467e0ac38819df17cd7c918de19f62d58 modules/DroneCAN/libcanard (heads/master)",
+    " 9c6bc9118de66d6edaf1b8539e2b9717ba26d123 modules/DroneCAN/libcanard/drivers/avr/avr-can-lib (heads/master)",
+    " 08cda37aaf2958657399606653b99ceb5a6beae0 modules/DroneCAN/pydronecan (08cda37)",
+    " 3d1b17703c7cf4f22def2910bc845bdb5152d7b5 modules/Micro-CDR (heads/master)",
+    " 97175304425c5bee87c6fddd99de1ef8d0c394dc modules/Micro-XRCE-DDS-Client (heads/master)",
+    " d572f4777349d43653b21d6c2fc63020ab326db2 modules/gbenchmark (d572f47)",
+    " e1f690585d4803402584962bfaa8240ecaf1db30 modules/gsoap (heads/master)",
+    " c5fed93f941865a0e912e9baf46ded713506590a modules/gtest (c5fed93)",
+    " 34be692aafaaf4319a18e415b08aa4332697408b modules/littlefs (34be692)",
+    " a6bf350c679ed8ba042ad58bf81cc540d61bb605 modules/lwip (a6bf350)",
+    " 288b907c384a892c8519bfe271682424b1e1a3a0 modules/mavlink (288b907)",
+    " ec06837a50688b5974094876c3c9d1b8bf86629d modules/mavlink/pymavlink (ec06837)",
+    " 35eadbb64e2052099a853b571e507c33032b392c modules/waf (heads/master)"
+   ]
+  }
+ },
+ "started": "2026-11-06T21:42:18Z",
+ "tool": "ardupilot-repro 0.1.0",
+ "toolchain": {
+  "gcc": "arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10-2020-q4-major) 10.2.1 20201103 (release)",
+  "name": "gcc-arm-none-eabi-10-2020-q4-major",
+  "path": "/home/runner/work/_temp/work/toolchain/gcc-arm-none-eabi-10-2020-q4-major",
+  "sha256": "21134caa478bbf5352e239fbc6e2da3038f8d2207e089efc96c3b55f1edcd618",
+  "url": "https://firmware.ardupilot.org/Tools/STM32-tools/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2"
+ }
+}
