@@ -36,7 +36,7 @@ class Apj:
 
     def digests(self) -> dict:
         d = {"apj_sha256": sha256_bytes(self.raw), "image_sha256": sha256_bytes(self.image),
-             "image_size": len(self.image), "fwversion": fwversion(self.image)}
+             "image_size": len(self.image), "fwversion": fwversion(self.image) or fwversion(self.extf_image)}
         if self.extf_image:
             d.update(extf_sha256=sha256_bytes(self.extf_image), extf_size=len(self.extf_image))
         return d
@@ -69,8 +69,8 @@ def parse(data: bytes) -> Apj:
         raise ApjError(f"не JSON: {e}") from e
     if not isinstance(d, dict) or d.get("magic") != MAGIC:
         raise ApjError(f"нет признака {MAGIC}")
-    image = _image(d, "image")
-    if not image:
-        raise ApjError("в файле нет образа")
+    image, extf = _image(d, "image"), _image(d, "extf_image")
+    if not image and not extf:          # у плат с внешней флеш-памятью (SPRacingH7 и др.) образ — в extf_image
+        raise ApjError("в файле нет ни образа, ни образа внешней флеш-памяти")
     meta = {k: v for k, v in d.items() if k not in IMAGE_KEYS}
-    return Apj(meta=meta, image=image, extf_image=_image(d, "extf_image"), raw=data)
+    return Apj(meta=meta, image=image, extf_image=extf, raw=data)

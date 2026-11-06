@@ -34,8 +34,21 @@ def test_parse_apj():
     assert "image" not in a.meta and a.digests()["image_size"] == len(IMG)
 
 
+def test_parse_extf_only_apj():
+    d = json.loads(apj(IMG))
+    d["extf_image"], d["image"] = d["image"], base64.b64encode(zlib.compress(b"", 9)).decode()
+    a = parse(json.dumps(d).encode())
+    assert a.image == b"" and a.extf_image == IMG and a.digests()["extf_size"] == len(IMG)
+    res = {"vehicle": "Copter", "version": "4.4.4", "board": "SPRacingH7", "tag": "Copter-4.4.4",
+           "build_commit": "d" * 40, "official_url": "https://x/arducopter.apj", "finished": "t",
+           **compare(json.dumps(d).encode(), json.dumps(d).encode())}
+    st = statement(res, {"name": "tc", "url": "https://tc", "sha256": "a" * 64})
+    assert st["predicate"]["candidate"]["sha256"] == a.digests()["extf_sha256"] == st["predicate"]["rebuilt"]["sha256"]
+
+
 @pytest.mark.parametrize("data", [b"not json", b"[]", json.dumps({"magic": "X"}).encode(),
-                                  json.dumps({"magic": "APJFWv1", "image": "!!!"}).encode()])
+                                  json.dumps({"magic": "APJFWv1", "image": "!!!"}).encode(),
+                                  json.dumps({"magic": "APJFWv1"}).encode()])
 def test_parse_rejects(data):
     with pytest.raises(ApjError):
         parse(data)

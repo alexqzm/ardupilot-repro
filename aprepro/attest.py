@@ -28,10 +28,12 @@ def builder_id() -> str:
 def statement(result: dict, toolchain: dict) -> dict:
     binary = VEHICLES[result["vehicle"]]["binary"]
     off, reb = result["official"], result["rebuilt"]
+    # кандидат — образ внутренней флеш-памяти, а у плат, где прошивка целиком во внешней, — образ extf
+    key = "image_sha256" if off["image_size"] else "extf_sha256"
     return {
         "_type": STATEMENT_TYPE,
         "subject": [{"name": f"{result['board']}/{binary}.apj", "digest": {"sha256": off["apj_sha256"]}},
-                    {"name": f"{result['board']}/{binary}.bin", "digest": {"sha256": off["image_sha256"]}}],
+                    {"name": f"{result['board']}/{binary}.bin", "digest": {"sha256": off[key]}}],
         "predicateType": PREDICATE_TYPE,
         "predicate": {
             "source": {"uri": f"git+https://github.com/ArduPilot/ardupilot@{result['build_commit']}",
@@ -39,8 +41,8 @@ def statement(result: dict, toolchain: dict) -> dict:
             "toolchain": {"uri": toolchain["url"], "sha256": toolchain["sha256"], "name": toolchain["name"]},
             "builder": {"id": builder_id()},
             "board": result["board"], "vehicle": result["vehicle"], "version": result["version"],
-            "candidate": {"sha256": off["image_sha256"], "apj_sha256": off["apj_sha256"], "url": result["official_url"]},
-            "rebuilt": {"sha256": reb["image_sha256"], "apj_sha256": reb["apj_sha256"]},
+            "candidate": {"sha256": off[key], "apj_sha256": off["apj_sha256"], "url": result["official_url"]},
+            "rebuilt": {"sha256": reb.get(key), "apj_sha256": reb["apj_sha256"]},
             "result": "MATCH" if result["verdict"] in ("reproducible", "image-identical") else "MISMATCH",
             "verdict": result["verdict"],
             "finishedOn": result["finished"],

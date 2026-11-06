@@ -135,7 +135,10 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None) -> str:
           "| Группа | Плата | Роль | Итог | SHA-256 образа | ROMFS сжато/всего | zlib-ng изменит | Сборка, с |",
           "|---|---|---|---|---|---|---|---|"]
     for r in sorted(rows, key=lambda r: (r["group"], r["role"] != "panel", r["board"])):
-        sha = r.get("official", {}).get("image_sha256", "")[:12]
+        off = r.get("official", {})
+        # у плат, где вся прошивка во внешней флеш-памяти (SPRacingH7), внутренний образ пуст — показываем extf
+        sha = off.get("image_sha256", "")[:12] if off.get("image_size") or "extf_sha256" not in off \
+            else "extf " + off["extf_sha256"][:12]
         rf = r.get("romfs") or {}
         romfs = f"{rf['compressed']}/{rf['files']}" if "files" in rf else "—"
         ng = (r.get("romfs_official") or {}).get("zlib_ng_differs")
@@ -146,7 +149,7 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None) -> str:
     if bad:
         L += ["", "## Расхождения", ""]
         for r in bad:
-            d = r.get("image_diff", {})
+            d = r.get("image_diff") or r.get("extf_diff") or {}
             dg = r.get("diagnosis", {})
             extra = []
             if r["official"].get("git_identity") != r["rebuilt"].get("git_identity"):
