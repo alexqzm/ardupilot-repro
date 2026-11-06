@@ -1,0 +1,126 @@
+{
+ "apj_equal": true,
+ "board": "Pixhawk6X",
+ "build_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+ "build_from": "release",
+ "build_seconds": 303.6,
+ "configure_seconds": 1.2,
+ "extf_equal": true,
+ "finished": "2026-11-06T20:30:40Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+ "group": "Copter-4.5.7",
+ "image_equal": true,
+ "manifest_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "4a4415f9c075872ce29ba72a35261efca18065eb289beeff911ff369dea7d48d",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.5.7"
+  },
+  "git_identity": "2a3dc4b7",
+  "image_sha256": "777058bebb0c62e6cd3c23f7787fa7c2655cd7bdbc02b5e4f5ebb416d2a48461",
+  "image_size": 1876688
+ },
+ "official_url": "https://firmware.ardupilot.org/Copter/stable-4.5.7/Pixhawk6X/arducopter.apj",
+ "out_dir": "/tmp/aprepro-out",
+ "paths": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "paths_official": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "4a4415f9c075872ce29ba72a35261efca18065eb289beeff911ff369dea7d48d",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 2,
+   "version": "4.5.7"
+  },
+  "git_identity": "2a3dc4b7",
+  "image_sha256": "777058bebb0c62e6cd3c23f7787fa7c2655cd7bdbc02b5e4f5ebb416d2a48461",
+  "image_size": 1876688
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 97988,
+  "files": 5,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 38848,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 28834,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 6993,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 2278,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40648,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 29028,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 52828,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 37794,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 54,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/mnt/volume_nyc3_01/autotest/APM/APM",
+ "started": "2026-11-06T20:25:34Z",
+ "tag": "Copter-4.5.7",
+ "tag_commit": "2a3dc4b7bf2507120f7378a7b2fde73185e0c325",
+ "vehicle": "Copter",
+ "verdict": "reproducible",
+ "version": "4.5.7"
+}

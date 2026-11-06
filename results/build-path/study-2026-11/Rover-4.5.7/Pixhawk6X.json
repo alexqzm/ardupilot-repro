@@ -1,0 +1,126 @@
+{
+ "apj_equal": true,
+ "board": "Pixhawk6X",
+ "build_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "build_from": "release",
+ "build_seconds": 256.1,
+ "configure_seconds": 1.2,
+ "extf_equal": true,
+ "finished": "2026-11-06T20:28:58Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "group": "Rover-4.5.7",
+ "image_equal": true,
+ "manifest_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "c3900878d1ccc09431a4ae58f92d89aabd699bbbaa39ddb8eb4885284e68bf40",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "e158d31a95ea9087c9714f11f11fd79efc4023b043f0f06fda31c7203e949890",
+  "image_size": 1730784
+ },
+ "official_url": "https://firmware.ardupilot.org/Rover/stable-4.5.7/Pixhawk6X/ardurover.apj",
+ "out_dir": "/tmp/aprepro-out",
+ "paths": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "paths_official": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "c3900878d1ccc09431a4ae58f92d89aabd699bbbaa39ddb8eb4885284e68bf40",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 1,
+   "version": "4.5.7"
+  },
+  "git_identity": "52bed8d5",
+  "image_sha256": "e158d31a95ea9087c9714f11f11fd79efc4023b043f0f06fda31c7203e949890",
+  "image_size": 1730784
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 97988,
+  "files": 5,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 38848,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 28834,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 6993,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 2278,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40648,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 29028,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 52828,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 37794,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 54,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/mnt/volume_nyc3_01/autotest/APM/APM",
+ "started": "2026-11-06T20:24:39Z",
+ "tag": "Rover-4.5.7",
+ "tag_commit": "52bed8d542003c4767fea21b0f5a78fe864a377f",
+ "vehicle": "Rover",
+ "verdict": "reproducible",
+ "version": "4.5.7"
+}

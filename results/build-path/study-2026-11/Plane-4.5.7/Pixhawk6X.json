@@ -1,0 +1,126 @@
+{
+ "apj_equal": true,
+ "board": "Pixhawk6X",
+ "build_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "build_from": "release",
+ "build_seconds": 308.8,
+ "configure_seconds": 1.2,
+ "extf_equal": true,
+ "finished": "2026-11-06T20:30:28Z",
+ "firmware_version": "4.5.7-FIRMWARE_VERSION_TYPE_OFFICIAL",
+ "git_version_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "group": "Plane-4.5.7",
+ "image_equal": true,
+ "manifest_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "meta_diff": {},
+ "official": {
+  "apj_sha256": "7f125369cc4126b6037642b0ba3078d2a839053e1d6c1aa50567aa0cd9a5a53d",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.5.7"
+  },
+  "git_identity": "0358a9c2",
+  "image_sha256": "ff3af5d83d88d2e8cf4421ea376bca9eb61193769c1e3f46915bb55b779f2e52",
+  "image_size": 1875388
+ },
+ "official_url": "https://firmware.ardupilot.org/Plane/stable-4.5.7/Pixhawk6X/arduplane.apj",
+ "out_dir": "/tmp/aprepro-out",
+ "paths": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "paths_official": {
+  "other": 5,
+  "prefixes": {
+   "/mnt/volume_nyc3_01/autotest/APM/APM": 24
+  },
+  "tree": 24
+ },
+ "plan": "study-2026-11",
+ "python_zlib": "1.3",
+ "rebuilt": {
+  "apj_sha256": "7f125369cc4126b6037642b0ba3078d2a839053e1d6c1aa50567aa0cd9a5a53d",
+  "board_id": 53,
+  "fwversion": {
+   "board_type": 10,
+   "fw_type": "OFFICIAL",
+   "vehicle_type": 3,
+   "version": "4.5.7"
+  },
+  "git_identity": "0358a9c2",
+  "image_sha256": "ff3af5d83d88d2e8cf4421ea376bca9eb61193769c1e3f46915bb55b779f2e52",
+  "image_size": 1875388
+ },
+ "role": "panel",
+ "romfs": {
+  "compressed": 5,
+  "compressed_bytes": 97988,
+  "files": 5,
+  "format": [
+   "gzip"
+  ]
+ },
+ "romfs_official": {
+  "blobs": [
+   {
+    "content_size": 38848,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_0",
+    "size": 28834,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 6993,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_1",
+    "size": 2278,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 40648,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_2",
+    "size": 29028,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 52828,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_3",
+    "size": 37794,
+    "zlib_ng_equal": false
+   },
+   {
+    "content_size": 47,
+    "format": "gzip",
+    "local_zlib_equal": true,
+    "name": "ap_romfs_4",
+    "size": 54,
+    "zlib_ng_equal": true
+   }
+  ],
+  "compressed": 5,
+  "local_zlib_all_equal": true,
+  "zlib": "1.3",
+  "zlib_ng": "2.3.3",
+  "zlib_ng_differs": true
+ },
+ "schema": "ardupilot-repro/result/v1",
+ "src_path": "/mnt/volume_nyc3_01/autotest/APM/APM",
+ "started": "2026-11-06T20:25:16Z",
+ "tag": "Plane-4.5.7",
+ "tag_commit": "0358a9c210bc6c965006f5d6029239b7033616df",
+ "vehicle": "Plane",
+ "verdict": "reproducible",
+ "version": "4.5.7"
+}
