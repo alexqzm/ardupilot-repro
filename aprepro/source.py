@@ -1,8 +1,9 @@
-"""Исходный код ArduPilot на заданном коммите с подмодулями, нужными для сборки под ChibiOS.
+"""Исходный код ArduPilot на заданном коммите со всеми подмодулями.
 
 Коммит забирается по SHA (git fetch --depth 1 origin <sha>), а не по имени тега: проверяется
-ровно та ревизия, которую указывают официальные файлы или тег. Подмодули инициализируются на
-закреплённых в дереве коммитах, неглубоко; waf при сборке проверяет их и дотягивает вложенные.
+ровно та ревизия, которую указывают официальные файлы или тег. Все подмодули дерева, включая
+вложенные, инициализируются на закреплённых в дереве коммитах, неглубоко: набор нужных сборке
+подмодулей меняется от выпуска к выпуску (в 4.4 — modules/uavcan, в 4.6 — modules/littlefs и т. д.).
 """
 from __future__ import annotations
 
@@ -11,11 +12,6 @@ from pathlib import Path
 
 from .plan import AP_REPO
 from .util import ToolError, git
-
-SUBMODULES = ["modules/waf", "modules/mavlink", "modules/ChibiOS", "modules/DroneCAN/DSDL",
-              "modules/DroneCAN/pydronecan", "modules/DroneCAN/dronecan_dsdlc", "modules/DroneCAN/libcanard",
-              "modules/lwip", "modules/littlefs", "modules/CrashDebug"]
-RECURSIVE = {"modules/mavlink", "modules/CrashDebug"}
 
 
 def prepare(commit: str, dest: Path, log: Path = None) -> dict:
@@ -31,14 +27,7 @@ def prepare(commit: str, dest: Path, log: Path = None) -> dict:
     head = git("rev-parse", "HEAD", cwd=dest)
     if head != commit:
         raise ToolError(f"получен коммит {head}, ожидался {commit}")
-    paths = set(git("config", "-f", ".gitmodules", "--get-regexp", r"\.path$", cwd=dest).split()[1::2])
-    for sm in SUBMODULES:
-        if sm not in paths:
-            continue
-        args = ["submodule", "update", "-q", "--init", "--depth", "1"]
-        if sm in RECURSIVE:
-            args.append("--recursive")
-        git(*args, "--", sm, cwd=dest, log=log)
+    git("submodule", "update", "-q", "--init", "--recursive", "--depth", "1", cwd=dest, log=log)
     return describe(dest)
 
 

@@ -110,6 +110,8 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
             wjson(out / f"{t['board']}.intoto.json", statement(res, tc))
         except (ToolError, ApjError, OSError) as e:
             res.update(verdict="error", stage=stage, error=str(e)[-2000:], finished=now_utc())
+        except Exception as e:                       # непредвиденное: записать и перейти к следующей плате
+            res.update(verdict="error", stage=stage, error=f"{type(e).__name__}: {e}"[-2000:], finished=now_utc())
         wjson(out / f"{t['board']}.json", res)
         log(f"  → {res['verdict']}")
         done.append(res)

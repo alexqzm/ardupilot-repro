@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import datetime as dt
 import hashlib
+import http.client
 import json
 import os
 import subprocess
@@ -69,7 +70,7 @@ def fetch(url: str, dest=None, retries: int = 4, timeout: float = 120.0) -> byte
             if e.code < 500:
                 raise ToolError(f"{url}: HTTP {e.code}") from e
             last = e
-        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+        except (urllib.error.URLError, http.client.HTTPException, OSError) as e:   # обрыв, неполный ответ
             last = e
         time.sleep(2 ** attempt)
     raise ToolError(f"{url}: {last}")
