@@ -1,6 +1,9 @@
 # Пересборка прошивок по плану и сверка с firmware.ardupilot.org. Запуск вручную:
 # Actions -> rebuild -> Run workflow. Каждая группа плана — отдельная задача матрицы.
 # Результаты (JSON без двоичных файлов) — артефакт results-all; в репозиторий их переносит автор.
+# Вариант прогона (variant) — та же сборка с изменённым условием, например каталогами дерева и
+# сборки (src_root, out_dir); его результаты ложатся в results/<variant>/ и в сводке идут
+# отдельной таблицей.
 name: rebuild
 
 on:
@@ -11,6 +14,18 @@ on:
         default: plans/study-2026-11.json
       groups:
         description: Группы через пробел (пусто — все группы плана)
+        default: ""
+      boards:
+        description: Платы через пробел (пусто — все платы групп; каждая должна быть в каждой группе)
+        default: ""
+      src_root:
+        description: Каталог дерева исходников (пусто — во временном каталоге раннера)
+        default: ""
+      out_dir:
+        description: Каталог сборки вне дерева, waf --out (пусто — build/ в дереве)
+        default: ""
+      variant:
+        description: Имя варианта прогона для results/<variant>/ (пусто — основной прогон)
         default: ""
       attest:
         description: Подписать аттестации пересборки (Sigstore, запись в публичном журнале Rekor)
@@ -85,34 +100,54 @@ jobs:
         run: |
           python -c 'import sys, zlib; print(sys.version); print("zlib", zlib.ZLIB_RUNTIME_VERSION)'
           python -c 'import sys, zlib; sys.exit("zlib-ng" in zlib.ZLIB_RUNTIME_VERSION)'
+      - name: Каталог дерева исходников
+        if: ${{ inputs.src_root != '' }}
+        env:
+          SRC_ROOT: ${{ inputs.src_root }}
+        run: |
+          parent=$(dirname "$SRC_ROOT")
+          sudo mkdir -p "$parent"
+          sudo chown "$(id -u):$(id -g)" "$parent"
       - name: Пересборка и сверка
         env:
           PLAN: ${{ inputs.plan }}
           GROUP: ${{ matrix.group }}
-        run: python -m aprepro run "$PLAN" --group "$GROUP" --work "$RUNNER_TEMP/work" --results results
+          BOARDS: ${{ inputs.boards }}
+          SRC_ROOT: ${{ inputs.src_root }}
+          OUT_DIR: ${{ inputs.out_dir }}
+          VARIANT: ${{ inputs.variant }}
+        run: |
+          args=()
+          for b in $BOARDS; do args+=(--board "$b"); done
+          if [ -n "$SRC_ROOT" ]; then args+=(--src-root "$SRC_ROOT"); fi
+          if [ -n "$OUT_DIR" ]; then args+=(--out-dir "$OUT_DIR"); fi
+          python -m aprepro run "$PLAN" --group "$GROUP" --work "$RUNNER_TEMP/work" \
+            --results "$RUNNER_TEMP/results${VARIANT:+/$VARIANT}" "${args[@]}"
       - name: Подпись аттестаций пересборки (cosign, бесключевая)
         if: ${{ inputs.attest }}
         env:
           PLAN: ${{ inputs.plan }}
           GROUP: ${{ matrix.group }}
+          VARIANT: ${{ inputs.variant }}
         run: |
+          out="$RUNNER_TEMP/results${VARIANT:+/$VARIANT}"
           curl -sSfL -o "$RUNNER_TEMP/cosign" https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-amd64
           echo "$COSIGN_SHA256  $RUNNER_TEMP/cosign" | sha256sum -c -
           chmod +x "$RUNNER_TEMP/cosign"
           name=$(basename "$PLAN" .json)
-          for st in results/"$name"/"$GROUP"/*.intoto.json; do
+          for st in "$out/$name/$GROUP"/*.intoto.json; do
             board=$(basename "$st" .intoto.json)
             apj=$(find "$RUNNER_TEMP/work/official/$GROUP/$board" -name '*.apj' | head -1)
             python -c 'import json, sys; json.dump(json.load(open(sys.argv[1]))["predicate"], open(sys.argv[2], "w"))' \
               "$st" "$RUNNER_TEMP/predicate.json"
             "$RUNNER_TEMP/cosign" attest-blob --yes --type urn:scii:predicate:rebuild:v1 \
-              --predicate "$RUNNER_TEMP/predicate.json" --bundle "results/$name/$GROUP/$board.sigstore.json" "$apj"
+              --predicate "$RUNNER_TEMP/predicate.json" --bundle "$out/$name/$GROUP/$board.sigstore.json" "$apj"
           done
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: results-${{ matrix.group }}
-          path: results/
+          path: ${{ runner.temp }}/results/
           if-no-files-found: error
 
   report:
@@ -130,14 +165,17 @@ jobs:
         with:
           pattern: results-*
           merge-multiple: true
-          path: results/
+          path: ${{ runner.temp }}/results/
       - name: Сводка
         env:
           PLAN: ${{ inputs.plan }}
+          VARIANT: ${{ inputs.variant }}
         run: |
-          python -m aprepro report "$PLAN" --md "$RUNNER_TEMP/results.md" --json "results/$(basename "$PLAN" .json)/summary.json"
+          out="$RUNNER_TEMP/results${VARIANT:+/$VARIANT}"
+          python -m aprepro report "$PLAN" --results "$out" --md "$RUNNER_TEMP/results.md" \
+            --json "$out/$(basename "$PLAN" .json)/summary.json"
           cat "$RUNNER_TEMP/results.md" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: results-all
-          path: results/
+          path: ${{ runner.temp }}/results/

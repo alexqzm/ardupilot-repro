@@ -1,6 +1,7 @@
 import base64
 import gzip
 import json
+import struct
 import zlib
 
 import pytest
@@ -10,7 +11,7 @@ from aprepro.apj import ApjError, parse
 from aprepro.attest import PREDICATE_TYPE, statement
 from aprepro.compare import compare, regions
 from aprepro.manifest import Manifest
-from aprepro.diagnose import _deflate, unpack
+from aprepro.diagnose import _deflate, build_paths, diagnose, unpack
 from aprepro.plan import make, python_for, rank
 from aprepro.run import _git_version_commit
 from aprepro.source import required_toolchain
@@ -182,3 +183,49 @@ def test_romfs_unpack_formats():
 def test_python_for_release():
     assert python_for("4.4.4") == "3.10" and python_for("4.4.0") == "3.10"
     assert python_for("4.5.7") == "3.11" and python_for("4.7.2") == "3.11"
+
+
+def elf32(data: bytes, flags: int = 6) -> bytes:
+    """Минимальный ELF32 little-endian: одна секция PROGBITS (по умолчанию ALLOC|EXECINSTR) с data."""
+    hdr = bytearray(52)
+    hdr[:6] = b"\x7fELF\x01\x01"
+    struct.pack_into("<I", hdr, 0x20, 52 + len(data))
+    struct.pack_into("<HH", hdr, 0x2E, 40, 2)
+    sh = bytes(40) + struct.pack("<IIIIIIIIII", 0, 1, flags, 0x08000000, 52, len(data), 0, 0, 4, 0)
+    return bytes(hdr) + data + sh
+
+
+def test_build_paths_and_cause():
+    tail = b"\0/mnt/workspace/GCC-10-pipeline/src/newlib/libc/stdlib/rand.c\0/APM/scripts/modules/?.lua\0code"
+    official = elf32(b"\0/mnt/srv/APM/APM/modules/lwip/src/core/tcp.c\0/mnt/srv/APM/APM/libraries/AP_Networking/"
+                     b"lwip_hal/arch/sys_arch.cpp\0" + tail)
+    rebuilt = elf32(b"\0/home/runner/src/modules/lwip/src/core/tcp.c\0/home/runner/src/libraries/AP_Networking/"
+                    b"lwip_hal/arch/sys_arch.cpp\0" + tail)
+    assert build_paths(official) == {"tree": 2, "prefixes": {"/mnt/srv/APM/APM": 2}, "other": 1}
+    assert build_paths(elf32(b"\0/mnt/srv/APM/APM/modules/lwip/src/core/tcp.c\0", flags=0))["tree"] == 0  # не ALLOC
+    d = diagnose(official, rebuilt)
+    assert d["cause"] == "build-path" and d["build_paths"]["rebuilt"]["prefixes"] == {"/home/runner/src": 2}
+    assert diagnose(official, official)["cause"] == "unknown"          # путь тот же — путь не причина
+
+
+def test_report_variants(tmp_path):
+    plan = {"created": "t", "manifest": {"sha256": "b" * 64}, "toolchain": "tc",
+            "groups": [{"id": "Copter-4.5.7", "build_from": "release", "tag_commit": "f" * 40, "boards_in_release": 9,
+                        "targets": [{"build_commit": "f" * 40}]}]}
+    base = {"vehicle": "Copter", "version": "4.5.7", "board": "Pixhawk6X", "tag": "Copter-4.5.7", "group": "Copter-4.5.7",
+            "build_commit": "f" * 40, "manifest_commit": "f" * 40, "role": "panel", "build_from": "release",
+            "paths_official": {"tree": 24, "prefixes": {"/mnt/srv": 24}, "other": 5}}
+    main = {**base, **compare(apj(IMG), apj(IMG[:-1] + b"x")), "src_path": "/home/runner/src"}
+    var = {**base, **compare(apj(IMG), apj(IMG)), "src_path": "/mnt/srv", "out_dir": "/tmp/out", "python_zlib": "1.3"}
+    for root, row in ((tmp_path, main), (tmp_path / "build-path", var)):
+        (root / "p" / "Copter-4.5.7").mkdir(parents=True)
+        (root / "p" / "Copter-4.5.7" / "Pixhawk6X.json").write_text(json.dumps(row))
+    rows, extra = report.load(tmp_path, "p"), report.variants(tmp_path, "p")
+    assert list(extra) == ["build-path"] and len(rows) == 1
+    s = report.summary(plan, rows)
+    assert s["paths_official"]["with_tree_paths"] == 1 and s["paths_official"]["reproducible"] == 0
+    md = report.markdown(plan, "p", rows, None, extra)
+    assert "встроены в 1 из 1 проверенных" in md
+    assert "| дерево в каталоге сборочного сервера, сборка вне дерева (waf --out) | Copter-4.5.7 | Pixhawk6X | " \
+           "не совпадает | совпадает побитово | 1.3 | `/mnt/srv`; `--out /tmp/out` |" in md
+

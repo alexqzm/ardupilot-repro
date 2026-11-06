@@ -8,9 +8,23 @@ ArduPilot встраивает в прошивку файлы ROMFS (загру�
 интерпретатор. Разные реализации (классический zlib и zlib-ng) дают для одного содержимого разный
 поток deflate, поэтому прошивка зависит от того, с какой библиотекой собран Python.
 
+Вторая известная причина — пути исходников, попавшие в образ через __FILE__. В 4.5 и 4.6
+утверждения lwIP (libraries/AP_Networking/config/lwipopts.h) передают __FILE__. Waf передаёт
+компилятору путь исходника относительно каталога сборки, если у них есть общий предок ниже корня
+(при сборке в build/ дерева — ../../modules/lwip/…), и абсолютный, если общий предок — только «/»
+(waflib/Node.py, path_from). Официальные прошивки собирает Tools/scripts/build_binaries.py с
+каталогом сборки вне дерева (waf configure --out), и в образах плат с сетевым стеком (Ethernet,
+PPP) — абсолютные пути вида <корень дерева>/modules/lwip/src/core/tcp.c. Строки другой длины
+сдвигают всё, что лежит за ними. В 4.7 утверждения lwIP не передают __FILE__, а сборка добавляет
+-ffile-prefix-map (Tools/ardupilotwaf/boards.py).
+
 Разбор сравнивает таблицы символов официального и пересобранного ELF и для блоков ap_romfs_N
 распаковывает оба потока: если содержимое совпадает, а сжатые байты нет, и только эти символы
-различаются размером, — расхождение объясняется сжатием ROMFS.
+различаются размером, — расхождение объясняется сжатием ROMFS. Затем сравниваются корни дерева в
+абсолютных путях исходников, встроенных в образы: если они разные (в том числе абсолютные пути в
+официальном образе и относительные в пересобранном), а других символов разного размера нет,
+расхождение объясняется путями исходников. Это вывод по признакам; подтверждение — пересборка с
+деревом в том же каталоге и каталогом сборки вне дерева (aprepro run --src-root … --out-dir …).
 """
 from __future__ import annotations
 
@@ -21,6 +35,12 @@ import zlib
 
 _ROMFS = re.compile(r"^(?:_ZL\d+)?(ap_romfs_\d+)$")
 STT_OBJECT, STT_FUNC = 1, 2
+SHT_NOBITS, SHF_ALLOC = 8, 2
+# строка-путь в образе: начинается с «/» после непечатного байта и заканчивается NUL
+_ABS_PATH = re.compile(rb"(?<![\x20-\x7e])/[\x21-\x7e]{3,400}?(?=\x00)")
+# каталоги верхнего уровня дерева ArduPilot: всё, что левее первого из них, — корень дерева
+_TREE_DIR = re.compile(r"/(?:libraries|modules|ArduCopter|ArduPlane|Rover|ArduSub|AntennaTracker|Blimp)/")
+_SOURCE = re.compile(r"\.(?:c|cc|cpp|h|hpp|S)$")      # только пути к исходникам (не «/APM/scripts/modules/?.lua»)
 
 
 class ElfError(ValueError):
@@ -29,11 +49,7 @@ class ElfError(ValueError):
 
 def symbols(elf: bytes) -> dict:
     """{имя: (адрес, размер, байты или None)} для объектов и функций ELF32 little-endian."""
-    if elf[:4] != b"\x7fELF" or elf[4] != 1 or elf[5] != 1:
-        raise ElfError("ожидался ELF32 little-endian")
-    shoff, = struct.unpack_from("<I", elf, 0x20)
-    shentsize, shnum = struct.unpack_from("<HH", elf, 0x2E)
-    secs = [struct.unpack_from("<IIIIIIIIII", elf, shoff + i * shentsize) for i in range(shnum)]
+    secs = _sections(elf)
     out = {}
     for sec in secs:
         if sec[1] != 2:                                   # SHT_SYMTAB
@@ -47,11 +63,42 @@ def symbols(elf: bytes) -> dict:
             end = elf.index(b"\0", stroff + st_name)
             name = elf[stroff + st_name:end].decode("utf-8", "replace")
             data = None
-            if 0 < shndx < len(secs) and secs[shndx][1] != 8:     # не NOBITS
+            if 0 < shndx < len(secs) and secs[shndx][1] != SHT_NOBITS:
                 s_addr, s_off = secs[shndx][3], secs[shndx][4]
                 data = elf[s_off + value - s_addr: s_off + value - s_addr + st_size]
             out[name] = (value, st_size, data)
     return out
+
+
+def _sections(elf: bytes) -> list:
+    if elf[:4] != b"\x7fELF" or elf[4] != 1 or elf[5] != 1:
+        raise ElfError("ожидался ELF32 little-endian")
+    shoff, = struct.unpack_from("<I", elf, 0x20)
+    shentsize, shnum = struct.unpack_from("<HH", elf, 0x2E)
+    return [struct.unpack_from("<IIIIIIIIII", elf, shoff + i * shentsize) for i in range(shnum)]
+
+
+def build_paths(elf: bytes) -> dict:
+    """Абсолютные пути исходников, встроенные в загружаемые секции образа (через __FILE__).
+
+    tree — пути внутри дерева ArduPilot с корнями дерева (prefixes: корень → число строк);
+    other — прочие абсолютные пути (например, исходники newlib из сборки самого тулчейна: они
+    одинаковы у всех, кто собирает тем же тулчейном)."""
+    prefixes, other = {}, 0
+    for sec in _sections(elf):
+        _n, typ, flags, _a, off, size = sec[:6]
+        if typ == SHT_NOBITS or not flags & SHF_ALLOC:
+            continue
+        for m in _ABS_PATH.finditer(elf, off, off + size):
+            s = m.group().decode("ascii", "replace")
+            if not _SOURCE.search(s):
+                continue
+            d = _TREE_DIR.search(s)
+            if d and d.start() > 0:
+                prefixes[s[:d.start()]] = prefixes.get(s[:d.start()], 0) + 1
+            else:
+                other += 1
+    return {"tree": sum(prefixes.values()), "prefixes": dict(sorted(prefixes.items())), "other": other}
 
 
 def _inflate(b: bytes):
@@ -106,15 +153,20 @@ def diagnose(official_elf: bytes, rebuilt_elf: bytes, limit: int = 30) -> dict:
                          official_is_local_zlib=_deflate(ua[1], ua[3]) == ua[2],
                          rebuilt_is_local_zlib=_deflate(ub[1], ub[3]) == ub[2])
         romfs.append(entry)
-    only_romfs = bool(sized) and all(_ROMFS.match(n) for n in sized)
-    explained = only_romfs and romfs and all(r["content_equal"] for r in romfs) and \
+    only_romfs = all(_ROMFS.match(n) for n in sized)       # пусто — тоже «только ROMFS»
+    by_romfs = bool(sized) and only_romfs and romfs and all(r["content_equal"] for r in romfs) and \
         any(not r["compressed_equal"] for r in romfs)
+    paths = {"official": build_paths(official_elf), "rebuilt": build_paths(rebuilt_elf)}
+    by_path = only_romfs and paths["official"]["tree"] > 0 and \
+        set(paths["official"]["prefixes"]) != set(paths["rebuilt"]["prefixes"])
+    causes = [c for c, ok in (("romfs-compression", by_romfs), ("build-path", by_path)) if ok]
     return {"zlib": zlib.ZLIB_RUNTIME_VERSION,
             "size_diff_count": len(sized),
             "size_diff": [{"name": n, "official": (a.get(n) or (0, None))[1], "rebuilt": (b.get(n) or (0, None))[1]}
                           for n in sized[:limit]],
             "romfs": romfs,
-            "cause": "romfs-compression" if explained else "unknown"}
+            "build_paths": paths,
+            "cause": "+".join(causes) or "unknown"}
 
 
 def romfs_info(elf: bytes) -> dict:

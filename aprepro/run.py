@@ -13,7 +13,7 @@ from .apj import ApjError
 from .attest import statement
 from .build import build, clean
 from .compare import compare
-from .diagnose import ElfError, diagnose, romfs_check, romfs_info
+from .diagnose import ElfError, build_paths, diagnose, romfs_check, romfs_info
 from .manifest import VEHICLES
 from .source import prepare, required_toolchain
 from .util import ToolError, fetch, now_utc, wjson
@@ -36,7 +36,10 @@ def _git_version_commit(text: str):
 
 
 def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, boards=None, jobs: int = None,
-              keep: bool = False, log=print) -> list:
+              keep: bool = False, src_root: Path = None, out_dir: Path = None, log=print) -> list:
+    """src_root — каталог дерева исходников (по умолчанию <work>/src/<коммит>); out_dir — каталог
+    сборки вне дерева (waf --out; по умолчанию build/ в дереве). Оба влияют на пути исходников,
+    которые попадают в образ через __FILE__ (см. diagnose.py)."""
     g = group_of(plan, gid)
     want = g.get("python")
     if want and ".".join(map(str, sys.version_info[:2])) != want:
@@ -53,10 +56,14 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
            "toolchain": tc,
            "github_run": os.environ.get("GITHUB_RUN_ID"), "sources": {}}
     trees = {}
-    for commit in sorted({t["build_commit"] for t in targets}):
+    commits = sorted({t["build_commit"] for t in targets})
+    if src_root and len(commits) > 1:
+        raise ToolError(f"--src-root: в группе {gid} несколько коммитов сборки, один каталог на всех невозможен")
+    for commit in commits:
         log(f"исходники {commit[:12]}")
-        tree = work / "src" / commit[:12]
+        tree = Path(src_root).absolute() if src_root else (work / "src" / commit[:12]).absolute()
         desc = prepare(commit, tree, log=work / "logs" / f"source-{commit[:12]}.log")
+        desc["path"] = str(tree)
         req = required_toolchain(tree)
         desc["required_toolchain"] = req
         if req != tc_name:
@@ -70,7 +77,9 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
         res = {"schema": SCHEMA, "plan": plan_name, "group": gid, "vehicle": g["vehicle"], "version": g["version"],
                "tag": g["tag"], "tag_commit": g["tag_commit"], "build_from": g["build_from"], "board": t["board"],
                "role": t["role"], "official_url": t["url"], "manifest_commit": t["manifest_commit"],
-               "build_commit": t["build_commit"], "python_zlib": zlib.ZLIB_RUNTIME_VERSION, "started": now_utc()}
+               "build_commit": t["build_commit"], "python_zlib": zlib.ZLIB_RUNTIME_VERSION,
+               "src_path": str(trees[t["build_commit"]]),
+               "out_dir": str(Path(out_dir).absolute()) if out_dir else None, "started": now_utc()}
         stage = "official"
         log(f"{gid} {t['board']}")
         try:
@@ -86,16 +95,20 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
             try:
                 official_elf = fetch(base + f"/{binary}.elf", odir / f"{binary}.elf")
                 res["romfs_official"] = romfs_check(official_elf)
+                res["paths_official"] = build_paths(official_elf)
             except (ToolError, ElfError) as e:
                 res["romfs_official"] = {"error": str(e)[-300:]}
             stage = "build"
-            b = build(trees[t["build_commit"]], t["board"], g["vehicle"], tc_bin, work / "logs" / gid, jobs)
+            b = build(trees[t["build_commit"]], t["board"], g["vehicle"], tc_bin, work / "logs" / gid, jobs,
+                      out=out_dir)
             res.update(configure_seconds=b["configure_seconds"], build_seconds=b["build_seconds"])
             stage = "compare"
             res.update(compare(official, b["apj"].read_bytes()))
             elf = b["apj"].with_suffix("")
             try:
-                res["romfs"] = romfs_info(elf.read_bytes())
+                rebuilt_elf = elf.read_bytes()
+                res["romfs"] = romfs_info(rebuilt_elf)
+                res["paths"] = build_paths(rebuilt_elf)
             except (ElfError, OSError) as e:
                 res["romfs"] = {"error": str(e)[-300:]}
             if res["verdict"] == "not-reproducible":
@@ -117,7 +130,7 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
         done.append(res)
         if not keep:
             for tree in trees.values():
-                clean(tree, t["board"])
+                clean(tree, out_dir)
     env["finished"] = now_utc()
     wjson(out / "_group.json", env)
     return done

@@ -68,18 +68,24 @@ def cmd_run(args) -> int:
     from .run import run_group
     plan = rjson(args.plan)
     rows = run_group(plan, Path(args.plan).stem, args.group, Path(args.work), Path(args.results), boards=args.board,
-                     jobs=args.jobs, keep=args.keep, log=lambda m: print(m, flush=True))
+                     jobs=args.jobs, keep=args.keep, src_root=args.src_root,
+                     out_dir=args.out_dir, log=lambda m: print(m, flush=True))
     return 0 if all(r["verdict"] != "error" for r in rows) else 3
 
 
 def cmd_report(args) -> int:
-    from .report import environments, load, markdown, readme_block, readme_with_block, summary
+    from .report import environments, load, markdown, readme_block, readme_with_block, summary, variants
     plan = rjson(args.plan)
     name = Path(args.plan).stem
     rows = load(Path(args.results), name)
-    text = markdown(plan, name, rows, environments(Path(args.results), name))
+    extra = variants(Path(args.results), name)
+    text = markdown(plan, name, rows, environments(Path(args.results), name), extra)
     if args.json:
-        wjson(args.json, summary(plan, rows))
+        s = summary(plan, rows)
+        s["variants"] = {v: {"n": len(vr), **{k: sum(r["verdict"] == k for r in vr)
+                                              for k in ("reproducible", "image-identical", "not-reproducible", "error")}}
+                         for v, vr in extra.items()}
+        wjson(args.json, s)
     outputs = []
     if args.md:
         outputs.append((Path(args.md), lambda cur: text))
@@ -146,6 +152,8 @@ def main(argv=None) -> int:
     p.add_argument("--results", default="results")
     p.add_argument("-j", "--jobs", type=int)
     p.add_argument("--keep", action="store_true", help="не удалять каталоги сборки")
+    p.add_argument("--src-root", help="каталог дерева исходников (например, тот же путь, что у сборочного сервера)")
+    p.add_argument("--out-dir", help="каталог сборки вне дерева (waf --out), как у Tools/scripts/build_binaries.py")
     p.set_defaults(func=cmd_run)
     p = sub.add_parser("report", help="сводка результатов")
     p.add_argument("plan")

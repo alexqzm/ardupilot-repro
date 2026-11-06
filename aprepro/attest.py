@@ -40,6 +40,10 @@ def statement(result: dict, toolchain: dict) -> dict:
                        "commit": result["build_commit"], "tag": result["tag"]},
             "toolchain": {"uri": toolchain["url"], "sha256": toolchain["sha256"], "name": toolchain["name"]},
             "builder": {"id": builder_id()},
+            # от чего, кроме исходников и тулчейна, зависит результат: zlib интерпретатора (сжатие ROMFS),
+            # каталог дерева и каталог сборки (пути исходников в образе у плат с lwIP в 4.5–4.6)
+            "environment": {"pythonZlib": result.get("python_zlib"), "srcPath": result.get("src_path"),
+                            "outDir": result.get("out_dir")},
             "board": result["board"], "vehicle": result["vehicle"], "version": result["version"],
             "candidate": {"sha256": off[key], "apj_sha256": off["apj_sha256"], "url": result["official_url"]},
             "rebuilt": {"sha256": reb.get(key), "apj_sha256": reb["apj_sha256"]},
