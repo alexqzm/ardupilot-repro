@@ -68,9 +68,11 @@ def summary(plan: dict, rows: list) -> dict:
     sample = [r for r in release if r["role"] == "sample"]
     k = sum(ok(r) for r in sample)
     lo, hi = wilson(k, len(sample))
-    checked = [r["romfs_official"] for r in rows if "compressed" in r.get("romfs_official", {})]
+    # официальные файлы считаются по группам выпусков: группа «из тега» сверяется с теми же файлами
+    official = [r for r in rows if r["build_from"] == "release"]
+    checked = [r["romfs_official"] for r in official if "compressed" in r.get("romfs_official", {})]
     packed = [c for c in checked if c["compressed"]]
-    with_paths = [r for r in rows if "tree" in r.get("paths_official", {})]
+    with_paths = [r for r in official if "tree" in r.get("paths_official", {})]
     pathful = [r for r in with_paths if located(r["paths_official"])]
     by_file = [r for r in pathful if any(p.startswith("/") for p in r["paths_official"]["prefixes"])]
     by_debug = [r for r in pathful if r["paths_official"].get("dirs")]
