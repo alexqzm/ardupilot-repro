@@ -5,6 +5,7 @@ import math
 from collections import Counter
 from pathlib import Path
 
+from .diagnose import located
 from .util import rjson
 
 VERDICTS = ("reproducible", "image-identical", "not-reproducible", "error")
@@ -16,7 +17,8 @@ CAUSE_RU = {"romfs-compression": "сжатие ROMFS другой реализа
             "unknown": "не установлена", "unavailable": "разбор недоступен"}
 # варианты прогона: results/<вариант>/<план>/… — та же сборка с одним изменённым условием
 VARIANT_RU = {"zlib-ng": "Python с zlib-ng вместо классического zlib",
-              "build-path": "дерево в каталоге сборочного сервера, сборка вне дерева (waf --out)"}
+              "build-path": "дерево в каталоге сборочного сервера, сборка вне дерева (waf --out)",
+              "server-layout": "дерево, каталог сборки и тулчейн в каталогах сборочного сервера"}
 
 
 def load(results: Path, plan_name: str) -> list:
@@ -69,7 +71,9 @@ def summary(plan: dict, rows: list) -> dict:
     checked = [r["romfs_official"] for r in rows if "compressed" in r.get("romfs_official", {})]
     packed = [c for c in checked if c["compressed"]]
     with_paths = [r for r in rows if "tree" in r.get("paths_official", {})]
-    pathful = [r for r in with_paths if r["paths_official"]["tree"]]
+    pathful = [r for r in with_paths if located(r["paths_official"])]
+    by_file = [r for r in pathful if any(p.startswith("/") for p in r["paths_official"]["prefixes"])]
+    by_debug = [r for r in pathful if r["paths_official"].get("dirs")]
     return {"groups": by_group,
             "release": {"n": len(release), **{v: sum(r["verdict"] == v for r in release) for v in VERDICTS[:3]}},
             "sample": {"n": len(sample), "ok": k, "wilson95": [round(lo, 4), round(hi, 4)]},
@@ -77,10 +81,14 @@ def summary(plan: dict, rows: list) -> dict:
                                "local_zlib_all_equal": sum(c["local_zlib_all_equal"] for c in packed),
                                "zlib_ng_differs": sum(c.get("zlib_ng_differs") is True for c in packed),
                                "zlib": sorted({c["zlib"] for c in packed}), "zlib_ng": sorted({str(c.get("zlib_ng")) for c in packed})},
-            "paths_official": {"checked": len(with_paths), "with_tree_paths": len(pathful),
-                               "prefixes": sorted({p for r in pathful for p in r["paths_official"]["prefixes"]}),
-                               "groups": sorted({r["group"] for r in pathful}),
-                               "boards": sorted({r["board"] for r in pathful}),
+            "paths_official": {"checked": len(with_paths), "located": len(pathful),
+                               "file_macro": {"n": len(by_file), "boards": sorted({r["board"] for r in by_file}),
+                                              "groups": sorted({r["group"] for r in by_file}),
+                                              "roots": sorted({p for r in by_file for p in r["paths_official"]["prefixes"]
+                                                               if p.startswith("/")})},
+                               "debug_info": {"n": len(by_debug), "boards": sorted({r["board"] for r in by_debug}),
+                                              "groups": sorted({r["group"] for r in by_debug}),
+                                              "dirs": sorted({d for r in by_debug for d in r["paths_official"]["dirs"]})},
                                "reproducible": sum(ok(r) for r in pathful)},
             "causes": dict(Counter(r.get("diagnosis", {}).get("cause", "unknown") for r in rows
                                    if r["verdict"] == "not-reproducible")),
@@ -91,11 +99,14 @@ def _pct(x: float) -> str:
     return f"{100 * x:.1f}".replace(".", ",") + " %"
 
 
-def _dirs(r: dict) -> str:
+def _dirs(r: dict, main: dict = None) -> str:
     if not r.get("src_path"):
         return "—"
     out = f"`--out {r['out_dir']}`" if r.get("out_dir") else "build/ в дереве"
-    return f"`{r['src_path']}`; {out}"
+    tc = ""
+    if r.get("toolchain_dir") and (main or {}).get("toolchain_dir") != r["toolchain_dir"]:
+        tc = f"; тулчейн `{r['toolchain_dir']}`"
+    return f"`{r['src_path']}`; {out}{tc}"
 
 
 def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: dict = None) -> str:
@@ -128,15 +139,21 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: 
               "собранные с ним прошивки не совпали бы с официальными.", ""]
     po = s["paths_official"]
     if po["checked"]:
-        if po["with_tree_paths"]:
-            L += [f"Абсолютные пути дерева исходников сборочного сервера "
-                  f"({', '.join(f'`{p}`' for p in po['prefixes'])}) встроены в {po['with_tree_paths']} из "
-                  f"{po['checked']} проверенных официальных прошивок (платы {', '.join(po['boards'])}; группы "
-                  f"{', '.join(po['groups'])}). Из них при пересборке в другом каталоге совпали "
+        if po["located"]:
+            fm, dbg = po["file_macro"], po["debug_info"]
+            parts = []
+            if fm["n"]:
+                parts.append(f"абсолютные пути исходников через `__FILE__` (корень дерева "
+                             f"{', '.join(f'`{p}`' for p in fm['roots'])}) — в {fm['n']}: платы "
+                             f"{', '.join(fm['boards'])}, группы {', '.join(fm['groups'])}")
+            if dbg["n"]:
+                parts.append(f"отладочная информация с каталогами сборки и тулчейна — в {dbg['n']}: платы "
+                             f"{', '.join(dbg['boards'])}, группы {', '.join(dbg['groups'])}")
+            L += [f"Пути каталогов сборочного сервера встроены в {po['located']} из {po['checked']} проверенных "
+                  f"официальных прошивок: {'; '.join(parts)}. Из них при штатной пересборке совпали "
                   f"{po['reproducible']}.", ""]
         else:
-            L += [f"Абсолютных путей дерева исходников нет ни в одной из {po['checked']} проверенных "
-                  "официальных прошивок.", ""]
+            L += [f"Путей каталогов сборки нет ни в одной из {po['checked']} проверенных официальных прошивок.", ""]
     L += ["## По группам", "",
           "| Группа | Собрано из | Плат в выпуске | В плане | Побитово | Образ | Не совпало | Ошибка |",
           "|---|---|---|---|---|---|---|---|"]
@@ -198,25 +215,29 @@ def markdown(plan: dict, plan_name: str, rows: list, envs: dict = None, varied: 
                 extra.append(f"причина: {CAUSE_RU.get(dg.get('cause'), dg.get('cause'))}; символов разного размера "
                              f"{dg.get('size_diff_count', '—')}; zlib сборки {dg.get('zlib', r.get('python_zlib', '—'))}")
                 bp = dg.get("build_paths") or {}
-                if (bp.get("official") or {}).get("tree"):
+                if located(bp.get("official") or {}) or located(bp.get("rebuilt") or {}):
                     fmt = lambda x: ", ".join(f"`{p}`" for p in x["prefixes"]) or "нет"
                     extra.append(f"корень дерева в путях образа: {fmt(bp['official'])} → {fmt(bp['rebuilt'])}")
+                    if bp["official"].get("dirs") or bp["rebuilt"].get("dirs"):
+                        extra.append(f"каталогов сборки и тулчейна в образе: {len(bp['official'].get('dirs', []))} → "
+                                     f"{len(bp['rebuilt'].get('dirs', []))}")
             L.append(f"- **{r['group']} / {r['board']}**: областей различий {d.get('regions', '—')}, байт "
                      f"{d.get('differing_bytes', '—')}; поля .apj: {', '.join(r['meta_diff']) or 'нет'}"
                      + "".join(f"; {x}" for x in extra))
     if varied:
         main = {(r["group"], r["board"]): r for r in rows}
         L += ["", "## Проверка причин повторной сборкой", "",
-              "Те же платы, пересобранные с изменённым условием (zlib интерпретатора, каталоги дерева и сборки); "
+              "Те же платы, пересобранные с изменённым условием (zlib интерпретатора, каталоги дерева, сборки и "
+              "тулчейна); "
               "результаты лежат в `results/<вариант>/`.", "",
-              "| Вариант | Группа | Плата | Основной прогон | Вариант | zlib | Дерево; сборка |",
+              "| Вариант | Группа | Плата | Основной прогон | Вариант | zlib | Каталоги |",
               "|---|---|---|---|---|---|---|"]
         for name, vrows in varied.items():
             for r in sorted(vrows, key=lambda r: (r["group"], r["board"])):
                 m = main.get((r["group"], r["board"]))
                 L.append(f"| {VARIANT_RU.get(name, name)} | {r['group']} | {r['board']} | "
                          f"{VERDICT_RU[m['verdict']] if m else '—'} | {VERDICT_RU[r['verdict']]} | "
-                         f"{r.get('python_zlib', '—')} | {_dirs(r)} |")
+                         f"{r.get('python_zlib', '—')} | {_dirs(r, m)} |")
     errs = [r for r in rows if r["verdict"] == "error"]
     if errs:
         L += ["", "## Ошибки", ""]

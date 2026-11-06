@@ -11,7 +11,7 @@ from aprepro.apj import ApjError, parse
 from aprepro.attest import PREDICATE_TYPE, statement
 from aprepro.compare import compare, regions
 from aprepro.manifest import Manifest
-from aprepro.diagnose import _deflate, build_paths, diagnose, unpack
+from aprepro.diagnose import _deflate, build_paths, diagnose, located, unpack
 from aprepro.plan import make, python_for, rank
 from aprepro.run import _git_version_commit
 from aprepro.source import required_toolchain
@@ -201,11 +201,25 @@ def test_build_paths_and_cause():
                      b"lwip_hal/arch/sys_arch.cpp\0" + tail)
     rebuilt = elf32(b"\0/home/runner/src/modules/lwip/src/core/tcp.c\0/home/runner/src/libraries/AP_Networking/"
                     b"lwip_hal/arch/sys_arch.cpp\0" + tail)
-    assert build_paths(official) == {"tree": 2, "prefixes": {"/mnt/srv/APM/APM": 2}, "other": 1}
+    assert build_paths(official) == {"tree": 2, "prefixes": {"/mnt/srv/APM/APM": 2}, "other": 1, "dirs": []}
     assert build_paths(elf32(b"\0/mnt/srv/APM/APM/modules/lwip/src/core/tcp.c\0", flags=0))["tree"] == 0  # не ALLOC
     d = diagnose(official, rebuilt)
     assert d["cause"] == "build-path" and d["build_paths"]["rebuilt"]["prefixes"] == {"/home/runner/src": 2}
     assert diagnose(official, official)["cause"] == "unknown"          # путь тот же — путь не причина
+    assert not located({"prefixes": {"../..": 24}, "dirs": []})       # сборка в build/ дерева
+
+
+def test_debug_info_paths():
+    # отладочная информация в .text у плат с прошивкой во внешней флеш-памяти (SPRacingH7)
+    official = elf32(b"\0../../../../../../mnt/srv/APM/APM/modules/ChibiOS/os/rt/include\0"
+                     b"/home/autotest/build/tmp/binaries.build/SPRacingH7\0"
+                     b"/home/autotest/arm-gcc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys\0/APM/LOGS\0")
+    rebuilt = elf32(b"\0../../modules/ChibiOS/os/rt/include\0/home/runner/src/build/SPRacingH7\0"
+                    b"/home/runner/tc/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys\0/APM/LOGS\0")
+    bp = build_paths(official)
+    assert bp["prefixes"] == {"../../../../../../mnt/srv/APM/APM": 1} and len(bp["dirs"]) == 2 and located(bp)
+    assert build_paths(rebuilt)["prefixes"] == {"../..": 1}
+    assert diagnose(official, rebuilt)["cause"] == "build-path"
 
 
 def test_report_variants(tmp_path):
@@ -214,7 +228,7 @@ def test_report_variants(tmp_path):
                         "targets": [{"build_commit": "f" * 40}]}]}
     base = {"vehicle": "Copter", "version": "4.5.7", "board": "Pixhawk6X", "tag": "Copter-4.5.7", "group": "Copter-4.5.7",
             "build_commit": "f" * 40, "manifest_commit": "f" * 40, "role": "panel", "build_from": "release",
-            "paths_official": {"tree": 24, "prefixes": {"/mnt/srv": 24}, "other": 5}}
+            "paths_official": {"tree": 24, "prefixes": {"/mnt/srv": 24}, "other": 5, "dirs": []}}
     main = {**base, **compare(apj(IMG), apj(IMG[:-1] + b"x")), "src_path": "/home/runner/src"}
     var = {**base, **compare(apj(IMG), apj(IMG)), "src_path": "/mnt/srv", "out_dir": "/tmp/out", "python_zlib": "1.3"}
     for root, row in ((tmp_path, main), (tmp_path / "build-path", var)):
@@ -223,7 +237,8 @@ def test_report_variants(tmp_path):
     rows, extra = report.load(tmp_path, "p"), report.variants(tmp_path, "p")
     assert list(extra) == ["build-path"] and len(rows) == 1
     s = report.summary(plan, rows)
-    assert s["paths_official"]["with_tree_paths"] == 1 and s["paths_official"]["reproducible"] == 0
+    assert s["paths_official"]["located"] == 1 and s["paths_official"]["file_macro"]["n"] == 1
+    assert s["paths_official"]["reproducible"] == 0
     md = report.markdown(plan, "p", rows, None, extra)
     assert "встроены в 1 из 1 проверенных" in md
     assert "| дерево в каталоге сборочного сервера, сборка вне дерева (waf --out) | Copter-4.5.7 | Pixhawk6X | " \

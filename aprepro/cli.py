@@ -69,7 +69,7 @@ def cmd_run(args) -> int:
     plan = rjson(args.plan)
     rows = run_group(plan, Path(args.plan).stem, args.group, Path(args.work), Path(args.results), boards=args.board,
                      jobs=args.jobs, keep=args.keep, src_root=args.src_root,
-                     out_dir=args.out_dir, log=lambda m: print(m, flush=True))
+                     out_dir=args.out_dir, toolchain_dir=args.toolchain_dir, log=lambda m: print(m, flush=True))
     return 0 if all(r["verdict"] != "error" for r in rows) else 3
 
 
@@ -154,6 +154,7 @@ def main(argv=None) -> int:
     p.add_argument("--keep", action="store_true", help="не удалять каталоги сборки")
     p.add_argument("--src-root", help="каталог дерева исходников (например, тот же путь, что у сборочного сервера)")
     p.add_argument("--out-dir", help="каталог сборки вне дерева (waf --out), как у Tools/scripts/build_binaries.py")
+    p.add_argument("--toolchain-dir", help="каталог, в который ставить тулчейн (по умолчанию <work>/toolchain)")
     p.set_defaults(func=cmd_run)
     p = sub.add_parser("report", help="сводка результатов")
     p.add_argument("plan")

@@ -1,9 +1,9 @@
 # Пересборка прошивок по плану и сверка с firmware.ardupilot.org. Запуск вручную:
 # Actions -> rebuild -> Run workflow. Каждая группа плана — отдельная задача матрицы.
 # Результаты (JSON без двоичных файлов) — артефакт results-all; в репозиторий их переносит автор.
-# Вариант прогона (variant) — та же сборка с изменённым условием, например каталогами дерева и
-# сборки (src_root, out_dir); его результаты ложатся в results/<variant>/ и в сводке идут
-# отдельной таблицей.
+# Вариант прогона (variant) — та же сборка с изменённым условием, например каталогами дерева,
+# сборки и тулчейна (src_root, out_dir, toolchain_dir); его результаты ложатся в
+# results/<variant>/ и в сводке идут отдельной таблицей.
 name: rebuild
 
 on:
@@ -23,6 +23,9 @@ on:
         default: ""
       out_dir:
         description: Каталог сборки вне дерева, waf --out (пусто — build/ в дереве)
+        default: ""
+      toolchain_dir:
+        description: Каталог, в который ставить тулчейн (пусто — во временном каталоге раннера)
         default: ""
       variant:
         description: Имя варианта прогона для results/<variant>/ (пусто — основной прогон)
@@ -100,14 +103,16 @@ jobs:
         run: |
           python -c 'import sys, zlib; print(sys.version); print("zlib", zlib.ZLIB_RUNTIME_VERSION)'
           python -c 'import sys, zlib; sys.exit("zlib-ng" in zlib.ZLIB_RUNTIME_VERSION)'
-      - name: Каталог дерева исходников
-        if: ${{ inputs.src_root != '' }}
+      - name: Каталоги дерева, сборки и тулчейна
+        if: ${{ inputs.src_root != '' || inputs.out_dir != '' || inputs.toolchain_dir != '' }}
         env:
-          SRC_ROOT: ${{ inputs.src_root }}
+          DIRS: ${{ inputs.src_root }} ${{ inputs.out_dir }} ${{ inputs.toolchain_dir }}
         run: |
-          parent=$(dirname "$SRC_ROOT")
-          sudo mkdir -p "$parent"
-          sudo chown "$(id -u):$(id -g)" "$parent"
+          for d in $DIRS; do
+            parent=$(dirname "$d")
+            sudo mkdir -p "$parent"
+            sudo chown "$(id -u):$(id -g)" "$parent"
+          done
       - name: Пересборка и сверка
         env:
           PLAN: ${{ inputs.plan }}
@@ -115,12 +120,14 @@ jobs:
           BOARDS: ${{ inputs.boards }}
           SRC_ROOT: ${{ inputs.src_root }}
           OUT_DIR: ${{ inputs.out_dir }}
+          TOOLCHAIN_DIR: ${{ inputs.toolchain_dir }}
           VARIANT: ${{ inputs.variant }}
         run: |
           args=()
           for b in $BOARDS; do args+=(--board "$b"); done
           if [ -n "$SRC_ROOT" ]; then args+=(--src-root "$SRC_ROOT"); fi
           if [ -n "$OUT_DIR" ]; then args+=(--out-dir "$OUT_DIR"); fi
+          if [ -n "$TOOLCHAIN_DIR" ]; then args+=(--toolchain-dir "$TOOLCHAIN_DIR"); fi
           python -m aprepro run "$PLAN" --group "$GROUP" --work "$RUNNER_TEMP/work" \
             --results "$RUNNER_TEMP/results${VARIANT:+/$VARIANT}" "${args[@]}"
       - name: Подпись аттестаций пересборки (cosign, бесключевая)

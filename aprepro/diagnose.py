@@ -18,13 +18,20 @@ PPP) — абсолютные пути вида <корень дерева>/modu
 сдвигают всё, что лежит за ними. В 4.7 утверждения lwIP не передают __FILE__, а сборка добавляет
 -ffile-prefix-map (Tools/ardupilotwaf/boards.py).
 
+Третья — отладочная информация внутри образа. У плат, прошивка которых исполняется из внешней
+флеш-памяти (common_extf.ld, например SPRacingH7), в загружаемую секцию .text попадают и
+отладочные данные части объектов ChibiOS: каталог сборки, каталоги включаемых файлов тулчейна и
+пути к исходникам относительно каталога сборки. Такой образ зависит от расположения дерева,
+каталога сборки и тулчейна.
+
 Разбор сравнивает таблицы символов официального и пересобранного ELF и для блоков ap_romfs_N
 распаковывает оба потока: если содержимое совпадает, а сжатые байты нет, и только эти символы
-различаются размером, — расхождение объясняется сжатием ROMFS. Затем сравниваются корни дерева в
-абсолютных путях исходников, встроенных в образы: если они разные (в том числе абсолютные пути в
-официальном образе и относительные в пересобранном), а других символов разного размера нет,
-расхождение объясняется путями исходников. Это вывод по признакам; подтверждение — пересборка с
-деревом в том же каталоге и каталогом сборки вне дерева (aprepro run --src-root … --out-dir …).
+различаются размером, — расхождение объясняется сжатием ROMFS. Затем сравниваются пути, встроенные
+в образы (build_paths): корни дерева и каталоги сборки и тулчейна. Если они разные (в том числе
+абсолютные пути в официальном образе и относительные в пересобранном), а других символов разного
+размера нет, расхождение объясняется путями сборки. Это вывод по признакам; подтверждение —
+пересборка в тех же каталогах, что у сборочного сервера (aprepro run --src-root, --out-dir,
+--toolchain-dir).
 """
 from __future__ import annotations
 
@@ -37,7 +44,10 @@ _ROMFS = re.compile(r"^(?:_ZL\d+)?(ap_romfs_\d+)$")
 STT_OBJECT, STT_FUNC = 1, 2
 SHT_NOBITS, SHF_ALLOC = 8, 2
 # строка-путь в образе: начинается с «/» после непечатного байта и заканчивается NUL
-_ABS_PATH = re.compile(rb"(?<![\x20-\x7e])/[\x21-\x7e]{3,400}?(?=\x00)")
+# строка-путь: начинается с «/» или «../» после непечатного байта и заканчивается NUL
+_PATH_STR = re.compile(rb"(?<![\x20-\x7e])(?:/|\.\./)[\x21-\x7e]{3,400}?(?=\x00)")
+_PATH_OK = re.compile(r"^(?:/|(?:\.\./)+)[\w.+-]+(?:/[\w.+-]+)+/?$")   # только символы путей, ≥ 2 компонентов
+_FIRMWARE_PATHS = ("/APM/", "/fs/")          # пути на карте памяти самого автопилота, а не сборки
 # каталоги верхнего уровня дерева ArduPilot: всё, что левее первого из них, — корень дерева
 _TREE_DIR = re.compile(r"/(?:libraries|modules|ArduCopter|ArduPlane|Rover|ArduSub|AntennaTracker|Blimp)/")
 _SOURCE = re.compile(r"\.(?:c|cc|cpp|h|hpp|S)$")      # только пути к исходникам (не «/APM/scripts/modules/?.lua»)
@@ -79,26 +89,38 @@ def _sections(elf: bytes) -> list:
 
 
 def build_paths(elf: bytes) -> dict:
-    """Абсолютные пути исходников, встроенные в загружаемые секции образа (через __FILE__).
+    """Пути файловой системы сборки, встроенные в загружаемые секции образа.
 
-    tree — пути внутри дерева ArduPilot с корнями дерева (prefixes: корень → число строк);
-    other — прочие абсолютные пути (например, исходники newlib из сборки самого тулчейна: они
-    одинаковы у всех, кто собирает тем же тулчейном)."""
-    prefixes, other = {}, 0
+    prefixes — корни дерева ArduPilot в путях к его файлам (часть пути до libraries/, modules/ и
+    т. п.) с числом строк: абсолютные (/mnt/…/APM) или относительные от каталога сборки (../..);
+    tree — сколько всего таких строк. Они попадают в образ через __FILE__ или вместе с
+    отладочной информацией. other — пути к исходникам вне дерева (например, newlib из сборки
+    самого тулчейна: одинаковы у всех, кто собирает тем же тулчейном). dirs — прочие абсолютные
+    пути без имени исходника: каталоги сборки и тулчейна из отладочной информации."""
+    prefixes, other, dirs = {}, 0, set()
     for sec in _sections(elf):
         _n, typ, flags, _a, off, size = sec[:6]
         if typ == SHT_NOBITS or not flags & SHF_ALLOC:
             continue
-        for m in _ABS_PATH.finditer(elf, off, off + size):
+        for m in _PATH_STR.finditer(elf, off, off + size):
             s = m.group().decode("ascii", "replace")
-            if not _SOURCE.search(s):
+            if not _PATH_OK.match(s) or s.startswith(_FIRMWARE_PATHS):
                 continue
             d = _TREE_DIR.search(s)
             if d and d.start() > 0:
                 prefixes[s[:d.start()]] = prefixes.get(s[:d.start()], 0) + 1
-            else:
+            elif _SOURCE.search(s):
                 other += 1
-    return {"tree": sum(prefixes.values()), "prefixes": dict(sorted(prefixes.items())), "other": other}
+            elif s.startswith("/"):
+                dirs.add(s)
+    return {"tree": sum(prefixes.values()), "prefixes": dict(sorted(prefixes.items())), "other": other,
+            "dirs": sorted(dirs)[:40]}
+
+
+def located(bp: dict) -> bool:
+    """Зависят ли пути образа от расположения каталогов сборки: абсолютный или именованный корень
+    дерева (не «../..» внутри дерева) либо абсолютные каталоги сборки и тулчейна."""
+    return bool(bp.get("dirs")) or any(p.startswith("/") or p.strip("./") for p in bp.get("prefixes", {}))
 
 
 def _inflate(b: bytes):
@@ -157,8 +179,9 @@ def diagnose(official_elf: bytes, rebuilt_elf: bytes, limit: int = 30) -> dict:
     by_romfs = bool(sized) and only_romfs and romfs and all(r["content_equal"] for r in romfs) and \
         any(not r["compressed_equal"] for r in romfs)
     paths = {"official": build_paths(official_elf), "rebuilt": build_paths(rebuilt_elf)}
-    by_path = only_romfs and paths["official"]["tree"] > 0 and \
-        set(paths["official"]["prefixes"]) != set(paths["rebuilt"]["prefixes"])
+    po, pr = paths["official"], paths["rebuilt"]
+    by_path = only_romfs and (located(po) or located(pr)) and \
+        (set(po["prefixes"]) != set(pr["prefixes"]) or po["dirs"] != pr["dirs"])
     causes = [c for c, ok in (("romfs-compression", by_romfs), ("build-path", by_path)) if ok]
     return {"zlib": zlib.ZLIB_RUNTIME_VERSION,
             "size_diff_count": len(sized),

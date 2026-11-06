@@ -36,10 +36,12 @@ def _git_version_commit(text: str):
 
 
 def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, boards=None, jobs: int = None,
-              keep: bool = False, src_root: Path = None, out_dir: Path = None, log=print) -> list:
+              keep: bool = False, src_root: Path = None, out_dir: Path = None, toolchain_dir: Path = None,
+              log=print) -> list:
     """src_root — каталог дерева исходников (по умолчанию <work>/src/<коммит>); out_dir — каталог
-    сборки вне дерева (waf --out; по умолчанию build/ в дереве). Оба влияют на пути исходников,
-    которые попадают в образ через __FILE__ (см. diagnose.py)."""
+    сборки вне дерева (waf --out; по умолчанию build/ в дереве); toolchain_dir — каталог, в
+    который ставится тулчейн (по умолчанию <work>/toolchain). Все три влияют на пути, которые
+    попадают в образ (см. diagnose.py)."""
     g = group_of(plan, gid)
     want = g.get("python")
     if want and ".".join(map(str, sys.version_info[:2])) != want:
@@ -49,8 +51,9 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
     if boards and len(targets) != len(set(boards)):
         raise ToolError(f"не все платы {sorted(boards)} есть в группе {gid}")
     tc_name = plan["toolchain"]
-    tc_bin = toolchain.ensure(tc_name, work / "toolchain")
-    tc = {"name": tc_name, **toolchain.spec(tc_name), "gcc": toolchain.version(tc_bin)}
+    tc_root = (Path(toolchain_dir) if toolchain_dir else work / "toolchain").absolute()
+    tc_bin = toolchain.ensure(tc_name, tc_root)
+    tc = {"name": tc_name, **toolchain.spec(tc_name), "gcc": toolchain.version(tc_bin), "path": str(tc_bin.parent)}
     env = {"started": now_utc(), "tool": f"ardupilot-repro {__version__}", "python": sys.version.split()[0],
            "python_zlib": zlib.ZLIB_RUNTIME_VERSION, "platform": platform.platform(), "cpus": os.cpu_count(),
            "toolchain": tc,
@@ -79,7 +82,8 @@ def run_group(plan: dict, plan_name: str, gid: str, work: Path, results: Path, b
                "role": t["role"], "official_url": t["url"], "manifest_commit": t["manifest_commit"],
                "build_commit": t["build_commit"], "python_zlib": zlib.ZLIB_RUNTIME_VERSION,
                "src_path": str(trees[t["build_commit"]]),
-               "out_dir": str(Path(out_dir).absolute()) if out_dir else None, "started": now_utc()}
+               "out_dir": str(Path(out_dir).absolute()) if out_dir else None,
+               "toolchain_dir": str(tc_bin.parent), "started": now_utc()}
         stage = "official"
         log(f"{gid} {t['board']}")
         try:
