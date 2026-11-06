@@ -63,9 +63,12 @@
 
 Workflow [`rebuild`](.github/workflows/rebuild.yml) запускается вручную (Actions → rebuild → Run
 workflow): каждая группа плана — отдельная задача на `ubuntu-24.04`. Результаты в JSON (без
-двоичных файлов) — артефакт `results-all`, сводка — в итогах запуска. Параметр `attest` включает
-бесключевую подпись аттестаций пересборки через Sigstore; подпись попадает в публичный журнал
-прозрачности Rekor навсегда, поэтому по умолчанию выключена.
+двоичных файлов) — артефакт `results-all`, сводка — в итогах запуска. Параметры `groups` и
+`boards` сужают прогон; `src_root`, `out_dir` и `variant` задают вариант прогона — например,
+дерево в каталоге сборочного сервера и сборку вне дерева, — результаты которого ложатся в
+`results/<variant>/`. Параметр `attest` включает бесключевую подпись аттестаций пересборки через
+Sigstore; подпись попадает в публичный журнал прозрачности Rekor навсегда, поэтому по умолчанию
+выключена.
 
 ### Локально
 
@@ -83,6 +86,17 @@ aprepro report plans/study-2026-11.json
 Если системный Python собран с zlib-ng (например, в Fedora с версии 40 системный zlib заменён
 совместимым zlib-ng — [Changes/ZlibNGTransition](https://fedoraproject.org/wiki/Changes/ZlibNGTransition)),
 возьмите интерпретатор с классическим zlib, например `uv python install 3.11`.
+
+Прошивки 4.5 и 4.6 для плат с сетевым стеком lwIP (Pixhawk6X, CubeOrangePlus и др.) совпадают с
+официальными только при тех же путях исходников, что на сборочном сервере: дерево в
+`/mnt/volume_nyc3_01/autotest/APM/APM` и каталог сборки вне дерева (как у
+`Tools/scripts/build_binaries.py`):
+
+```bash
+sudo mkdir -p /mnt/volume_nyc3_01/autotest && sudo chown "$USER" /mnt/volume_nyc3_01/autotest
+aprepro run plans/study-2026-11.json --group Copter-4.5.7 --board Pixhawk6X \
+  --src-root /mnt/volume_nyc3_01/autotest/APM/APM --out-dir /tmp/aprepro-out
+```
 
 Другие команды: `aprepro show файл.apj` — метаданные, дайджесты и версия, зашитая в образ;
 `aprepro compare официальный.apj пересобранный.apj` — сверка двух файлов; `aprepro plan` —
